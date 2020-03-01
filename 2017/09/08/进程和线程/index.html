@@ -1,0 +1,1366 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="进程和线程, lovelyfrog&#39;s blog">
+    <meta name="description" content="进程和线程
+
+多进程
+linux系统提供了一个fork()创造多进程的方式i，但是并不支持windows
+multiprocessing在windows上可以使用multiprocessing模块来编写多进程的程序
+from multipr">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>进程和线程 | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">进程和线程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/python/" class="post-category">
+                                python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-09-08
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.4k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>进程和线程</p>
+<a id="more"></a>
+<h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><hr>
+<p>linux系统提供了一个fork()创造多进程的方式i，但是并不支持windows</p>
+<h2 id="multiprocessing"><a href="#multiprocessing" class="headerlink" title="multiprocessing"></a>multiprocessing</h2><p>在windows上可以使用multiprocessing模块来编写多进程的程序</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> Process
+<span class="token keyword">import</span> os
+
+<span class="token comment" spellcheck="true"># 子进程要执行的代码</span>
+<span class="token keyword">def</span> <span class="token function">run_proc</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Run child process %s (%s)...'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Parent process %s.'</span> <span class="token operator">%</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    p <span class="token operator">=</span> Process<span class="token punctuation">(</span>target<span class="token operator">=</span>run_proc<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Child process will start.'</span><span class="token punctuation">)</span>
+    p<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    p<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#join()方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Child process end.'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Parent process 29444.
+Child process will start.
+Child process end.</code></pre><h2 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h2><p>如果需要大量子进程的话，可以用进程池的方式批量创建子进程</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> Pool
+<span class="token keyword">import</span> os<span class="token punctuation">,</span>time<span class="token punctuation">,</span>random
+
+<span class="token keyword">def</span> <span class="token function">long_time_task</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Run task %s (%s)'</span> <span class="token operator">%</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    end <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Task %s runs %0.2f seconds'</span> <span class="token operator">%</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> end<span class="token operator">-</span>start<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Parent process %s.'</span> <span class="token operator">%</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    p <span class="token operator">=</span> Pool<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        p<span class="token punctuation">.</span>apply_async<span class="token punctuation">(</span>long_time_task<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#每次循环都从p中初始化一个进程,主进程子进程并行运行，所以这个并不妨碍下面print的运行</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 可以理解为执行子进程需要时间，所以下面的print先执行，子进程在运行但同时主进程也在运行</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Waiting for all subprocesses done...'</span><span class="token punctuation">)</span>
+    p<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#close()之后就无法再添加新的进程</span>
+    p<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#join()方法会等待所有子进程执行完毕，调用join()之前必须先调用close()</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'All subprocesses done.'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Parent process 29444.
+Waiting for all subprocesses done...</code></pre><p><img src="http://note.youdao.com/yws/public/resource/2bc193fa9e391954cec6d611ba0ae81a/xmlnote/6A980E5267314044A2967FEFE9960BB8/380"
+style="width:600px;height:400px"></p>
+<p><img src="http://note.youdao.com/yws/public/resource/2bc193fa9e391954cec6d611ba0ae81a/xmlnote/62D4707D805C497BBCA1C4B825BEB2B3/382"
+style="width:600px;height:400px"></p>
+<h2 id="子进程"><a href="#子进程" class="headerlink" title="子进程"></a>子进程</h2><p>我们创建了子进程后还需要控制子进程的输入和输出<br>subprocess模块可以非常方便的创建一个子进程，然后控制其输入和输出</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> subprocess
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'$ nslookup www.python.org'</span><span class="token punctuation">)</span>
+r <span class="token operator">=</span> subprocess<span class="token punctuation">.</span>call<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'nslookup'</span><span class="token punctuation">,</span> <span class="token string">'www.python.org'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Exit code:'</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span></code></pre>
+<pre><code>$ nslookup www.python.org
+Exit code: 0</code></pre><p>如果子进程还需要输入，则可以通过communicate()方法输入</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> subprocess
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'$ nslookup'</span><span class="token punctuation">)</span>
+p <span class="token operator">=</span> subprocess<span class="token punctuation">.</span>Popen<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'nslookup'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> stdin<span class="token operator">=</span>subprocess<span class="token punctuation">.</span>PIPE<span class="token punctuation">,</span> stdout<span class="token operator">=</span>subprocess<span class="token punctuation">.</span>PIPE<span class="token punctuation">,</span> stderr<span class="token operator">=</span>subprocess<span class="token punctuation">.</span>PIPE<span class="token punctuation">)</span>
+output<span class="token punctuation">,</span> err <span class="token operator">=</span> p<span class="token punctuation">.</span>communicate<span class="token punctuation">(</span>b<span class="token string">'set q=mx\npython.org\nexit\n'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'gbk'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Exit code:'</span><span class="token punctuation">,</span> p<span class="token punctuation">.</span>returncode<span class="token punctuation">)</span></code></pre>
+<pre><code>$ nslookup
+默认服务器:  promote.cache-dns.local
+Address:  221.131.143.69
+
+&gt; &gt; 服务器:  promote.cache-dns.local
+Address:  221.131.143.69
+
+python.org    MX preference = 50, mail exchanger = mail.python.org
+&gt; 
+Exit code: 0</code></pre><h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><p>在父进程中创建两个子进程，一个往Queue里写数据，一个从Queue里读数据：</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># queue_process.py</span>
+<span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> Process<span class="token punctuation">,</span> Queue
+<span class="token keyword">import</span> os<span class="token punctuation">,</span> time<span class="token punctuation">,</span> random
+
+<span class="token comment" spellcheck="true"># 写数据进程执行的代码:</span>
+<span class="token keyword">def</span> <span class="token function">write</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Process to write: %s'</span> <span class="token operator">%</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> value <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token string">'C'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Put %s to queue...'</span> <span class="token operator">%</span> value<span class="token punctuation">)</span>
+        q<span class="token punctuation">.</span>put<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 读数据进程执行的代码:</span>
+<span class="token keyword">def</span> <span class="token function">read</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Process to read: %s'</span> <span class="token operator">%</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        value <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Get %s from queue.'</span> <span class="token operator">%</span> value<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 父进程创建Queue，并传给各个子进程：</span>
+    q <span class="token operator">=</span> Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    pw <span class="token operator">=</span> Process<span class="token punctuation">(</span>target<span class="token operator">=</span>write<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    pr <span class="token operator">=</span> Process<span class="token punctuation">(</span>target<span class="token operator">=</span>read<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 启动子进程pw，写入:</span>
+    pw<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 启动子进程pr，读取:</span>
+    pr<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 等待pw结束:</span>
+    pw<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># pr进程里是死循环，无法等待其结束，只能强行终止:</span>
+    pr<span class="token punctuation">.</span>terminate<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src='http://note.youdao.com/yws/public/resource/2bc193fa9e391954cec6d611ba0ae81a/xmlnote/ED616DCD63F24EE8993CAAD37DBDFC01/384'
+style="width:600px;height:400px"></p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><hr>
+<p>python的标准库提供了两个模块：_thread 和 threading，大多数情况下我们只需要使用threading这个模块<br>同样的，启动一个线程就是把一个函数传入Thread实例，然后调用start()开始执行</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> time<span class="token punctuation">,</span> threading
+<span class="token comment" spellcheck="true">#新线程执行的代码</span>
+<span class="token keyword">def</span> <span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'thread %s is running...'</span> <span class="token operator">%</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+    n<span class="token operator">=</span><span class="token number">0</span>
+    <span class="token keyword">while</span> n<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> n <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'thread %s >>> %s'</span> <span class="token operator">%</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'thread %s ended.'</span> <span class="token operator">%</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'thread %s is running...'</span> <span class="token operator">%</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>loop<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'LoopThread'</span><span class="token punctuation">)</span>
+t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'thread %s ended.'</span> <span class="token operator">%</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span></code></pre>
+<pre><code>thread LoopThread is running...thread MainThread is running...
+thread LoopThread &gt;&gt;&gt; 1
+
+thread LoopThread &gt;&gt;&gt; 2
+thread LoopThread &gt;&gt;&gt; 3
+thread LoopThread &gt;&gt;&gt; 4
+thread LoopThread &gt;&gt;&gt; 5
+thread LoopThread ended.
+thread MainThread ended.</code></pre><p>current_thread()函数永远返回当前线程的实例</p>
+<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>多线程和多进程最大的区别是，同一个变量，多进程中各自有一份拷贝在每个进程中，互不影响。而多线程中，所有变量都由所有线程共享，所以任何一个变量都可以被任何一个线程修改。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> threading
+<span class="token comment" spellcheck="true">#多个线程同时操作一个变量可能把内容改乱了</span>
+<span class="token comment" spellcheck="true">#假定这是你的银行存款</span>
+balance <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">def</span> <span class="token function">change_it</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#先存后取，结果应该是0</span>
+    <span class="token keyword">global</span> balance
+    balance <span class="token operator">=</span> balance <span class="token operator">+</span> n 
+    balance <span class="token operator">=</span> balance <span class="token operator">-</span> n
+
+<span class="token keyword">def</span> <span class="token function">run_thread</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        change_it<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+
+t1 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>run_thread<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+t2 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>run_thread<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>balance<span class="token punctuation">)</span></code></pre>
+<pre><code>10</code></pre><img src='http://note.youdao.com/yws/public/resource/2bc193fa9e391954cec6d611ba0ae81a/xmlnote/F3BFEE03A79D4281B2139A7CF13670EB/386'>
+
+<ul>
+<li>所以我们要确保balance计算正确，就要给change_it()上一把锁，使得当某个进程执行change_it()时其他进程无法同时执行，只等等待，直到锁被释放之后。  </li>
+<li>创建一个锁是通过threading.Lock()来实现</li>
+</ul>
+<pre class=" language-python"><code class="language-python">balance <span class="token operator">=</span> <span class="token number">0</span>
+lock <span class="token operator">=</span> threading<span class="token punctuation">.</span>Lock<span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#先创建一个锁实例</span>
+<span class="token keyword">def</span> <span class="token function">change_it</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true">#先要获得锁</span>
+        lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            change_it<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+        <span class="token keyword">finally</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">#该晚了一定要释放锁</span>
+            lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>当多个线程同时执行lock.acquire()时只有一个线程能获得锁，然后继续执行代码，其他线程就继续等待直到获得锁为止。  </li>
+<li>由于锁的存在，阻止了多线程并发执行，效率降低了</li>
+</ul>
+<h2 id="多核CPU"><a href="#多核CPU" class="headerlink" title="多核CPU"></a>多核CPU</h2><p>如果写一个死循环的话，一个死循环线程会100%占用一个CPU，要想把计算机N个CPU全部跑满，就必须启动N个死循环线程</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> threading<span class="token punctuation">,</span> multiprocessing
+<span class="token keyword">def</span> <span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> x <span class="token operator">*</span> <span class="token number">1</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>multiprocessing<span class="token punctuation">.</span>cpu_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>loop<span class="token punctuation">)</span>
+    t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<ul>
+<li>启动与CPU核心数量相同的N个线程，在4核CPU上可以监控到CPU占用率仅有102%，也就是仅使用了一核。  </li>
+<li>因为Python的线程虽然是真正的线程，但解释器执行代码时，有一个GIL锁：Global Interpreter Lock，任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核。</li>
+<li>不过，也不用过于担心，Python虽然不能利用多线程实现多核任务，但可以通过多进程实现多核任务。多个Python进程有各自独立的GIL锁，互不影响。</li>
+</ul>
+<h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><hr>
+<p>在多线程情况下，每个线程使用自己的局部变量比使用全局变量好，因为局部变量只有自己看的见，而全局变量的改动必须要加锁</p>
+<p>但是局部变量在函数调用的时候会比较麻烦</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">process_student</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    std <span class="token operator">=</span> Student<span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># std是局部变量，但是每个函数都要用它，因此必须传进去：</span>
+    do_task_1<span class="token punctuation">(</span>std<span class="token punctuation">)</span>
+    do_task_2<span class="token punctuation">(</span>std<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">do_task_1</span><span class="token punctuation">(</span>std<span class="token punctuation">)</span><span class="token punctuation">:</span>   <span class="token comment" spellcheck="true">#即使在task1中改变了std，由于它是局部变量，task2中的std依旧是那个std</span>
+    do_subtask_1<span class="token punctuation">(</span>std<span class="token punctuation">)</span>
+    do_subtask_2<span class="token punctuation">(</span>std<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">do_task_2</span><span class="token punctuation">(</span>std<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    do_subtask_2<span class="token punctuation">(</span>std<span class="token punctuation">)</span>
+    do_subtask_2<span class="token punctuation">(</span>std<span class="token punctuation">)</span></code></pre>
+<p>上面那个代码很麻烦，如果用一个全局dict存放所有的Student对象，然后以thread自身作为key获得线程对应的Student对象如何？</p>
+<pre class=" language-python"><code class="language-python">global_dict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">std_thread</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    std <span class="token operator">=</span> Student<span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把std放到全局变量global_dict中：</span>
+    global_dict<span class="token punctuation">[</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> std
+    do_task_1<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    do_task_2<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">do_task_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 不传入std，而是根据当前线程查找：</span>
+    std <span class="token operator">=</span> global_dict<span class="token punctuation">[</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">def</span> <span class="token function">do_task_2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 任何函数都可以查找出当前线程的std变量：</span>
+    std <span class="token operator">=</span> global_dict<span class="token punctuation">[</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
+<p>但是有没有更简单的方式?ThreadLocal应运而生</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> threading
+<span class="token comment" spellcheck="true">#创建ThreadLocal全局变量</span>
+local_school <span class="token operator">=</span> threading<span class="token punctuation">.</span>local<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">process_student</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#获取当前线程关联的student</span>
+    std <span class="token operator">=</span> local_school<span class="token punctuation">.</span>student
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Hello, %s (in %s)'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>std<span class="token punctuation">,</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">process_thread</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 绑定ThreadLocal的student:</span>
+    local_school<span class="token punctuation">.</span>student <span class="token operator">=</span> name
+    process_student<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+t1 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span> process_thread<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">'Alice'</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'Thread-A'</span><span class="token punctuation">)</span>
+t2 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span> process_thread<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">'Bob'</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'Thread-B'</span><span class="token punctuation">)</span>
+t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Hello, Alice (in Thread-A)
+Hello, Bob (in Thread-B)</code></pre><ul>
+<li>一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。<strong>ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题</strong>。</li>
+<li>你可以把local_school看成全局变量，但每个属性如local_school.student都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。</li>
+</ul>
+<h1 id="进程VS线程"><a href="#进程VS线程" class="headerlink" title="进程VS线程"></a>进程VS线程</h1><hr>
+<ul>
+<li>要实现多任务，通常我们会设计master-worker模式，master负责分配任务，worker负责执行任务</li>
+<li>如果用多进程实现Master-Worker，主进程就是Master，其他进程就是Worker。</li>
+<li>如果用多线程实现Master-Worker，主线程就是Master，其他线程就是Worker。</li>
+</ul>
+<p>多进程模式最大的优点就是稳定性高，因为一个子进程崩溃了，不会影响主进程和其他子进程。（当然主进程挂了所有进程就全挂了，但是Master进程只负责分配任务，挂掉的概率低）著名的Apache最早就是采用多进程模式。</p>
+<p>多进程模式的缺点是创建进程的代价大，在Unix/Linux系统下，用fork调用还行，在Windows下创建进程开销巨大。另外，操作系统能同时运行的进程数也是有限的，在内存和CPU的限制下，如果有几千个进程同时运行，操作系统连调度都会成问题。</p>
+<p>多线程模式通常比多进程快一点，但是也快不到哪去，而且，多线程模式致命的缺点就是任何一个线程挂掉都可能直接造成整个进程崩溃，因为所有线程共享进程的内存。在Windows上，如果一个线程执行的代码出了问题，你经常可以看到这样的提示：“该程序执行了非法操作，即将关闭”，其实往往是某个线程出了问题，但是操作系统会强制结束整个进程。</p>
+<p>在Windows下，多线程的效率比多进程要高，所以微软的IIS服务器默认采用多线程模式。由于多线程存在稳定性的问题，IIS的稳定性就不如Apache。为了缓解这个问题，IIS和Apache现在又有多进程+多线程的混合模式，真是把问题越搞越复杂。</p>
+<h1 id="分布式进程"><a href="#分布式进程" class="headerlink" title="分布式进程"></a>分布式进程</h1><hr>
+<ul>
+<li>在Thread和Process中应当优选Process,因为Process更稳定。而且Process可以分布到多台机器上，Thread只能分布在一台机器上</li>
+<li>python的multiprocessing模块不但支持多进程，其managers子模块还支持把多个进程分布到多台机器上，一个服务进程可以作为调度者，将任务分布到其他多个进程中，依靠网络通信。由于managers模块封装很好，不必了解网络通信的细节，就可以很容易地编写分布式多进程程序。</li>
+</ul>
+<p>举个例子，假如现在已经有一个通过Queue通信的多进程程序在同一台机器上运行，现在由于处理任务的进程任务繁重，希望把发送任务的进程和处理任务的进程分布在两台机器上，怎么用分布式进程实现呢?</p>
+<p><img src='http://note.youdao.com/yws/public/resource/2bc193fa9e391954cec6d611ba0ae81a/xmlnote/17EB3E89618845A7A341DE94332E00C8/388'
+style="width:800px;height:300px;float:left"></p>
+<p>通过managers模块把Queue通过网络暴露出去，就可以让其他机器的进程访问Queue了。</p>
+<p>我们先看服务进程，服务进程负责启动Queue，把Queue注册到网络上，然后往Queue里面写入任务：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> random<span class="token punctuation">,</span> time<span class="token punctuation">,</span> queue
+<span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> freeze_support
+<span class="token keyword">from</span> multiprocessing<span class="token punctuation">.</span>managers <span class="token keyword">import</span> BaseManager
+
+<span class="token comment" spellcheck="true"># 发送任务的队列:</span>
+task_queue <span class="token operator">=</span> queue<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 接收结果的队列:</span>
+result_queue <span class="token operator">=</span> queue<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 从BaseManager继承的QueueManager:</span>
+<span class="token keyword">class</span> <span class="token class-name">QueueManager</span><span class="token punctuation">(</span>BaseManager<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+
+<span class="token keyword">def</span> <span class="token function">return_task_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> task_queue
+    <span class="token keyword">return</span> task_queue
+
+
+<span class="token keyword">def</span> <span class="token function">return_result_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> result_queue
+    <span class="token keyword">return</span> result_queue
+
+<span class="token keyword">def</span> <span class="token function">ceshi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 把两个Queue都注册到网络上, callable参数关联了Queue对象:</span>
+    <span class="token comment" spellcheck="true"># QueueManager.register('get_task_queue', callable=lambda: task_queue)</span>
+    <span class="token comment" spellcheck="true"># QueueManager.register('get_result_queue', callable=lambda: result_queue)</span>
+    QueueManager<span class="token punctuation">.</span>register<span class="token punctuation">(</span><span class="token string">'get_task_queue'</span><span class="token punctuation">,</span> callable<span class="token operator">=</span>return_task_queue<span class="token punctuation">)</span>
+    QueueManager<span class="token punctuation">.</span>register<span class="token punctuation">(</span><span class="token string">'get_result_queue'</span><span class="token punctuation">,</span> callable<span class="token operator">=</span>return_result_queue<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 绑定端口5000, 设置验证码'abc':</span>
+    manager <span class="token operator">=</span> QueueManager<span class="token punctuation">(</span>address<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">'127.0.0.1'</span><span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">,</span> authkey<span class="token operator">=</span>b<span class="token string">'abc'</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 启动Queue:</span>
+    manager<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 获得通过网络访问的Queue对象:</span>
+    task <span class="token operator">=</span> manager<span class="token punctuation">.</span>get_task_queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    result <span class="token operator">=</span> manager<span class="token punctuation">.</span>get_result_queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 放几个任务进去:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Put task %d...'</span> <span class="token operator">%</span> n<span class="token punctuation">)</span>
+        task<span class="token punctuation">.</span>put<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 从result队列读取结果:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Try get results...'</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        r <span class="token operator">=</span> result<span class="token punctuation">.</span>get<span class="token punctuation">(</span>timeout<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Result: %s'</span> <span class="token operator">%</span> r<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 关闭:</span>
+    manager<span class="token punctuation">.</span>shutdown<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'master exit.'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    freeze_support<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    ceshi<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">Put task <span class="token number">337</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">2278</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">9258</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">1975</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">7342</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">8540</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">1659</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">7008</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">6128</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Put task <span class="token number">3709</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Try get results<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+Result<span class="token punctuation">:</span> <span class="token number">337</span> <span class="token operator">*</span> <span class="token number">337</span> <span class="token operator">=</span> <span class="token number">113569</span>
+Result<span class="token punctuation">:</span> <span class="token number">2278</span> <span class="token operator">*</span> <span class="token number">2278</span> <span class="token operator">=</span> <span class="token number">5189284</span>
+Result<span class="token punctuation">:</span> <span class="token number">9258</span> <span class="token operator">*</span> <span class="token number">9258</span> <span class="token operator">=</span> <span class="token number">85710564</span>
+Result<span class="token punctuation">:</span> <span class="token number">1975</span> <span class="token operator">*</span> <span class="token number">1975</span> <span class="token operator">=</span> <span class="token number">3900625</span>
+Result<span class="token punctuation">:</span> <span class="token number">7342</span> <span class="token operator">*</span> <span class="token number">7342</span> <span class="token operator">=</span> <span class="token number">53904964</span>
+Result<span class="token punctuation">:</span> <span class="token number">8540</span> <span class="token operator">*</span> <span class="token number">8540</span> <span class="token operator">=</span> <span class="token number">72931600</span>
+Result<span class="token punctuation">:</span> <span class="token number">1659</span> <span class="token operator">*</span> <span class="token number">1659</span> <span class="token operator">=</span> <span class="token number">2752281</span>
+Result<span class="token punctuation">:</span> <span class="token number">7008</span> <span class="token operator">*</span> <span class="token number">7008</span> <span class="token operator">=</span> <span class="token number">49112064</span>
+Result<span class="token punctuation">:</span> <span class="token number">6128</span> <span class="token operator">*</span> <span class="token number">6128</span> <span class="token operator">=</span> <span class="token number">37552384</span>
+Result<span class="token punctuation">:</span> <span class="token number">3709</span> <span class="token operator">*</span> <span class="token number">3709</span> <span class="token operator">=</span> <span class="token number">13756681</span>
+master exit<span class="token punctuation">.</span></code></pre>
+<p>请注意，当我们在一台机器上写多进程程序时，创建的Queue可以直接拿来用，但是，在分布式多进程环境下，添加任务到Queue不可以直接对原始的task_queue进行操作，那样就绕过了QueueManager的封装，必须通过manager.get_task_queue()获得的Queue接口添加。</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#task_worker.py</span>
+<span class="token keyword">import</span> time<span class="token punctuation">,</span> sys<span class="token punctuation">,</span> queue
+<span class="token keyword">from</span> multiprocessing<span class="token punctuation">.</span>managers <span class="token keyword">import</span> BaseManager
+
+<span class="token comment" spellcheck="true"># 创建类似的QueueManager:</span>
+<span class="token keyword">class</span> <span class="token class-name">QueueManager</span><span class="token punctuation">(</span>BaseManager<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token comment" spellcheck="true">#由于这个QueueManager只从网上获取Queue，所以注册时只提供名字</span>
+QueueManager<span class="token punctuation">.</span>register<span class="token punctuation">(</span><span class="token string">'get_task_queue'</span><span class="token punctuation">)</span>
+QueueManager<span class="token punctuation">.</span>register<span class="token punctuation">(</span><span class="token string">'get_result_queue'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#连接到服务器，也就是运行task_master.py的机器</span>
+server_addr <span class="token operator">=</span> <span class="token string">'127.0.0.1'</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Connect to server %s...'</span> <span class="token operator">%</span> server_addr<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 端口和验证码注意保持与task_master.py设置的完全一致:</span>
+m <span class="token operator">=</span> QueueManager<span class="token punctuation">(</span>address<span class="token operator">=</span><span class="token punctuation">(</span>server_addr<span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">,</span> authkey<span class="token operator">=</span>b<span class="token string">'abc'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 从网络连接:</span>
+m<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取Queue的对象:</span>
+task <span class="token operator">=</span> m<span class="token punctuation">.</span>get_task_queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+result <span class="token operator">=</span> m<span class="token punctuation">.</span>get_result_queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 从task队列取任务,并把结果写入result队列:</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> task<span class="token punctuation">.</span>get<span class="token punctuation">(</span>timeout<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'run task %d * %d...'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>n<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        r <span class="token operator">=</span> <span class="token string">'%d * %d = %d'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>n<span class="token punctuation">,</span> n<span class="token punctuation">,</span> n<span class="token operator">*</span>n<span class="token punctuation">)</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        result<span class="token punctuation">.</span>put<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
+    <span class="token keyword">except</span> Queue<span class="token punctuation">.</span>Empty<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'task queue is empty.'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 处理结束:</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'worker exit.'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">Connect to server <span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">337</span> <span class="token operator">*</span> <span class="token number">337</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">2278</span> <span class="token operator">*</span> <span class="token number">2278</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">9258</span> <span class="token operator">*</span> <span class="token number">9258</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">1975</span> <span class="token operator">*</span> <span class="token number">1975</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">7342</span> <span class="token operator">*</span> <span class="token number">7342</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">8540</span> <span class="token operator">*</span> <span class="token number">8540</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">1659</span> <span class="token operator">*</span> <span class="token number">1659</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">7008</span> <span class="token operator">*</span> <span class="token number">7008</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">6128</span> <span class="token operator">*</span> <span class="token number">6128</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+run task <span class="token number">3709</span> <span class="token operator">*</span> <span class="token number">3709</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+worker exit<span class="token punctuation">.</span></code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2017/09/08/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">http://lovelyfrog.github.io/2017/09/08/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/09/08/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="错误处理">
+                        
+                        <span class="card-title">错误处理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            错误处理
+
+记录错误
+python内置的logging模块可以非常容易的记录错误信息程序打印完错误信息后会继续执行，并正常退出
+import logging
+def foo(s):
+    return 10/int(s)
+
+def bar
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/09/08/%E5%B8%B8%E7%94%A8%E5%86%85%E5%BB%BA%E6%A8%A1%E5%9D%97/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="常用内建模块">
+                        
+                        <span class="card-title">常用内建模块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            常用内建模块
+
+
+from datetime import datetime
+m = datetime.now()
+class ss(object):
+    def __init__(cls, name):
+        cls.nam
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

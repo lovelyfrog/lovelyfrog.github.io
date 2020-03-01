@@ -1,0 +1,2372 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="常用内建模块, lovelyfrog&#39;s blog">
+    <meta name="description" content="常用内建模块
+
+
+from datetime import datetime
+m = datetime.now()
+class ss(object):
+    def __init__(cls, name):
+        cls.nam">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>常用内建模块 | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">常用内建模块</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/python/" class="post-category">
+                                python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-09-08
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    17.9k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>常用内建模块</p>
+<a id="more"></a>
+
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime</code></pre>
+<pre class=" language-python"><code class="language-python">m <span class="token operator">=</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">ss</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        cls<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+    @classmethod
+    <span class="token keyword">def</span> <span class="token function">fn</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">1</span></code></pre>
+<pre class=" language-python"><code class="language-python">m<span class="token operator">=</span>ss<span class="token punctuation">(</span><span class="token string">'aa'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">m<span class="token punctuation">.</span>name</code></pre>
+<pre><code>&#39;aa&#39;</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
+dd <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token keyword">lambda</span><span class="token punctuation">:</span> <span class="token string">'N/A'</span><span class="token punctuation">)</span>
+dd<span class="token punctuation">[</span><span class="token string">'key1'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'a'</span></code></pre>
+<pre class=" language-python"><code class="language-python">dd<span class="token punctuation">[</span><span class="token string">'key1'</span><span class="token punctuation">]</span></code></pre>
+<pre><code>&#39;a&#39;</code></pre><pre class=" language-python"><code class="language-python">dd<span class="token punctuation">[</span><span class="token string">'key2'</span><span class="token punctuation">]</span></code></pre>
+<pre><code>&#39;N/A&#39;</code></pre><pre class=" language-python"><code class="language-python">dd</code></pre>
+<pre><code>defaultdict(&lt;function __main__.&lt;lambda&gt;&gt;, {&#39;key1&#39;: &#39;a&#39;, &#39;key2&#39;: &#39;N/A&#39;})</code></pre><p>FIFO的dict</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> OrderedDict
+<span class="token keyword">class</span> <span class="token class-name">LastUpdatedOrderedDict</span><span class="token punctuation">(</span>OrderedDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> capacity<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_capacity <span class="token operator">=</span> capacity
+        super<span class="token punctuation">(</span>LastUpdatedOrderedDict<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#初始化后自动调用__setitem__</span>
+
+
+
+    <span class="token keyword">def</span> <span class="token function">__setitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        containsKey <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">if</span> key <span class="token keyword">in</span> self <span class="token keyword">else</span> <span class="token number">0</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span> containsKey <span class="token operator">>=</span> self<span class="token punctuation">.</span>_capacity<span class="token punctuation">:</span>
+            last <span class="token operator">=</span> self<span class="token punctuation">.</span>popitem<span class="token punctuation">(</span>last<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'remove:'</span><span class="token punctuation">,</span> last<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> containsKey<span class="token punctuation">:</span>
+            <span class="token keyword">del</span> self<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'set:'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'add:'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        OrderedDict<span class="token punctuation">.</span>__setitem__<span class="token punctuation">(</span>self<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">dd <span class="token operator">=</span> LastUpdatedOrderedDict<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+<pre><code>add: (&#39;a&#39;, 1)
+add: (&#39;b&#39;, 2)</code></pre><pre class=" language-python"><code class="language-python">dd<span class="token punctuation">[</span><span class="token string">'c'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">3</span></code></pre>
+<pre><code>add: (&#39;c&#39;, 3)</code></pre><pre class=" language-python"><code class="language-python">dd<span class="token punctuation">[</span><span class="token string">'d'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">4</span>
+dd<span class="token punctuation">[</span><span class="token string">'e'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">5</span></code></pre>
+<pre><code>add: (&#39;d&#39;, 4)
+add: (&#39;e&#39;, 5)</code></pre><pre class=" language-python"><code class="language-python">dd<span class="token punctuation">[</span><span class="token string">'f'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">6</span></code></pre>
+<pre><code>remove: (&#39;a&#39;, 1)
+add: (&#39;f&#39;, 6)</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#统计字符个数</span>
+<span class="token keyword">from</span> collections <span class="token keyword">import</span> Counter
+c <span class="token operator">=</span> Counter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> ch <span class="token keyword">in</span> <span class="token string">'programming'</span><span class="token punctuation">:</span>
+    c<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span></code></pre>
+<pre class=" language-python"><code class="language-python">c</code></pre>
+<pre><code>Counter({&#39;a&#39;: 1, &#39;g&#39;: 2, &#39;i&#39;: 1, &#39;m&#39;: 2, &#39;n&#39;: 1, &#39;o&#39;: 1, &#39;p&#39;: 1, &#39;r&#39;: 2})</code></pre><h2 id="contextlib"><a href="#contextlib" class="headerlink" title="contextlib"></a>contextlib</h2><p>$ 任何对象只要实现了上下文管理都是可以用到with语句的 $</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Query</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+    <span class="token keyword">def</span> <span class="token function">__enter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Begin'</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self
+    <span class="token keyword">def</span> <span class="token function">__exit__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exc_type<span class="token punctuation">,</span> exc_value<span class="token punctuation">,</span> traceback<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> exc_type<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Error'</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'End'</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">query</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Query info about %s'</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> Query<span class="token punctuation">(</span><span class="token string">'lovelyfrog'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> q<span class="token punctuation">:</span>
+    q<span class="token punctuation">.</span>query<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Begin
+Query info about lovelyfrog
+End</code></pre><h3 id="contextmanager"><a href="#contextmanager" class="headerlink" title="@contextmanager"></a>@contextmanager</h3><p>$ 编写<strong>enter</strong>和<strong>exit</strong>仍然很繁琐，因此Python的标准库contextlib提供了更简单的写法，上面的代码可以改写如下：$</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> contextlib <span class="token keyword">import</span> contextmanager
+
+<span class="token keyword">class</span> <span class="token class-name">Query</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+
+    <span class="token keyword">def</span> <span class="token function">query</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Query info about %s...'</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+@contextmanager
+<span class="token keyword">def</span> <span class="token function">create_query</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Begin'</span><span class="token punctuation">)</span>
+    q <span class="token operator">=</span> Query<span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#  变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。</span>
+    <span class="token keyword">yield</span> q  <span class="token comment" spellcheck="true">#返回的当作as 后面的变量</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'End'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> create_query<span class="token punctuation">(</span><span class="token string">'lovelyfrog'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> q<span class="token punctuation">:</span>
+    q<span class="token punctuation">.</span>query<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Begin
+Query info about lovelyfrog...
+End</code></pre><p>代码的执行顺序是：</p>
+<ul>
+<li>with语句首先执行yield之前的语句；</li>
+<li>yield调用会执行with语句内部的所有语句；</li>
+<li>最后执行yield之后的语句。</li>
+</ul>
+<h3 id="closing"><a href="#closing" class="headerlink" title="@closing"></a>@closing</h3><p>如果一个对象没有实现上下文，我们就不能把它用于with语句。这个时候，可以用closing()来把该对象变为上下文对象</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> contextlib <span class="token keyword">import</span> closing
+<span class="token keyword">from</span> urllib<span class="token punctuation">.</span>request <span class="token keyword">import</span> urlopen
+
+<span class="token keyword">with</span> closing<span class="token punctuation">(</span>urlopen<span class="token punctuation">(</span><span class="token string">'https://www.python.org'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> page<span class="token punctuation">:</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> page<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span></code></pre>
+<pre><code>b&#39;&lt;!doctype html&gt;\n&#39;
+b&#39;&lt;!--[if lt IE 7]&gt;   &lt;html class=&quot;no-js ie6 lt-ie7 lt-ie8 lt-ie9&quot;&gt;   &lt;![endif]--&gt;\n&#39;
+b&#39;&lt;!--[if IE 7]&gt;      &lt;html class=&quot;no-js ie7 lt-ie8 lt-ie9&quot;&gt;          &lt;![endif]--&gt;\n&#39;
+b&#39;&lt;!--[if IE 8]&gt;      &lt;html class=&quot;no-js ie8 lt-ie9&quot;&gt;                 &lt;![endif]--&gt;\n&#39;
+b&#39;&lt;!--[if gt IE 8]&gt;&lt;!--&gt;&lt;html class=&quot;no-js&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;  &lt;!--&lt;![endif]--&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;&lt;head&gt;\n&#39;
+b&#39;    &lt;meta charset=&quot;utf-8&quot;&gt;\n&#39;
+b&#39;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;link rel=&quot;prefetch&quot; href=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;meta name=&quot;application-name&quot; content=&quot;Python.org&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;msapplication-tooltip&quot; content=&quot;The official home of the Python Programming Language&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;Python.org&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;True&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;\n&#39;
+b&#39;    &lt;meta http-equiv=&quot;cleartype&quot; content=&quot;on&quot;&gt;\n&#39;
+b&#39;    &lt;meta http-equiv=&quot;imagetoolbar&quot; content=&quot;false&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;script src=&quot;/static/js/libs/modernizr.js&quot;&gt;&lt;/script&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;link href=&quot;/static/stylesheets/style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; title=&quot;default&quot; /&gt;\n&#39;
+b&#39;    &lt;link href=&quot;/static/stylesheets/mq.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;not print, braille, embossed, speech, tty&quot; /&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;!--[if (lte IE 8)&amp;(!IEMobile)]&gt;\n&#39;
+b&#39;    &lt;link href=&quot;/static/stylesheets/no-mq.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; /&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;![endif]--&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;/static/favicon.ico&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;/static/apple-touch-icon-144x144-precomposed.png&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;/static/apple-touch-icon-114x114-precomposed.png&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;/static/apple-touch-icon-72x72-precomposed.png&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; href=&quot;/static/apple-touch-icon-precomposed.png&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;/static/apple-touch-icon-precomposed.png&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;/static/metro-icon-144x144-precomposed.png&quot;&gt;&lt;!-- white shape --&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#3673a5&quot;&gt;&lt;!-- python blue --&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;msapplication-navbutton-color&quot; content=&quot;#3673a5&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;title&gt;Welcome to Python.org&lt;/title&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;meta name=&quot;description&quot; content=&quot;The official home of the Python Programming Language&quot;&gt;\n&#39;
+b&#39;    &lt;meta name=&quot;keywords&quot; content=&quot;Python programming language object oriented web free open source software license documentation download community&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;meta property=&quot;og:type&quot; content=&quot;website&quot;&gt;\n&#39;
+b&#39;    &lt;meta property=&quot;og:site_name&quot; content=&quot;Python.org&quot;&gt;\n&#39;
+b&#39;    &lt;meta property=&quot;og:title&quot; content=&quot;Welcome to Python.org&quot;&gt;\n&#39;
+b&#39;    &lt;meta property=&quot;og:description&quot; content=&quot;The official home of the Python Programming Language&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;meta property=&quot;og:image&quot; content=&quot;https://www.python.org/static/opengraph-icon-200x200.png&quot;&gt;\n&#39;
+b&#39;    &lt;meta property=&quot;og:image:secure_url&quot; content=&quot;https://www.python.org/static/opengraph-icon-200x200.png&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;meta property=&quot;og:url&quot; content=&quot;https://www.python.org/&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;link rel=&quot;author&quot; href=&quot;/static/humans.txt&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;Python Enhancement Proposals&quot;\n&#39;
+b&#39;          href=&quot;https://www.python.org/dev/peps/peps.rss/&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;Python Job Opportunities&quot;\n&#39;
+b&#39;          href=&quot;https://www.python.org/jobs/feed/rss/&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;Python Software Foundation News&quot;\n&#39;
+b&#39;          href=&quot;https://feeds.feedburner.com/PythonSoftwareFoundationNews&quot;&gt;\n&#39;
+b&#39;    &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;Python Insider&quot;\n&#39;
+b&#39;          href=&quot;https://feeds.feedburner.com/PythonInsider&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;script type=&quot;application/ld+json&quot;&gt;\n&#39;
+b&#39;     {\n&#39;
+b&#39;       &quot;@context&quot;: &quot;http://schema.org&quot;,\n&#39;
+b&#39;       &quot;@type&quot;: &quot;WebSite&quot;,\n&#39;
+b&#39;       &quot;url&quot;: &quot;https://www.python.org/&quot;,\n&#39;
+b&#39;       &quot;potentialAction&quot;: {\n&#39;
+b&#39;         &quot;@type&quot;: &quot;SearchAction&quot;,\n&#39;
+b&#39;         &quot;target&quot;: &quot;https://www.python.org/search/?q={search_term_string}&quot;,\n&#39;
+b&#39;         &quot;query-input&quot;: &quot;required name=search_term_string&quot;\n&#39;
+b&#39;       }\n&#39;
+b&#39;     }\n&#39;
+b&#39;    &lt;/script&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;script type=&quot;text/javascript&quot;&gt;\n&#39;
+b&#39;    var _gaq = _gaq || [];\n&#39;
+b&quot;    _gaq.push([&#39;_setAccount&#39;, &#39;UA-39055973-1&#39;]);\n&quot;
+b&quot;    _gaq.push([&#39;_trackPageview&#39;]);\n&quot;
+b&#39;\n&#39;
+b&#39;    (function() {\n&#39;
+b&quot;        var ga = document.createElement(&#39;script&#39;); ga.type = &#39;text/javascript&#39;; ga.async = true;\n&quot;
+b&quot;        ga.src = (&#39;https:&#39; == document.location.protocol ? &#39;https://ssl&#39; : &#39;http://www&#39;) + &#39;.google-analytics.com/ga.js&#39;;\n&quot;
+b&quot;        var s = document.getElementsByTagName(&#39;script&#39;)[0]; s.parentNode.insertBefore(ga, s);\n&quot;
+b&#39;    })();\n&#39;
+b&#39;    &lt;/script&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/head&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;&lt;body class=&quot;python home&quot; id=&quot;homepage&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;div id=&quot;touchnav-wrapper&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;div id=&quot;nojs&quot; class=&quot;do-not-print&quot;&gt;\n&#39;
+b&#39;            &lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; While Javascript is not essential for this website, your interaction with the content will be limited. Please turn Javascript on for the full experience. &lt;/p&gt;\n&#39;
+b&#39;        &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;!--[if lt IE 8]&gt;\n&#39;
+b&#39;        &lt;div id=&quot;oldie-warning&quot; class=&quot;do-not-print&quot;&gt;\n&#39;
+b&#39;            &lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; Your browser is &lt;em&gt;ancient&lt;/em&gt; and &lt;a href=&quot;http://www.ie6countdown.com/&quot;&gt;Microsoft agrees&lt;/a&gt;. &lt;a href=&quot;http://browsehappy.com/&quot;&gt;Upgrade to a different browser&lt;/a&gt; or &lt;a href=&quot;http://www.google.com/chromeframe/?redirect=true&quot;&gt;install Google Chrome Frame&lt;/a&gt; to experience a better web.&lt;/p&gt;\n&#39;
+b&#39;        &lt;/div&gt;\n&#39;
+b&#39;        &lt;![endif]--&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;!-- Sister Site Links --&gt;\n&#39;
+b&#39;        &lt;div id=&quot;top&quot; class=&quot;top-bar do-not-print&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;            &lt;nav class=&quot;meta-navigation container&quot; role=&quot;navigation&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;div class=&quot;skip-link screen-reader-text&quot;&gt;\n&#39;
+b&#39;                    &lt;a href=&quot;#content&quot; title=&quot;Skip to content&quot;&gt;Skip to content&lt;/a&gt;\n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;a id=&quot;close-python-network&quot; class=&quot;jump-link&quot; href=&quot;#python-network&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;                    &lt;span aria-hidden=&quot;true&quot; class=&quot;icon-arrow-down&quot;&gt;&lt;span&gt;&amp;#9660;&lt;/span&gt;&lt;/span&gt; Close\n&#39;
+b&#39;                &lt;/a&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;menu&quot; role=&quot;tree&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;python-meta current_item selectedcurrent_branch selected&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/&quot; title=&quot;The Python Programming Language&quot; class=&quot;current_item selectedcurrent_branch selected&quot;&gt;Python&lt;/a&gt;\n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;psf-meta &quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/psf-landing/&quot; title=&quot;The Python Software Foundation&quot; &gt;PSF&lt;/a&gt;\n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;docs-meta &quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;https://docs.python.org&quot; title=&quot;Python Documentation&quot; &gt;Docs&lt;/a&gt;\n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;pypi-meta &quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;https://pypi.python.org/&quot; title=&quot;Python Package Index&quot; &gt;PyPI&lt;/a&gt;\n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;jobs-meta &quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/jobs/&quot; title=&quot;Python Job Board&quot; &gt;Jobs&lt;/a&gt;\n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;shop-meta &quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/community/&quot; title=&quot;Python Community&quot; &gt;Community&lt;/a&gt;\n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;a id=&quot;python-network&quot; class=&quot;jump-link&quot; href=&quot;#top&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;                    &lt;span aria-hidden=&quot;true&quot; class=&quot;icon-arrow-up&quot;&gt;&lt;span&gt;&amp;#9650;&lt;/span&gt;&lt;/span&gt; The Python Network\n&#39;
+b&#39;                &lt;/a&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;            &lt;/nav&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;!-- Header elements --&gt;\n&#39;
+b&#39;        &lt;header class=&quot;main-header&quot; role=&quot;banner&quot;&gt;\n&#39;
+b&#39;            &lt;div class=&quot;container&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;h1 class=&quot;site-headline&quot;&gt;\n&#39;
+b&#39;                    &lt;a href=&quot;/&quot;&gt;&lt;img class=&quot;python-logo&quot; src=&quot;/static/img/python-logo.png&quot; alt=&quot;python&amp;trade;&quot;&gt;&lt;/a&gt;\n&#39;
+b&#39;                &lt;/h1&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;div class=&quot;options-bar do-not-print&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                    &lt;a id=&quot;site-map-link&quot; class=&quot;jump-to-menu&quot; href=&quot;#site-map&quot;&gt;&lt;span class=&quot;menu-icon&quot;&gt;&amp;equiv;&lt;/span&gt; Menu&lt;/a&gt;&lt;form class=&quot;search-the-site&quot; action=&quot;/search/&quot; method=&quot;get&quot;&gt;\n&#39;
+b&#39;                        &lt;fieldset title=&quot;Search Python.org&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            &lt;span aria-hidden=&quot;true&quot; class=&quot;icon-search&quot;&gt;&lt;/span&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            &lt;label class=&quot;screen-reader-text&quot; for=&quot;id-search-field&quot;&gt;Search This Site&lt;/label&gt;\n&#39;
+b&#39;                            &lt;input id=&quot;id-search-field&quot; name=&quot;q&quot; type=&quot;search&quot; role=&quot;textbox&quot; class=&quot;search-field&quot; placeholder=&quot;Search&quot; value=&quot;&quot; tabindex=&quot;1&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            &lt;button type=&quot;submit&quot; name=&quot;submit&quot; id=&quot;submit&quot; class=&quot;search-button&quot; title=&quot;Submit this Search&quot; tabindex=&quot;3&quot;&gt;\n&#39;
+b&#39;                                GO\n&#39;
+b&#39;                            &lt;/button&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            \n&#39;
+b&#39;                            &lt;!--[if IE]&gt;&lt;input type=&quot;text&quot; style=&quot;display: none;&quot; disabled=&quot;disabled&quot; size=&quot;1&quot; tabindex=&quot;4&quot;&gt;&lt;![endif]--&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                        &lt;/fieldset&gt;\n&#39;
+b&#39;                    &lt;/form&gt;&lt;span class=&quot;breaker&quot;&gt;&lt;/span&gt;&lt;div class=&quot;adjust-font-size&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;                        &lt;ul class=&quot;navigation menu&quot; aria-label=&quot;Adjust Text Size on Page&quot;&gt;\n&#39;
+b&#39;                            &lt;li class=&quot;tier-1 last&quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;                                &lt;a href=&quot;#&quot; class=&quot;action-trigger&quot;&gt;&lt;strong&gt;&lt;small&gt;A&lt;/small&gt; A&lt;/strong&gt;&lt;/a&gt;\n&#39;
+b&#39;                                &lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a class=&quot;text-shrink&quot; title=&quot;Make Text Smaller&quot; href=&quot;javascript:;&quot;&gt;Smaller&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a class=&quot;text-grow&quot; title=&quot;Make Text Larger&quot; href=&quot;javascript:;&quot;&gt;Larger&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a class=&quot;text-reset&quot; title=&quot;Reset any font size changes I have made&quot; href=&quot;javascript:;&quot;&gt;Reset&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                &lt;/ul&gt;\n&#39;
+b&#39;                            &lt;/li&gt;\n&#39;
+b&#39;                        &lt;/ul&gt;\n&#39;
+b&#39;                    &lt;/div&gt;&lt;div class=&quot;winkwink-nudgenudge&quot;&gt;\n&#39;
+b&#39;                        &lt;ul class=&quot;navigation menu&quot; aria-label=&quot;Social Media Navigation&quot;&gt;\n&#39;
+b&#39;                            &lt;li class=&quot;tier-1 last&quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;                                &lt;a href=&quot;#&quot; class=&quot;action-trigger&quot;&gt;Socialize&lt;/a&gt;\n&#39;
+b&#39;                                &lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://plus.google.com/+Python&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-google-plus&quot;&gt;&lt;/span&gt;Google+&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://www.facebook.com/pythonlang?fref=ts&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-facebook&quot;&gt;&lt;/span&gt;Facebook&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://twitter.com/ThePSF&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-twitter&quot;&gt;&lt;/span&gt;Twitter&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/irc/&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-freenode&quot;&gt;&lt;/span&gt;Chat on IRC&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                &lt;/ul&gt;\n&#39;
+b&#39;                            &lt;/li&gt;\n&#39;
+b&#39;                        &lt;/ul&gt;\n&#39;
+b&#39;                    &lt;/div&gt;&lt;div class=&quot;account-signin&quot;&gt;\n&#39;
+b&#39;                        &lt;ul class=&quot;navigation menu&quot; aria-label=&quot;Social Media Navigation&quot;&gt;\n&#39;
+b&#39;                            &lt;li class=&quot;tier-1 last&quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;a href=&quot;/accounts/login/&quot; title=&quot;Sign Up or Sign In to Python.org&quot;&gt;Sign In&lt;/a&gt;\n&#39;
+b&#39;                                &lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/accounts/signup/&quot;&gt;Sign Up / Register&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                    &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/accounts/login/&quot;&gt;Sign In&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                &lt;/ul&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                            &lt;/li&gt;\n&#39;
+b&#39;                        &lt;/ul&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;&lt;!-- end options-bar --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;nav id=&quot;mainnav&quot; class=&quot;python-navigation main-navigation do-not-print&quot; role=&quot;navigation&quot;&gt;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                        \n&#39;
+b&#39;&lt;ul class=&quot;navigation menu&quot; role=&quot;menubar&quot; aria-label=&quot;Main Navigation&quot;&gt;\n&#39;
+b&#39;  \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;about&quot; class=&quot;tier-1 element-1  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/about/&quot; title=&quot;&quot; class=&quot;&quot;&gt;About&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/apps/&quot; title=&quot;&quot;&gt;Applications&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/quotes/&quot; title=&quot;&quot;&gt;Quotes&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/gettingstarted/&quot; title=&quot;&quot;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/help/&quot; title=&quot;&quot;&gt;Help&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://brochure.getpython.info/&quot; title=&quot;&quot;&gt;Python Brochure&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;downloads&quot; class=&quot;tier-1 element-2  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/downloads/&quot; title=&quot;&quot; class=&quot;&quot;&gt;Downloads&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/&quot; title=&quot;&quot;&gt;All releases&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/source/&quot; title=&quot;&quot;&gt;Source code&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/windows/&quot; title=&quot;&quot;&gt;Windows&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/mac-osx/&quot; title=&quot;&quot;&gt;Mac OS X&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/download/other/&quot; title=&quot;&quot;&gt;Other Platforms&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://docs.python.org/3/license.html&quot; title=&quot;&quot;&gt;License&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/download/alternatives&quot; title=&quot;&quot;&gt;Alternative Implementations&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;documentation&quot; class=&quot;tier-1 element-3  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/doc/&quot; title=&quot;&quot; class=&quot;&quot;&gt;Documentation&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/doc/&quot; title=&quot;&quot;&gt;Docs&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/doc/av&quot; title=&quot;&quot;&gt;Audio/Visual Talks&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/BeginnersGuide&quot; title=&quot;&quot;&gt;Beginner&amp;#39;s Guide&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://docs.python.org/devguide/&quot; title=&quot;&quot;&gt;Developer&amp;#39;s Guide&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://docs.python.org/faq/&quot; title=&quot;&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://wiki.python.org/moin/Languages&quot; title=&quot;&quot;&gt;Non-English Docs&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://python.org/dev/peps/&quot; title=&quot;&quot;&gt;PEP Index&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-8&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/PythonBooks&quot; title=&quot;&quot;&gt;Python Books&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-9&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/doc/essays/&quot; title=&quot;&quot;&gt;Python Essays&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;community&quot; class=&quot;tier-1 element-4  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/community/&quot; title=&quot;&quot; class=&quot;&quot;&gt;Community&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/diversity/&quot; title=&quot;&quot;&gt;Diversity&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/lists/&quot; title=&quot;&quot;&gt;Mailing Lists&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/irc/&quot; title=&quot;&quot;&gt;IRC&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/forums/&quot; title=&quot;&quot;&gt;Forums&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/workshops/&quot; title=&quot;&quot;&gt;Python Conferences&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/sigs/&quot; title=&quot;&quot;&gt;Special Interest Groups&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/&quot; title=&quot;&quot;&gt;Python Wiki&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-8&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/logos/&quot; title=&quot;&quot;&gt;Python Logo&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-9&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/merchandise/&quot; title=&quot;&quot;&gt;Merchandise&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-10&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/awards&quot; title=&quot;&quot;&gt;Community Awards&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-11&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://www.python.org/psf/codeofconduct/&quot; title=&quot;&quot;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;success-stories&quot; class=&quot;tier-1 element-5  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/about/success/&quot; title=&quot;success-stories&quot; class=&quot;&quot;&gt;Success Stories&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#arts&quot; title=&quot;&quot;&gt;Arts&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#business&quot; title=&quot;&quot;&gt;Business&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#education&quot; title=&quot;&quot;&gt;Education&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#engineering&quot; title=&quot;&quot;&gt;Engineering&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#government&quot; title=&quot;&quot;&gt;Government&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#scientific&quot; title=&quot;&quot;&gt;Scientific&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#software-development&quot; title=&quot;&quot;&gt;Software Development&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;news&quot; class=&quot;tier-1 element-6  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/blogs/&quot; title=&quot;News from around the Python world&quot; class=&quot;&quot;&gt;News&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/blogs/&quot; title=&quot;Python Insider Blog Posts&quot;&gt;Python News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://planetpython.org/&quot; title=&quot;Planet Python&quot;&gt;Community News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://pyfound.blogspot.com/&quot; title=&quot;PSF Blog&quot;&gt;PSF News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://pycon.blogspot.com/&quot; title=&quot;PyCon Blog&quot;&gt;PyCon News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li id=&quot;events&quot; class=&quot;tier-1 element-7  &quot; aria-haspopup=&quot;true&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/events/&quot; title=&quot;&quot; class=&quot;&quot;&gt;Events&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot; role=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-events&quot; title=&quot;&quot;&gt;Python Events&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-user-group/&quot; title=&quot;&quot;&gt;User Group Events&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-events/past/&quot; title=&quot;&quot;&gt;Python Events Archive&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-user-group/past/&quot; title=&quot;&quot;&gt;User Group Events Archive&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/PythonEventsCalendar#Submitting_an_Event&quot; title=&quot;&quot;&gt;Submit an Event&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;  \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                &lt;/nav&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;div class=&quot;header-banner &quot;&gt; &lt;!-- for optional &quot;do-not-print&quot; class --&gt;\n&#39;
+b&#39;                    \n&#39;
+b&#39;        &lt;div id=&quot;dive-into-python&quot; class=&quot;flex-slideshow slideshow&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;            &lt;ul class=&quot;launch-shell menu&quot; id=&quot;launch-shell&quot;&gt;\n&#39;
+b&#39;                &lt;li&gt;\n&#39;
+b&#39;                    &lt;a class=&quot;button prompt&quot; id=&quot;start-shell&quot; data-shell-container=&quot;#dive-into-python&quot; href=&quot;/shell/&quot;&gt;&amp;gt;_\n&#39;
+b&#39;                        &lt;span class=&quot;message&quot;&gt;Launch Interactive Shell&lt;/span&gt;\n&#39;
+b&#39;                    &lt;/a&gt;\n&#39;
+b&#39;                &lt;/li&gt;\n&#39;
+b&#39;            &lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;            &lt;ul class=&quot;slides menu&quot;&gt;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;li&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-code&quot;&gt;&lt;pre&gt;&lt;code&gt;&lt;span class=&quot;comment&quot;&gt;# Python 3: Fibonacci series up to n&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; def fib(n):\r\n&#39;
+b&#39;&gt;&gt;&gt;     a, b = 0, 1\r\n&#39;
+b&#39;&gt;&gt;&gt;     while a &amp;lt; n:\r\n&#39;
+b&quot;&gt;&gt;&gt;         print(a, end=&#39; &#39;)\r\n&quot;
+b&#39;&gt;&gt;&gt;         a, b = b, a+b\r\n&#39;
+b&#39;&gt;&gt;&gt;     print()\r\n&#39;
+b&#39;&gt;&gt;&gt; fib(1000)\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-copy&quot;&gt;&lt;h1&gt;Functions Defined&lt;/h1&gt;\r\n&#39;
+b&#39;&lt;p&gt;The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. &lt;a href=&quot;//docs.python.org/3/tutorial/controlflow.html#defining-functions&quot;&gt;More about defining functions in Python&amp;nbsp;3&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;\n&#39;
+b&#39;                &lt;/li&gt;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;li&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-code&quot;&gt;&lt;pre&gt;&lt;code&gt;&lt;span class=&quot;comment&quot;&gt;# Python 3: List comprehensions&lt;/span&gt;\r\n&#39;
+b&quot;&gt;&gt;&gt; fruits = [&#39;Banana&#39;, &#39;Apple&#39;, &#39;Lime&#39;]\r\n&quot;
+b&#39;&gt;&gt;&gt; loud_fruits = [fruit.upper() for fruit in fruits]\r\n&#39;
+b&#39;&gt;&gt;&gt; print(loud_fruits)\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;[\&#39;BANANA\&#39;, \&#39;APPLE\&#39;, \&#39;LIME\&#39;]&lt;/span&gt;\r\n&#39;
+b&#39;\r\n&#39;
+b&#39;&lt;span class=&quot;comment&quot;&gt;# List and the enumerate function&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; list(enumerate(fruits))\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;[(0, \&#39;Banana\&#39;), (1, \&#39;Apple\&#39;), (2, \&#39;Lime\&#39;)]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-copy&quot;&gt;&lt;h1&gt;Compound Data Types&lt;/h1&gt;\r\n&#39;
+b&#39;&lt;p&gt;Lists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. &lt;a href=&quot;//docs.python.org/3/tutorial/introduction.html#lists&quot;&gt;More about lists in Python&amp;nbsp;3&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;\n&#39;
+b&#39;                &lt;/li&gt;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;li&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-code&quot;&gt;&lt;pre&gt;&lt;code&gt;&lt;span class=&quot;comment&quot;&gt;# Python 3: Simple arithmetic&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; 1 / 2\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;0.5&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; 2 ** 3\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;8&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; 17 / 3  &lt;span class=&quot;comment&quot;&gt;# classic division returns a float&lt;/span&gt;\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;5.666666666666667&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; 17 // 3  &lt;span class=&quot;comment&quot;&gt;# floor division&lt;/span&gt;\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-copy&quot;&gt;&lt;h1&gt;Intuitive Interpretation&lt;/h1&gt;\r\n&#39;
+b&#39;&lt;p&gt;Calculations are simple with Python, and expression syntax is straightforward: the operators &lt;code&gt;+&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, &lt;code&gt;*&lt;/code&gt; and &lt;code&gt;/&lt;/code&gt; work as expected; parentheses &lt;code&gt;()&lt;/code&gt; can be used for grouping. &lt;a href=&quot;http://docs.python.org/3/tutorial/introduction.html#using-python-as-a-calculator&quot;&gt;More about simple math functions in Python&amp;nbsp;3&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;\n&#39;
+b&#39;                &lt;/li&gt;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;li&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-code&quot;&gt;&lt;pre&gt;&lt;code&gt;&lt;span class=&quot;comment&quot;&gt;# Python 3: Simple output (with Unicode)&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; print(&quot;Hello, I\&#39;m Python!&quot;)\r\n&#39;
+b&#39;&lt;span class=&quot;output&quot;&gt;Hello, I\&#39;m Python!&lt;/span&gt;\r\n&#39;
+b&#39;\r\n&#39;
+b&#39;&lt;span class=&quot;comment&quot;&gt;# Input, assignment&lt;/span&gt;\r\n&#39;
+b&quot;&gt;&gt;&gt; name = input(&#39;What is your name?\\n&#39;)\r\n&quot;
+b&quot;&gt;&gt;&gt; print(&#39;Hi, %s.&#39; % name)\r\n&quot;
+b&#39;&lt;span class=&quot;output&quot;&gt;What is your name?\r\n&#39;
+b&#39;Python\r\n&#39;
+b&#39;Hi, Python.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-copy&quot;&gt;&lt;h1&gt;Quick &amp;amp; Easy to Learn&lt;/h1&gt;\r\n&#39;
+b&#39;&lt;p&gt;Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. &lt;a href=&quot;//docs.python.org/3/tutorial/&quot;&gt;Whet your appetite&lt;/a&gt; with our Python&amp;nbsp;3 overview.&lt;/p&gt;\r\n&#39;
+b&#39;                   &lt;/div&gt;\n&#39;
+b&#39;                &lt;/li&gt;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;li&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-code&quot;&gt;&lt;pre&gt;&lt;code&gt;&lt;span class=&quot;comment&quot;&gt;# For loop on a list&lt;/span&gt;\r\n&#39;
+b&#39;&gt;&gt;&gt; numbers = [2, 4, 6, 8]\r\n&#39;
+b&#39;&gt;&gt;&gt; product = 1\r\n&#39;
+b&#39;&gt;&gt;&gt; for number in numbers:\r\n&#39;
+b&#39;...    product = product * number\r\n&#39;
+b&#39;... \r\n&#39;
+b&quot;&gt;&gt;&gt; print(&#39;The product is:&#39;, product)\r\n&quot;
+b&#39;&lt;span class=&quot;output&quot;&gt;The product is: 384&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;\n&#39;
+b&#39;                    &lt;div class=&quot;slide-copy&quot;&gt;&lt;h1&gt;All the Flow You&amp;rsquo;d Expect&lt;/h1&gt;\r\n&#39;
+b&#39;&lt;p&gt;Python knows the usual control flow statements that other languages speak &amp;mdash; &lt;code&gt;if&lt;/code&gt;, &lt;code&gt;for&lt;/code&gt;, &lt;code&gt;while&lt;/code&gt; and &lt;code&gt;range&lt;/code&gt; &amp;mdash; with some of its own twists, of course. &lt;a href=&quot;//docs.python.org/3/tutorial/controlflow.html&quot;&gt;More control flow tools in Python&amp;nbsp;3&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;\n&#39;
+b&#39;                &lt;/li&gt;\n&#39;
+b&#39;                \n&#39;
+b&#39;            &lt;/ul&gt;\n&#39;
+b&#39;        &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;        &lt;div class=&quot;introduction&quot;&gt;\n&#39;
+b&#39;            &lt;p&gt;Python is a programming language that lets you work quickly &lt;span class=&quot;breaker&quot;&gt;&lt;/span&gt;and integrate systems more effectively. &lt;a class=&quot;readmore&quot; href=&quot;/doc/&quot;&gt;Learn More&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;        &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;             &lt;/div&gt;&lt;!-- end .container --&gt;\n&#39;
+b&#39;        &lt;/header&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;div id=&quot;content&quot; class=&quot;content-wrapper&quot;&gt;\n&#39;
+b&#39;            &lt;!-- Main Content Column --&gt;\n&#39;
+b&#39;            &lt;div class=&quot;container&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;section class=&quot;main-content &quot; role=&quot;main&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                    \n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;div class=&quot;row&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;small-widget get-started-widget&quot;&gt;\n&#39;
+b&#39;                        &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-get-started&quot;&gt;&lt;/span&gt;Get Started&lt;/h2&gt;\r\n&#39;
+b&quot;&lt;p&gt;Whether you&#39;re new to programming or an experienced developer, it&#39;s easy to learn and use Python.&lt;/p&gt;\r\n&quot;
+b&#39;&lt;p&gt;&lt;a href=&quot;/about/gettingstarted/&quot;&gt;Start with our Beginner&amp;rsquo;s Guide&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;small-widget download-widget&quot;&gt;\n&#39;
+b&#39;                        &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-download&quot;&gt;&lt;/span&gt;Download&lt;/h2&gt;\n&#39;
+b&#39;&lt;p&gt;Python source code and installers are available for download for all versions! Not sure which version to use? &lt;a href=&quot;https://wiki.python.org/moin/Python2orPython3&quot;&gt;Check here&lt;/a&gt;.&lt;/p&gt;\n&#39;
+b&#39;&lt;p&gt;Latest: &lt;a href=&quot;/downloads/release/python-362/&quot;&gt;Python 3.6.2&lt;/a&gt; - &lt;a href=&quot;/downloads/release/python-2713/&quot;&gt;Python 2.7.13&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;small-widget documentation-widget&quot;&gt;\n&#39;
+b&#39;                        &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-documentation&quot;&gt;&lt;/span&gt;Docs&lt;/h2&gt;\r\n&#39;
+b&quot;&lt;p&gt;Documentation for Python&#39;s standard library, along with tutorials and guides, are available online.&lt;/p&gt;\r\n&quot;
+b&#39;&lt;p&gt;&lt;a href=&quot;https://docs.python.org&quot;&gt;docs.python.org&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;small-widget jobs-widget last&quot;&gt;\n&#39;
+b&#39;                        &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-jobs&quot;&gt;&lt;/span&gt;Jobs&lt;/h2&gt;\r\n&#39;
+b&quot;&lt;p&gt;Looking for work or have a Python related position that you&#39;re trying to hire for? Our &lt;strong&gt;relaunched community-run job board&lt;/strong&gt; is the place to go.&lt;/p&gt;\r\n&quot;
+b&#39;&lt;p&gt;&lt;a href=&quot;//jobs.python.org&quot;&gt;jobs.python.org&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;div class=&quot;list-widgets row&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;medium-widget blog-widget&quot;&gt;\n&#39;
+b&#39;                        \n&#39;
+b&#39;                        &lt;div class=&quot;shrubbery&quot;&gt;\n&#39;
+b&#39;                        \n&#39;
+b&#39;                            &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-news&quot;&gt;&lt;/span&gt;Latest News&lt;/h2&gt;\n&#39;
+b&#39;                            &lt;p class=&quot;give-me-more&quot;&gt;&lt;a href=&quot;http://blog.python.org&quot; title=&quot;More News&quot;&gt;More&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;                            \n&#39;
+b&#39;                            &lt;ul class=&quot;menu&quot;&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-08-27T03:41:00.000006+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;08-27&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;http://feedproxy.google.com/~r/PythonInsider/~3/pe2Ug4MA0Lg/python-2714-release-candidate-1.html&quot;&gt;The first release candidate for Python 2.7.14 is now available ...&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-08-09T07:34:00.000002+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;08-09&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;http://feedproxy.google.com/~r/PythonInsider/~3/vY72b719CGk/python-354-and-python-347-are-now.html&quot;&gt;Python 3.5.4 and Python 3.4.7 are now available for download. ...&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-07-25T08:40:00.000001+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;07-25&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;http://feedproxy.google.com/~r/PythonInsider/~3/ry7faTWPZiY/python-354rc1-and-python-347rc1-are-now.html&quot;&gt;Python 3.5.4rc1 and Python 3.4.7rc1 are now available for download. ...&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-07-17T05:43:00+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;07-17&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;http://feedproxy.google.com/~r/PythonInsider/~3/xgmAIcE1Wes/python-362-is-now-available.html&quot;&gt;Python 3.6.2 is now available. &amp;nbsp; Python 3.6.2 is the ...&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-07-08T05:15:00.000005+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;07-08&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;http://feedproxy.google.com/~r/PythonInsider/~3/u1jESRAmGy4/python-362rc2-is-now-available-for.html&quot;&gt;Python 3.6.2rc2 is now available. &amp;nbsp; Python 3.6.2rc2 is the ...&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                            &lt;/ul&gt;\n&#39;
+b&#39;                        &lt;/div&gt;&lt;!-- end .shrubbery --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;medium-widget event-widget last&quot;&gt;\n&#39;
+b&#39;                        \n&#39;
+b&#39;                        &lt;div class=&quot;shrubbery&quot;&gt;\n&#39;
+b&#39;                        \n&#39;
+b&#39;                            &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-calendar&quot;&gt;&lt;/span&gt;Upcoming Events&lt;/h2&gt;\n&#39;
+b&#39;                            &lt;p class=&quot;give-me-more&quot;&gt;&lt;a href=&quot;/events/calendars/&quot; title=&quot;More Events&quot;&gt;More&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;                            \n&#39;
+b&#39;                            &lt;ul class=&quot;menu&quot;&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-09-07T00:00:00+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;09-07&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;/events/python-events/577/&quot;&gt;PyCon JP 2017&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-09-07T00:00:00+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;09-07&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;/events/python-user-group/546/&quot;&gt;Django Girls Caxias do Sul&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-09-08T00:00:00+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;09-08&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;/events/python-events/544/&quot;&gt;Python Sul&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-09-15T00:00:00+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;09-15&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;/events/python-events/551/&quot;&gt;PyCon Nigeria 2017&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                                &lt;li&gt;\n&#39;
+b&#39;&lt;time datetime=&quot;2017-09-19T00:00:00+00:00&quot;&gt;&lt;span class=&quot;say-no-more&quot;&gt;2017-&lt;/span&gt;09-19&lt;/time&gt;\n&#39;
+b&#39; &lt;a href=&quot;/events/python-user-group/580/&quot;&gt;Django Girls Tucum\xc3\xa1n&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                                \n&#39;
+b&#39;                                \n&#39;
+b&#39;                            &lt;/ul&gt;\n&#39;
+b&#39;                        &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;div class=&quot;row&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;medium-widget success-stories-widget&quot;&gt;\n&#39;
+b&#39;                        \n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;                        &lt;div class=&quot;shrubbery&quot;&gt;\n&#39;
+b&#39;                            \n&#39;
+b&#39;\n&#39;
+b&#39;                            &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-success-stories&quot;&gt;&lt;/span&gt;Success Stories&lt;/h2&gt;\n&#39;
+b&#39;                            &lt;p class=&quot;give-me-more&quot;&gt;&lt;a href=&quot;/success-stories/&quot; title=&quot;More Success Stories&quot;&gt;More&lt;/a&gt;&lt;/p&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            \n&#39;
+b&#39;                            &lt;div class=&quot;success-story-item&quot; id=&quot;success-story-2&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            &lt;blockquote&gt;\n&#39;
+b&#39;                                &lt;a href=&quot;/success-stories/industrial-light-magic-runs-python/&quot;&gt;ILM runs a batch processing environment capable of modeling, rendering and compositing tens of thousands of motion picture frames per day. Thousands of machines running Linux, IRIX, Compaq Tru64, OS X, Solaris, and Windows join together to provide a production pipeline used by ~800 users daily. Speed of development is key, and Python was a faster way to code (and re-code) the programs that control this production pipeline.&lt;/a&gt;\n&#39;
+b&#39;                            &lt;/blockquote&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; class=&quot;quote-from&quot;&gt;\n&#39;
+b&#39;                                &lt;tbody&gt;\n&#39;
+b&#39;                                    &lt;tr&gt;\n&#39;
+b&#39;                                        \n&#39;
+b&#39;                                        &lt;td&gt;&lt;p&gt;&lt;a href=&quot;/success-stories/industrial-light-magic-runs-python/&quot;&gt;Industrial Light &amp;amp; Magic Runs on Python&lt;/a&gt; &lt;em&gt;by Tim Fortenberry&lt;/em&gt;&lt;/p&gt;&lt;/td&gt;\n&#39;
+b&#39;                                    &lt;/tr&gt;\n&#39;
+b&#39;                                &lt;/tbody&gt;\n&#39;
+b&#39;                            &lt;/table&gt;\n&#39;
+b&#39;                            &lt;/div&gt;\n&#39;
+b&#39;                            \n&#39;
+b&#39;\n&#39;
+b&#39;                        &lt;/div&gt;&lt;!-- end .shrubbery --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;medium-widget applications-widget last&quot;&gt;\n&#39;
+b&#39;                        &lt;div class=&quot;shrubbery&quot;&gt;\n&#39;
+b&#39;                            &lt;h2 class=&quot;widget-title&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-python&quot;&gt;&lt;/span&gt;Use Python for&amp;hellip;&lt;/h2&gt;\r\n&#39;
+b&#39;&lt;p class=&quot;give-me-more&quot;&gt;&lt;a href=&quot;/about/apps&quot; title=&quot;More Applications&quot;&gt;More&lt;/a&gt;&lt;/p&gt;\r\n&#39;
+b&#39;\r\n&#39;
+b&#39;&lt;ul class=&quot;menu&quot;&gt;\r\n&#39;
+b&#39;    &lt;li&gt;&lt;b&gt;Web Development&lt;/b&gt;:\r\n&#39;
+b&#39;        &lt;span class=&quot;tag-wrapper&quot;&gt;&lt;a class=&quot;tag&quot; href=&quot;http://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://www.pylonsproject.org/&quot;&gt;Pyramid&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://bottlepy.org&quot;&gt;Bottle&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://tornadoweb.org&quot;&gt;Tornado&lt;/a&gt;, &lt;a href=&quot;http://flask.pocoo.org/&quot; class=&quot;tag&quot;&gt;Flask&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://www.web2py.com/&quot;&gt;web2py&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;\r\n&#39;
+b&#39;    &lt;li&gt;&lt;b&gt;GUI Development&lt;/b&gt;:\r\n&#39;
+b&#39;        &lt;span class=&quot;tag-wrapper&quot;&gt;&lt;a class=&quot;tag&quot; href=&quot;http://wiki.python.org/moin/TkInter&quot;&gt;tkInter&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;https://wiki.gnome.org/Projects/PyGObject&quot;&gt;PyGObject&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://www.riverbankcomputing.co.uk/software/pyqt/intro&quot;&gt;PyQt&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;https://wiki.qt.io/PySide&quot;&gt;PySide&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;https://kivy.org/&quot;&gt;Kivy&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://www.wxpython.org/&quot;&gt;wxPython&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;\r\n&#39;
+b&#39;    &lt;li&gt;&lt;b&gt;Scientific and Numeric&lt;/b&gt;:\r\n&#39;
+b&#39;        &lt;span class=&quot;tag-wrapper&quot;&gt;\r\n&#39;
+b&#39;&lt;a class=&quot;tag&quot; href=&quot;http://www.scipy.org&quot;&gt;SciPy&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://pandas.pydata.org/&quot;&gt;Pandas&lt;/a&gt;, &lt;a href=&quot;http://ipython.org&quot; class=&quot;tag&quot;&gt;IPython&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;\r\n&#39;
+b&#39;    &lt;li&gt;&lt;b&gt;Software Development&lt;/b&gt;:\r\n&#39;
+b&#39;        &lt;span class=&quot;tag-wrapper&quot;&gt;&lt;a class=&quot;tag&quot; href=&quot;http://buildbot.net/&quot;&gt;Buildbot&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://trac.edgewall.org/&quot;&gt;Trac&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://roundup.sourceforge.net/&quot;&gt;Roundup&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;\r\n&#39;
+b&#39;    &lt;li&gt;&lt;b&gt;System Administration&lt;/b&gt;:\r\n&#39;
+b&#39;        &lt;span class=&quot;tag-wrapper&quot;&gt;&lt;a class=&quot;tag&quot; href=&quot;http://www.ansible.com&quot;&gt;Ansible&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;http://www.saltstack.com&quot;&gt;Salt&lt;/a&gt;, &lt;a class=&quot;tag&quot; href=&quot;https://www.openstack.org&quot;&gt;OpenStack&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;\r\n&#39;
+b&#39;&lt;/ul&gt;\r\n&#39;
+b&#39;\n&#39;
+b&#39;                        &lt;/div&gt;&lt;!-- end .shrubbery --&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;                &lt;div class=&quot;pep-widget&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;h2 class=&quot;widget-title&quot;&gt;\n&#39;
+b&#39;                        &lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;a href=&quot;/dev/peps/&quot;&gt;Python Enhancement Proposals&lt;span class=&quot;say-no-more&quot;&gt; (PEPs)&lt;/span&gt;&lt;/a&gt;: The future of Python&lt;span class=&quot;say-no-more&quot;&gt; is discussed here.&lt;/span&gt;\n&#39;
+b&#39;                        &lt;a aria-hidden=&quot;true&quot; class=&quot;rss-link&quot; href=&quot;/dev/peps/peps.rss&quot;&gt;&lt;span class=&quot;icon-feed&quot;&gt;&lt;/span&gt; RSS&lt;/a&gt;\n&#39;
+b&#39;                    &lt;/h2&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                    \n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                                &lt;div class=&quot;psf-widget&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;python-logo&quot;&gt;&lt;/div&gt;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                    &lt;h2 class=&quot;widget-title&quot;&gt;\r\n&#39;
+b&#39;    &lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;a href=&quot;/psf/&quot;&gt;Python Software Foundation&lt;/a&gt;\r\n&#39;
+b&#39;&lt;/h2&gt;\r\n&#39;
+b&#39;&lt;p&gt;The mission of the Python Software Foundation is to promote, protect, and advance the Python programming language, and to support and facilitate the growth of a diverse and international community of Python programmers. &lt;a class=&quot;readmore&quot; href=&quot;/psf/&quot;&gt;Learn more&lt;/a&gt; &lt;/p&gt;\r\n&#39;
+b&#39;&lt;p class=&quot;click-these&quot;&gt;\r\n&#39;
+b&#39;    &lt;a class=&quot;button&quot; href=&quot;/users/membership/&quot;&gt;Become a Member&lt;/a&gt;\r\n&#39;
+b&#39;    &lt;a class=&quot;button&quot; href=&quot;/psf/donations/&quot;&gt;Donate to the PSF&lt;/a&gt;\r\n&#39;
+b&#39;&lt;/p&gt;\n&#39;
+b&#39;                &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/section&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;                \n&#39;
+b&#39;\n&#39;
+b&#39;                \n&#39;
+b&#39;                \n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;            &lt;/div&gt;&lt;!-- end .container --&gt;\n&#39;
+b&#39;        &lt;/div&gt;&lt;!-- end #content .content-wrapper --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;!-- Footer and social media list --&gt;\n&#39;
+b&#39;        &lt;footer id=&quot;site-map&quot; class=&quot;main-footer&quot; role=&quot;contentinfo&quot;&gt;\n&#39;
+b&#39;            &lt;div class=&quot;main-footer-links&quot;&gt;\n&#39;
+b&#39;                &lt;div class=&quot;container&quot;&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                    &lt;a id=&quot;back-to-top-1&quot; class=&quot;jump-link&quot; href=&quot;#python-network&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-arrow-up&quot;&gt;&lt;span&gt;&amp;#9650;&lt;/span&gt;&lt;/span&gt; Back to Top&lt;/a&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;sitemap navigation menu do-not-print&quot; role=&quot;tree&quot; id=&quot;container&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-1&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/about/&quot; &gt;About&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/apps/&quot; title=&quot;&quot;&gt;Applications&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/quotes/&quot; title=&quot;&quot;&gt;Quotes&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/gettingstarted/&quot; title=&quot;&quot;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/help/&quot; title=&quot;&quot;&gt;Help&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://brochure.getpython.info/&quot; title=&quot;&quot;&gt;Python Brochure&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-2&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/downloads/&quot; &gt;Downloads&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/&quot; title=&quot;&quot;&gt;All releases&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/source/&quot; title=&quot;&quot;&gt;Source code&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/windows/&quot; title=&quot;&quot;&gt;Windows&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/downloads/mac-osx/&quot; title=&quot;&quot;&gt;Mac OS X&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/download/other/&quot; title=&quot;&quot;&gt;Other Platforms&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://docs.python.org/3/license.html&quot; title=&quot;&quot;&gt;License&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/download/alternatives&quot; title=&quot;&quot;&gt;Alternative Implementations&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-3&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/doc/&quot; &gt;Documentation&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/doc/&quot; title=&quot;&quot;&gt;Docs&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/doc/av&quot; title=&quot;&quot;&gt;Audio/Visual Talks&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/BeginnersGuide&quot; title=&quot;&quot;&gt;Beginner&amp;#39;s Guide&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://docs.python.org/devguide/&quot; title=&quot;&quot;&gt;Developer&amp;#39;s Guide&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://docs.python.org/faq/&quot; title=&quot;&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://wiki.python.org/moin/Languages&quot; title=&quot;&quot;&gt;Non-English Docs&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://python.org/dev/peps/&quot; title=&quot;&quot;&gt;PEP Index&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-8&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/PythonBooks&quot; title=&quot;&quot;&gt;Python Books&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-9&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/doc/essays/&quot; title=&quot;&quot;&gt;Python Essays&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-4&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/community/&quot; &gt;Community&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/diversity/&quot; title=&quot;&quot;&gt;Diversity&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/lists/&quot; title=&quot;&quot;&gt;Mailing Lists&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/irc/&quot; title=&quot;&quot;&gt;IRC&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/forums/&quot; title=&quot;&quot;&gt;Forums&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/workshops/&quot; title=&quot;&quot;&gt;Python Conferences&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/sigs/&quot; title=&quot;&quot;&gt;Special Interest Groups&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/&quot; title=&quot;&quot;&gt;Python Wiki&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-8&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/logos/&quot; title=&quot;&quot;&gt;Python Logo&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-9&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/merchandise/&quot; title=&quot;&quot;&gt;Merchandise&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-10&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/community/awards&quot; title=&quot;&quot;&gt;Community Awards&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-11&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://www.python.org/psf/codeofconduct/&quot; title=&quot;&quot;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-5&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/about/success/&quot; title=&quot;success-stories&quot;&gt;Success Stories&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#arts&quot; title=&quot;&quot;&gt;Arts&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#business&quot; title=&quot;&quot;&gt;Business&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#education&quot; title=&quot;&quot;&gt;Education&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#engineering&quot; title=&quot;&quot;&gt;Engineering&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#government&quot; title=&quot;&quot;&gt;Government&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-6&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#scientific&quot; title=&quot;&quot;&gt;Scientific&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-7&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/about/success/#software-development&quot; title=&quot;&quot;&gt;Software Development&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-6&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/blogs/&quot; title=&quot;News from around the Python world&quot;&gt;News&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/blogs/&quot; title=&quot;Python Insider Blog Posts&quot;&gt;Python News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://planetpython.org/&quot; title=&quot;Planet Python&quot;&gt;Community News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://pyfound.blogspot.com/&quot; title=&quot;PSF Blog&quot;&gt;PSF News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://pycon.blogspot.com/&quot; title=&quot;PyCon Blog&quot;&gt;PyCon News&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-7&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/events/&quot; &gt;Events&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-events&quot; title=&quot;&quot;&gt;Python Events&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-user-group/&quot; title=&quot;&quot;&gt;User Group Events&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-events/past/&quot; title=&quot;&quot;&gt;Python Events Archive&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/events/python-user-group/past/&quot; title=&quot;&quot;&gt;User Group Events Archive&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-5&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://wiki.python.org/moin/PythonEventsCalendar#Submitting_an_Event&quot; title=&quot;&quot;&gt;Submit an Event&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;li class=&quot;tier-1 element-8&quot;&gt;\n&#39;
+b&#39;        &lt;a href=&quot;/dev/&quot; &gt;Contributing&lt;/a&gt;\n&#39;
+b&#39;        \n&#39;
+b&#39;            \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;ul class=&quot;subnav menu&quot;&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-1&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;http://docs.python.org/devguide/&quot; title=&quot;&quot;&gt;Developer&amp;#39;s Guide&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-2&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://bugs.python.org/&quot; title=&quot;&quot;&gt;Issue Tracker&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-3&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;https://mail.python.org/mailman/listinfo/python-dev&quot; title=&quot;&quot;&gt;python-dev list&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;        &lt;li class=&quot;tier-2 element-4&quot; role=&quot;treeitem&quot;&gt;&lt;a href=&quot;/dev/core-mentorship/&quot; title=&quot;&quot;&gt;Core Mentorship&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        \n&#39;
+b&#39;    &lt;/li&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;&lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;a id=&quot;back-to-top-2&quot; class=&quot;jump-link&quot; href=&quot;#python-network&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;icon-arrow-up&quot;&gt;&lt;span&gt;&amp;#9650;&lt;/span&gt;&lt;/span&gt; Back to Top&lt;/a&gt;\n&#39;
+b&#39;                    \n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;&lt;!-- end .container --&gt;\n&#39;
+b&#39;            &lt;/div&gt; &lt;!-- end .main-footer-links --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;            &lt;div class=&quot;site-base&quot;&gt;\n&#39;
+b&#39;                &lt;div class=&quot;container&quot;&gt;\n&#39;
+b&#39;                    \n&#39;
+b&#39;                    &lt;ul class=&quot;footer-links navigation menu do-not-print&quot; role=&quot;tree&quot;&gt;\n&#39;
+b&#39;                        &lt;li class=&quot;tier-1 element-1&quot;&gt;&lt;a href=&quot;/about/help/&quot;&gt;Help &amp;amp; &lt;span class=&quot;say-no-more&quot;&gt;General&lt;/span&gt; Contact&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                        &lt;li class=&quot;tier-1 element-2&quot;&gt;&lt;a href=&quot;/community/diversity/&quot;&gt;Diversity &lt;span class=&quot;say-no-more&quot;&gt;Initiatives&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                        &lt;li class=&quot;tier-1 element-3&quot;&gt;&lt;a href=&quot;https://github.com/python/pythondotorg/issues&quot;&gt;Submit Website Bug&lt;/a&gt;&lt;/li&gt;\n&#39;
+b&#39;                        &lt;li class=&quot;tier-1 element-4&quot;&gt;\n&#39;
+b&#39;                            &lt;a href=&quot;https://status.python.org/&quot;&gt;Status &lt;span class=&quot;python-status-indicator-default&quot; id=&quot;python-status-indicator&quot;&gt;&lt;/span&gt;&lt;/a&gt;\n&#39;
+b&#39;                        &lt;/li&gt;\n&#39;
+b&#39;                    &lt;/ul&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                    &lt;div class=&quot;copyright&quot;&gt;\n&#39;
+b&#39;                        &lt;p&gt;&lt;small&gt;\n&#39;
+b&#39;                            &lt;span class=&quot;pre&quot;&gt;Copyright &amp;copy;2001-2017.&lt;/span&gt;\n&#39;
+b&#39;                            &amp;nbsp;&lt;span class=&quot;pre&quot;&gt;&lt;a href=&quot;/psf-landing/&quot;&gt;Python Software Foundation&lt;/a&gt;&lt;/span&gt;\n&#39;
+b&#39;                            &amp;nbsp;&lt;span class=&quot;pre&quot;&gt;&lt;a href=&quot;/about/legal/&quot;&gt;Legal Statements&lt;/a&gt;&lt;/span&gt;\n&#39;
+b&#39;                            &amp;nbsp;&lt;span class=&quot;pre&quot;&gt;&lt;a href=&quot;/privacy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/span&gt;\n&#39;
+b&#39;                        &lt;/small&gt;&lt;/p&gt;\n&#39;
+b&#39;                    &lt;/div&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;                &lt;/div&gt;&lt;!-- end .container --&gt;\n&#39;
+b&#39;            &lt;/div&gt;&lt;!-- end .site-base --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;        &lt;/footer&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;/div&gt;&lt;!-- end #touchnav-wrapper --&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js&quot;&gt;&lt;/script&gt;\n&#39;
+b&#39;    &lt;script&gt;window.jQuery || document.write(\&#39;&lt;script src=&quot;/static/js/libs/jquery-1.8.2.min.js&quot;&gt;&lt;\\/script&gt;\&#39;)&lt;/script&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;script src=&quot;/static/js/libs/masonry.pkgd.min.js&quot;&gt;&lt;/script&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;script type=&quot;text/javascript&quot; src=&quot;/static/js/main-min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;!--[if lte IE 7]&gt;\n&#39;
+b&#39;    &lt;script type=&quot;text/javascript&quot; src=&quot;/static/js/plugins/IE8-min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;![endif]--&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    &lt;!--[if lte IE 8]&gt;\n&#39;
+b&#39;    &lt;script type=&quot;text/javascript&quot; src=&quot;/static/js/plugins/getComputedStyle-min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;    &lt;![endif]--&gt;\n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;\n&#39;
+b&#39;    \n&#39;
+b&#39;    \n&#39;
+b&#39;\n&#39;
+b&#39;&lt;/body&gt;\n&#39;
+b&#39;&lt;/html&gt;\n&#39;</code></pre><p>其实closing也是一个经过@contextmanager装饰的generator</p>
+<pre class=" language-python"><code class="language-python">@contextmanager
+<span class="token keyword">def</span> <span class="token function">closing</span><span class="token punctuation">(</span>thing<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">yield</span> thing
+    <span class="token keyword">finally</span><span class="token punctuation">:</span>
+        thing<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> xml<span class="token punctuation">.</span>parsers<span class="token punctuation">.</span>expat <span class="token keyword">import</span> ParserCreate
+
+<span class="token keyword">class</span> <span class="token class-name">DefaultSaxHandler</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">start_element</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> attrs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'sax:start_element: %s, attrs: %s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> str<span class="token punctuation">(</span>attrs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">end_element</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'sax:end_element: %s'</span> <span class="token operator">%</span> name<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">char_data</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'sax:char_data: %s'</span> <span class="token operator">%</span> text<span class="token punctuation">)</span>
+
+xml <span class="token operator">=</span> r<span class="token triple-quoted-string string">'''&lt;?xml version="1.0"?>
+&lt;ol>
+    &lt;li>&lt;a href="/python">Python&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="/ruby">Ruby&lt;/a>&lt;/li>
+&lt;/ol>
+'''</span>
+
+handler <span class="token operator">=</span> DefaultSaxHandler<span class="token punctuation">(</span><span class="token punctuation">)</span>
+parser <span class="token operator">=</span> ParserCreate<span class="token punctuation">(</span><span class="token punctuation">)</span>
+parser<span class="token punctuation">.</span>StartElementHandler <span class="token operator">=</span> handler<span class="token punctuation">.</span>start_element
+parser<span class="token punctuation">.</span>EndElementHandler <span class="token operator">=</span> handler<span class="token punctuation">.</span>end_element
+parser<span class="token punctuation">.</span>CharacterDataHandler <span class="token operator">=</span> handler<span class="token punctuation">.</span>char_data
+parser<span class="token punctuation">.</span>Parse<span class="token punctuation">(</span>xml<span class="token punctuation">)</span></code></pre>
+<pre><code>sax:start_element: ol, attrs: {}
+sax:char_data: 
+
+sax:char_data:     
+sax:start_element: li, attrs: {}
+sax:start_element: a, attrs: {&#39;href&#39;: &#39;/python&#39;}
+sax:char_data: Python
+sax:end_element: a
+sax:end_element: li
+sax:char_data: 
+
+sax:char_data:     
+sax:start_element: li, attrs: {}
+sax:start_element: a, attrs: {&#39;href&#39;: &#39;/ruby&#39;}
+sax:char_data: Ruby
+sax:end_element: a
+sax:end_element: li
+sax:char_data: 
+
+sax:end_element: ol
+
+
+
+
+
+1</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">test</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">fn</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    self<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">5</span></code></pre>
+<pre class=" language-python"><code class="language-python">a <span class="token operator">=</span> test<span class="token punctuation">(</span><span class="token string">'lovelyfrog'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">a<span class="token punctuation">.</span>fn <span class="token operator">=</span> fn</code></pre>
+<pre class=" language-python"><code class="language-python">a<span class="token punctuation">.</span>fn<span class="token punctuation">(</span>a<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">a<span class="token punctuation">.</span>age</code></pre>
+<pre><code>5</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> html<span class="token punctuation">.</span>parser <span class="token keyword">import</span> HTMLParser
+<span class="token keyword">from</span> html<span class="token punctuation">.</span>entities <span class="token keyword">import</span> name2codepoint
+
+<span class="token keyword">class</span> <span class="token class-name">MyHTMLParser</span><span class="token punctuation">(</span>HTMLParser<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_starttag</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> attrs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&lt;%s>'</span> <span class="token operator">%</span> tag<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_endtag</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> tag<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&lt;/%s>'</span> <span class="token operator">%</span> tag<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_startendtag</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> attrs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&lt;%s/>'</span> <span class="token operator">%</span> tag<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_data</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_comment</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&lt;!--'</span><span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token string">'-->'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_entityref</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&amp;%s;'</span> <span class="token operator">%</span> name<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle_charref</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&amp;#%s;'</span> <span class="token operator">%</span> name<span class="token punctuation">)</span>
+
+parser <span class="token operator">=</span> MyHTMLParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+parser<span class="token punctuation">.</span>feed<span class="token punctuation">(</span><span class="token triple-quoted-string string">'''&lt;html>
+&lt;head>&lt;/head>
+&lt;body>
+&lt;!-- test html parser -->
+    &lt;p>Some &lt;a href=\"#\">html&lt;/a> HTML&amp;nbsp;tutorial...&lt;br>END&lt;/p>
+&lt;/body>&lt;/html>'''</span><span class="token punctuation">)</span></code></pre>
+<pre><code>&lt;html&gt;
+
+
+&lt;head&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+
+
+&lt;!--  test html parser  --&gt;
+
+
+&lt;p&gt;
+Some 
+&lt;a&gt;
+html
+&lt;/a&gt;
+ HTML tutorial...
+&lt;br&gt;
+END
+&lt;/p&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
+<span class="token comment" spellcheck="true">#经验1：数组下标取值前一定要判断长度</span>
+<span class="token comment" spellcheck="true">#经验2：子类在重载构造函数时不要忘了调用父类的构造函数</span>
+<span class="token comment" spellcheck="true">#经验3：HTMLParser的attrs是一个元素为tuple的list</span>
+<span class="token comment" spellcheck="true">#经验4：调用类属性时一定要加self，否则相当于申明了新的临时变量</span>
+
+<span class="token keyword">from</span> html<span class="token punctuation">.</span>parser <span class="token keyword">import</span> HTMLParser
+<span class="token keyword">from</span> html<span class="token punctuation">.</span>entities <span class="token keyword">import</span> name2codepoint
+<span class="token keyword">from</span> urllib <span class="token keyword">import</span> request
+
+<span class="token keyword">class</span> <span class="token class-name">MyHTMLParser</span><span class="token punctuation">(</span>HTMLParser<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>_event_title <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>_event_location <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>_ecent_time <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>_reading_title <span class="token operator">=</span> <span class="token boolean">False</span>
+        self<span class="token punctuation">.</span>_reading_time <span class="token operator">=</span> <span class="token boolean">False</span>
+        self<span class="token punctuation">.</span>_reading_location <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    <span class="token comment" spellcheck="true">#解析头标签</span>
+    <span class="token keyword">def</span> <span class="token function">handle_starttag</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> attrs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> tag <span class="token operator">==</span> <span class="token string">'time'</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_reading_time <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>attrs<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> tag <span class="token operator">==</span> <span class="token string">'h3'</span> <span class="token operator">and</span> attrs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'event-title'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>_reading_title <span class="token operator">=</span> <span class="token boolean">True</span>
+            <span class="token keyword">if</span> tag <span class="token operator">==</span> <span class="token string">'span'</span> <span class="token operator">and</span> attrs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'event-location'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>_reading_location <span class="token operator">=</span> <span class="token boolean">True</span>
+
+    <span class="token comment" spellcheck="true">#解析内容</span>
+    <span class="token keyword">def</span> <span class="token function">handle_data</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_reading_title<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_event_title<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>_reading_title <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_reading_time<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_ecent_time<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>_reading_time <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_reading_location<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_event_location<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>_reading_location <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    @property
+    <span class="token keyword">def</span> <span class="token function">data</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_event_title<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            dic <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+            dic<span class="token punctuation">[</span><span class="token string">"title"</span><span class="token punctuation">]</span> <span class="token operator">=</span> self<span class="token punctuation">.</span>_event_title<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            dic<span class="token punctuation">[</span><span class="token string">"time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> self<span class="token punctuation">.</span>_ecent_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            dic<span class="token punctuation">[</span><span class="token string">"location"</span><span class="token punctuation">]</span> <span class="token operator">=</span> self<span class="token punctuation">.</span>_event_location<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            self<span class="token punctuation">.</span>_data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>dic<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_data
+
+<span class="token keyword">def</span> <span class="token function">getHtml</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span><span class="token string">'https://www.python.org/events/python-events/'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        data <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data
+
+parser <span class="token operator">=</span> MyHTMLParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+parser<span class="token punctuation">.</span>feed<span class="token punctuation">(</span>getHtml<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> item <span class="token keyword">in</span> parser<span class="token punctuation">.</span>data<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>{&#39;title&#39;: &#39;PyCon JP 2017&#39;, &#39;location&#39;: &#39;Waseda University, Nishi-Waseda Campus, Building 63, Tokyo, Japan&#39;, &#39;time&#39;: &#39;07 Sept. – 11 Sept. &#39;}
+{&#39;title&#39;: &#39;Python Sul&#39;, &#39;location&#39;: &#39;Universidade de Caxias do Sul (UCS), Caxias do Sul, Rio Grande do Sul, Brazil&#39;, &#39;time&#39;: &#39;08 Sept. – 11 Sept. &#39;}
+{&#39;title&#39;: &#39;PyCon Nigeria 2017&#39;, &#39;location&#39;: &#39;Lagos, Nigeria&#39;, &#39;time&#39;: &#39;15 Sept. – 17 Sept. &#39;}
+{&#39;title&#39;: &#39;PyCon FR 2017&#39;, &#39;location&#39;: &#39;Toulouse, France&#39;, &#39;time&#39;: &#39;21 Sept. – 25 Sept. &#39;}
+{&#39;title&#39;: &#39;PyConES17&#39;, &#39;location&#39;: &#39;Caceres, Spain&#39;, &#39;time&#39;: &#39;22 Sept. – 25 Sept. &#39;}
+{&#39;title&#39;: &#39;PyConKE 2017&#39;, &#39;location&#39;: &#39;United States International University, Nairobi, Kenya&#39;, &#39;time&#39;: &#39;28 Sept. – 30 Sept. &#39;}
+{&#39;title&#39;: &#39;PyData Delhi 2017&#39;, &#39;location&#39;: &#39;New Delhi, India&#39;, &#39;time&#39;: &#39;02 Sept. – 04 Sept. &#39;}
+{&#39;title&#39;: &#39;EuroSciPy 2017&#39;, &#39;location&#39;: &#39;Erlangen, Germany&#39;, &#39;time&#39;: &#39;28 Aug. – 02 Sept. &#39;}</code></pre><h2 id="urllib"><a href="#urllib" class="headerlink" title="urllib"></a>urllib</h2><p>urllib的request模块可以非常方便地抓取URL内容，也就是发送一个GET请求到指定的页面，然后返回HTTP的响应：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> urllib <span class="token keyword">import</span> request
+
+<span class="token keyword">with</span> request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span><span class="token string">'https://api.douban.com/v2/book/2129650'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    data <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Status:'</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>status<span class="token punctuation">,</span> f<span class="token punctuation">.</span>reason<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token keyword">in</span> f<span class="token punctuation">.</span>getheaders<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s: %s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>k<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Data:'</span><span class="token punctuation">,</span> data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Status: 200 OK
+Date: Tue, 05 Sep 2017 02:40:34 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2058
+Connection: close
+Vary: Accept-Encoding
+X-Ratelimit-Remaining2: 99
+X-Ratelimit-Limit2: 100
+Expires: Sun, 1 Jan 2006 01:00:00 GMT
+Pragma: no-cache
+Cache-Control: must-revalidate, no-cache, private
+Set-Cookie: bid=DDvtiS0mipo; Expires=Wed, 05-Sep-18 02:40:34 GMT; Domain=.douban.com; Path=/
+X-DOUBAN-NEWBID: DDvtiS0mipo
+X-DAE-Node: sindar10c
+X-DAE-App: book
+Server: dae
+Data: {&quot;rating&quot;:{&quot;max&quot;:10,&quot;numRaters&quot;:16,&quot;average&quot;:&quot;7.4&quot;,&quot;min&quot;:0},&quot;subtitle&quot;:&quot;&quot;,&quot;author&quot;:[&quot;廖雪峰&quot;],&quot;pubdate&quot;:&quot;2007&quot;,&quot;tags&quot;:[{&quot;count&quot;:21,&quot;name&quot;:&quot;spring&quot;,&quot;title&quot;:&quot;spring&quot;},{&quot;count&quot;:13,&quot;name&quot;:&quot;Java&quot;,&quot;title&quot;:&quot;Java&quot;},{&quot;count&quot;:6,&quot;name&quot;:&quot;javaee&quot;,&quot;title&quot;:&quot;javaee&quot;},{&quot;count&quot;:5,&quot;name&quot;:&quot;j2ee&quot;,&quot;title&quot;:&quot;j2ee&quot;},{&quot;count&quot;:4,&quot;name&quot;:&quot;计算机&quot;,&quot;title&quot;:&quot;计算机&quot;},{&quot;count&quot;:3,&quot;name&quot;:&quot;藏书&quot;,&quot;title&quot;:&quot;藏书&quot;},{&quot;count&quot;:3,&quot;name&quot;:&quot;编程&quot;,&quot;title&quot;:&quot;编程&quot;},{&quot;count&quot;:3,&quot;name&quot;:&quot;POJO&quot;,&quot;title&quot;:&quot;POJO&quot;}],&quot;origin_title&quot;:&quot;&quot;,&quot;image&quot;:&quot;https://img3.doubanio.com\/mpic\/s2552283.jpg&quot;,&quot;binding&quot;:&quot;平装&quot;,&quot;translator&quot;:[],&quot;catalog&quot;:&quot;&quot;,&quot;pages&quot;:&quot;509&quot;,&quot;images&quot;:{&quot;small&quot;:&quot;https://img3.doubanio.com\/spic\/s2552283.jpg&quot;,&quot;large&quot;:&quot;https://img3.doubanio.com\/lpic\/s2552283.jpg&quot;,&quot;medium&quot;:&quot;https://img3.doubanio.com\/mpic\/s2552283.jpg&quot;},&quot;alt&quot;:&quot;https:\/\/book.douban.com\/subject\/2129650\/&quot;,&quot;id&quot;:&quot;2129650&quot;,&quot;publisher&quot;:&quot;电子工业出版社&quot;,&quot;isbn10&quot;:&quot;7121042622&quot;,&quot;isbn13&quot;:&quot;9787121042621&quot;,&quot;title&quot;:&quot;Spring 2.0核心技术与最佳实践&quot;,&quot;url&quot;:&quot;https:\/\/api.douban.com\/v2\/book\/2129650&quot;,&quot;alt_title&quot;:&quot;&quot;,&quot;author_intro&quot;:&quot;&quot;,&quot;summary&quot;:&quot;本书注重实践而又深入理论，由浅入深且详细介绍了Spring 2.0框架的几乎全部的内容，并重点突出2.0版本的新特性。本书将为读者展示如何应用Spring 2.0框架创建灵活高效的JavaEE应用，并提供了一个真正可直接部署的完整的Web应用程序——Live在线书店(http:\/\/www.livebookstore.net)。\n在介绍Spring框架的同时，本书还介绍了与Spring相关的大量第三方框架，涉及领域全面，实用性强。本书另一大特色是实用性强，易于上手，以实际项目为出发点，介绍项目开发中应遵循的最佳开发模式。\n本书还介绍了大量实践性极强的例子，并给出了完整的配置步骤，几乎覆盖了Spring 2.0版本的新特性。\n本书适合有一定Java基础的读者，对JavaEE开发人员特别有帮助。本书既可以作为Spring 2.0的学习指南，也可以作为实际项目开发的参考手册。&quot;,&quot;price&quot;:&quot;59.8&quot;}</code></pre><p>如果我们要想模拟浏览器发送GET请求，就需要使用Request对象，通过往Request对象添加HTTP头，我们就可以把请求伪装成浏览器</p>
+<p>如果要以POST发送一个请求，只需要把参数data以bytes形式传入。</p>
+<p>我们模拟一个微博登录，先读取登录的邮箱和口令，然后按照weibo.cn的登录页的格式以username=xxx&amp;password=xxx的编码传入：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> urllib <span class="token keyword">import</span> request<span class="token punctuation">,</span> parse
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Login to weibo.cn...'</span><span class="token punctuation">)</span>
+email <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">'Email: '</span><span class="token punctuation">)</span>
+passwd <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">'Password: '</span><span class="token punctuation">)</span>
+login_data <span class="token operator">=</span> parse<span class="token punctuation">.</span>urlencode<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">,</span> email<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">,</span> passwd<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'entry'</span><span class="token punctuation">,</span> <span class="token string">'mweibo'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'client_id'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'savestate'</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'ec'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">#     ('pagerefer', 'https://passport.weibo.cn/signin/welcome?entry=mweibo&amp;r=http%3A%2F%2Fm.weibo.cn%2F')</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+req <span class="token operator">=</span> request<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">'https://login.sina.com.cn/signup/signin.php'</span><span class="token punctuation">)</span>
+req<span class="token punctuation">.</span>add_header<span class="token punctuation">(</span><span class="token string">'Origin'</span><span class="token punctuation">,</span> <span class="token string">'https://passport.weibo.com'</span><span class="token punctuation">)</span>
+req<span class="token punctuation">.</span>add_header<span class="token punctuation">(</span><span class="token string">'User-Agent'</span><span class="token punctuation">,</span> <span class="token string">'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># req.add_header('Referer', 'https://passport.weibo.cn/signin/login?entry=mweibo&amp;res=wel&amp;wm=3349&amp;r=http%3A%2F%2Fm.weibo.cn%2F')</span>
+
+<span class="token keyword">with</span> request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>req<span class="token punctuation">,</span> data<span class="token operator">=</span>login_data<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Status:'</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>status<span class="token punctuation">,</span> f<span class="token punctuation">.</span>reason<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token keyword">in</span> f<span class="token punctuation">.</span>getheaders<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s: %s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>k<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Data:'</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Login to weibo.cn...</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2017/09/08/%E5%B8%B8%E7%94%A8%E5%86%85%E5%BB%BA%E6%A8%A1%E5%9D%97/">http://lovelyfrog.github.io/2017/09/08/%E5%B8%B8%E7%94%A8%E5%86%85%E5%BB%BA%E6%A8%A1%E5%9D%97/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/09/08/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="进程和线程">
+                        
+                        <span class="card-title">进程和线程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            进程和线程
+
+多进程
+linux系统提供了一个fork()创造多进程的方式i，但是并不支持windows
+multiprocessing在windows上可以使用multiprocessing模块来编写多进程的程序
+from multipr
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/09/08/%E7%BB%93%E5%90%88%E8%A1%80%E6%B6%B2%E5%8A%A8%E5%8A%9B%E5%AD%A6%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90%E8%84%91%E6%A2%97%E5%8F%91%E7%97%85%E5%87%A0%E7%8E%87/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="结合血液动力学参数分析脑梗发病几率">
+                        
+                        <span class="card-title">结合血液动力学参数分析脑梗发病几率</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2017曦源项目
+
+1.概述
+我结合了病人的血液动力学参数，依据采集的333个数据（实际有效采用302个数据）建立了一个预测病人脑埂患病与否的模型（采用python的tensorflow包）
+2.对采集数据的清洗
+
+一共采集了333例病患的
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

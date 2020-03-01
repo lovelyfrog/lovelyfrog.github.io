@@ -1,0 +1,1187 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="matlab sixth homework, lovelyfrog&#39;s blog">
+    <meta name="description" content="matlab工程分析第六次作业
+
+
+
+习题6.1% Archimedean spiral
+phi = linspace(0, 6*pi, 200);
+x = phi.*cos(phi);
+y = phi.*sin(phi);
+plot(x,">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>matlab sixth homework | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">matlab sixth homework</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/matlab/">
+                                <span class="chip bg-color">matlab</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/matlab/" class="post-category">
+                                matlab
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-11-15
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.2k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>matlab工程分析第六次作业</p>
+<a id="more"></a>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=611653&auto=1&height=66"></iframe>
+
+<h2 id="习题6-1"><a href="#习题6-1" class="headerlink" title="习题6.1"></a>习题6.1</h2><pre class=" language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">% Archimedean spiral</span>
+phi <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> phi<span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y <span class="token operator">=</span> phi<span class="token operator">.*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">plot</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+axis equal off</code></pre>
+<p><img src="output_1_1.png" alt="png"></p>
+<pre class=" language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">% Astroid</span>
+phi <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token number">4</span><span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span><span class="token operator">.^</span><span class="token number">3</span><span class="token punctuation">;</span>
+y <span class="token operator">=</span> <span class="token number">4</span><span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span><span class="token operator">.^</span><span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token function">plot</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+axis equal off</code></pre>
+<p><img src="output_2_1.png" alt="png"></p>
+<pre class=" language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">% Butterfly</span>
+<span class="token function">ezplot</span><span class="token punctuation">(</span><span class="token string">'(x.^2-x.^6)-y.^6'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+axis equal off</code></pre>
+<p><img src="output_3_1.png" alt="png"></p>
+<pre class=" language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">% Bicuspid</span>
+a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">ezplot</span><span class="token punctuation">(</span><span class="token string">'(x.^2-1^2).*(x-1).^2+(y.^2-1^2).^2'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+axis equal off</code></pre>
+<p><img src="output_4_1.png" alt="png"></p>
+<pre class=" language-matlab"><code class="language-matlab">help ezplot</code></pre>
+<pre><code>ezplot - （不推荐）易用的函数绘图函数
+
+    此 MATLAB 函数 绘制表达式 fun(x) 在默认定义域 -2π &lt; x &lt; 2π 上的图形，其中 fun(x) 仅是 x 的显函数。
+
+    ezplot(fun)
+    ezplot(fun,[xmin,xmax])
+    ezplot(fun2)
+    ezplot(fun2,[xymin,xymax])
+    ezplot(fun2,[xmin,xmax,ymin,ymax])
+    ezplot(funx,funy)
+    ezplot(funx,funy,[tmin,tmax])
+    ezplot(...,fig)
+    ezplot(ax,...)
+    h = ezplot(...)
+
+    See also fcontour, fmesh, fplot, fplot3, fsurf, plot
+
+    Reference page in Doc Center
+       doc ezplot
+
+    Other functions named ezplot
+
+       sym/ezplot</code></pre><h2 id="习题6-3"><a href="#习题6-3" class="headerlink" title="习题6.3"></a>习题6.3</h2><pre class=" language-matlab"><code class="language-matlab">N <span class="token operator">=</span> <span class="token number">17</span><span class="token punctuation">;</span>
+phi <span class="token operator">=</span> <span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">;</span>
+delta <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">% 先画出两条成phi角度原始的直线</span>
+x1 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>N<span class="token punctuation">,</span>N<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+y1 <span class="token operator">=</span> <span class="token function">zeros</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>N<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+x2 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>N<span class="token punctuation">,</span>N<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>delta<span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y2 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>N<span class="token punctuation">,</span>N<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>delta<span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">plot</span><span class="token punctuation">(</span><span class="token punctuation">[</span>x1<span class="token punctuation">,</span>x2<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span>y1<span class="token punctuation">,</span>y2<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'ks-'</span><span class="token punctuation">)</span>
+hold on
+<span class="token comment" spellcheck="true">% 用一个for循环画出其他直线</span>
+<span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span>N
+    <span class="token function">plot</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">x1</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">x2</span><span class="token punctuation">(</span>N<span class="token operator">+</span><span class="token number">1</span><span class="token operator">-</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token function">y1</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">y2</span><span class="token punctuation">(</span>N<span class="token operator">+</span><span class="token number">1</span><span class="token operator">-</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+axis off</code></pre>
+<p><img src="output_7_1.png" alt="png"></p>
+<h2 id="习题6-9"><a href="#习题6-9" class="headerlink" title="习题6.9"></a>习题6.9</h2><pre class=" language-matlab"><code class="language-matlab">Rb <span class="token operator">=</span> <span class="token number">90.21</span><span class="token punctuation">;</span>
+RT <span class="token operator">=</span> <span class="token number">106</span><span class="token punctuation">;</span>
+phi_s <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">/</span><span class="token number">9</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">;</span>
+m <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+ts <span class="token operator">=</span> <span class="token number">14.022</span><span class="token punctuation">;</span>
+N <span class="token operator">=</span> <span class="token number">24</span><span class="token punctuation">;</span>
+Rs <span class="token operator">=</span> N<span class="token operator">*</span>m<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
+phi_x <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">acos</span><span class="token punctuation">(</span>Rb<span class="token operator">./</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">% phi(R)</span>
+inv_x <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">tan</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">-</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">% inv(x)</span>
+theta_T <span class="token operator">=</span> <span class="token number">0.5</span><span class="token operator">*</span>ts<span class="token operator">/</span>Rs <span class="token operator">+</span> <span class="token function">inv_x</span><span class="token punctuation">(</span>phi_s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>RT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">% plot by polar (画出轮子的所有N个部分)</span>
+R_1 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span>Rb<span class="token punctuation">,</span>RT<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+phi_1 <span class="token operator">=</span> <span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>R_1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+R_2 <span class="token operator">=</span> <span class="token function">zeros</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token operator">+</span>RT<span class="token punctuation">;</span>
+phi_2 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>RT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>RT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>theta_T<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+R_3 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span>Rb<span class="token punctuation">,</span>RT<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+phi_3 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span><span class="token punctuation">(</span>theta_T<span class="token operator">+</span><span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>RT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>R_3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+R_4 <span class="token operator">=</span> <span class="token function">zeros</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token operator">+</span>Rb<span class="token punctuation">;</span>
+phi_4 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span><span class="token punctuation">(</span>theta_T<span class="token operator">+</span><span class="token function">inv_x</span><span class="token punctuation">(</span><span class="token function">phi_x</span><span class="token punctuation">(</span>RT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token operator">/</span>N<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">%polar2([phi_1,phi_2,phi_3,phi_4],[R_1,R_2,R_3,R_4],[Rb,RT,0,2*pi/N])</span>
+<span class="token comment" spellcheck="true">%polar([phi_1,phi_2,phi_3,phi_4],[R_1,R_2,R_3,R_4])</span>
+<span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span>N<span class="token punctuation">)</span>
+    <span class="token function">polar</span><span class="token punctuation">(</span>phi_1<span class="token operator">+</span><span class="token number">i</span><span class="token punctuation">,</span>R_1<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span>
+    hold on
+    <span class="token function">polar</span><span class="token punctuation">(</span>phi_2<span class="token operator">+</span><span class="token number">i</span><span class="token punctuation">,</span>R_2<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span>
+    <span class="token function">polar</span><span class="token punctuation">(</span>phi_3<span class="token operator">+</span><span class="token number">i</span><span class="token punctuation">,</span>R_3<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span>
+    <span class="token function">polar</span><span class="token punctuation">(</span>phi_4<span class="token operator">+</span><span class="token number">i</span><span class="token punctuation">,</span>R_4<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span></code></pre>
+<p><img src="output_10_1.png" alt="png"></p>
+<pre class=" language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">% plot by plot (只画出轮子的一个部分)</span>
+x_1 <span class="token operator">=</span> R_1<span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi_1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y_1 <span class="token operator">=</span> R_1<span class="token operator">.*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi_1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+x_2 <span class="token operator">=</span> R_2<span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi_2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y_2 <span class="token operator">=</span> R_2<span class="token operator">.*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi_2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+x_3 <span class="token operator">=</span> R_3<span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi_3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y_3 <span class="token operator">=</span> R_3<span class="token operator">.*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi_3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+x_4 <span class="token operator">=</span> R_4<span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>phi_4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y_4 <span class="token operator">=</span> R_4<span class="token operator">.*</span><span class="token function">sin</span><span class="token punctuation">(</span>phi_4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">plot</span><span class="token punctuation">(</span>x_1<span class="token punctuation">,</span>y_1<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span>x_2<span class="token punctuation">,</span>y_2<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span>x_3<span class="token punctuation">,</span>y_3<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span>x_4<span class="token punctuation">,</span>y_4<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span>
+axis off</code></pre>
+<p><img src="output_11_1.png" alt="png"></p>
+<pre class=" language-matlab"><code class="language-matlab"><span class="token function">plot</span><span class="token punctuation">(</span>x_1<span class="token punctuation">,</span>y_1<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span>x_2<span class="token punctuation">,</span>y_2<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span>x_3<span class="token punctuation">,</span>y_3<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span>x_4<span class="token punctuation">,</span>y_4<span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">)</span></code></pre>
+<p><img src="output_12_1.png" alt="png"></p>
+<h2 id="习题6-15"><a href="#习题6-15" class="headerlink" title="习题6.15"></a>习题6.15</h2><pre class=" language-matlab"><code class="language-matlab">lambda <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+beta <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0.02</span><span class="token punctuation">,</span><span class="token number">0.05</span><span class="token punctuation">,</span><span class="token number">0.08</span><span class="token punctuation">,</span><span class="token number">0.11</span><span class="token punctuation">,</span><span class="token number">0.15</span><span class="token punctuation">,</span><span class="token number">0.18</span><span class="token punctuation">,</span><span class="token number">0.23</span><span class="token punctuation">,</span><span class="token number">0.30</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">% 用meshgrid方便计算</span>
+<span class="token punctuation">[</span>ll<span class="token punctuation">,</span>bb<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">meshgrid</span><span class="token punctuation">(</span>lambda<span class="token punctuation">,</span>beta<span class="token punctuation">)</span><span class="token punctuation">;</span>
+K_1 <span class="token operator">=</span> bb<span class="token operator">./</span><span class="token function">sind</span><span class="token punctuation">(</span>ll<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">./</span><span class="token function">cosd</span><span class="token punctuation">(</span>ll<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">% 求出各个beta值最小的lambda</span>
+lambda_min <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+K_min <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span>beta
+    <span class="token punctuation">[</span>l_min<span class="token punctuation">,</span>kmin<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">fminbnd</span><span class="token punctuation">(</span><span class="token operator">@</span>func_5_44_a<span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">/</span><span class="token number">180</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token operator">/</span><span class="token number">180</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    K_min <span class="token operator">=</span> <span class="token punctuation">[</span>K_min kmin<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">%fprintf(</span><span class="token string">'当beta = %.2f 时使得K取得最小值的lamda =  %g\n'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">i</span><span class="token punctuation">,</span>l_min<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    lambda_min <span class="token operator">=</span> <span class="token punctuation">[</span>lambda_min l_min<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+<span class="token function">plot</span><span class="token punctuation">(</span>lambda_min<span class="token operator">/</span><span class="token keyword">pi</span><span class="token operator">*</span><span class="token number">180</span><span class="token punctuation">,</span>K_min<span class="token punctuation">,</span><span class="token string">'k--'</span><span class="token punctuation">)</span>
+hold on
+<span class="token comment" spellcheck="true">% for循环遍历所有beta画出图像</span>
+<span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token function">length</span><span class="token punctuation">(</span>beta<span class="token punctuation">)</span>
+    <span class="token function">plot</span><span class="token punctuation">(</span>lambda<span class="token punctuation">,</span><span class="token function">K_1</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">,</span><span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token function">ylim</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">legend</span><span class="token punctuation">(</span><span class="token string">'Minimum'</span><span class="token punctuation">,</span><span class="token string">'Location'</span><span class="token punctuation">,</span><span class="token string">'SouthWest'</span><span class="token punctuation">)</span>
+<span class="token function">xlabel</span><span class="token punctuation">(</span><span class="token string">'\lambda'</span><span class="token punctuation">)</span>
+<span class="token function">ylabel</span><span class="token punctuation">(</span><span class="token string">'K'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">21</span><span class="token punctuation">,</span><span class="token number">1.18</span><span class="token punctuation">,</span><span class="token string">'\beta = 0.02'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.26</span><span class="token punctuation">,</span><span class="token string">'0.05'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.34</span><span class="token punctuation">,</span><span class="token string">'0.08'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.42</span><span class="token punctuation">,</span><span class="token string">'0.11'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.51</span><span class="token punctuation">,</span><span class="token string">'0.15'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.6</span><span class="token punctuation">,</span><span class="token string">'0.18'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.73</span><span class="token punctuation">,</span><span class="token string">'0.23'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">1.9</span><span class="token punctuation">,</span><span class="token string">'0.3'</span><span class="token punctuation">)</span></code></pre>
+<p><img src="output_14_1.png" alt="png"></p>
+<h2 id="习题6-21"><a href="#习题6-21" class="headerlink" title="习题6.21"></a>习题6.21</h2><pre class=" language-matlab"><code class="language-matlab">clear all
+<span class="token comment" spellcheck="true">% 先定义yita函数</span>
+yita <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">(</span>lambda<span class="token punctuation">,</span>xigma<span class="token punctuation">)</span><span class="token punctuation">(</span>lambda<span class="token operator">*</span>xigma<span class="token operator">.*</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">6</span><span class="token operator">*</span>xigma<span class="token operator">+</span><span class="token number">4</span><span class="token operator">*</span>xigma<span class="token operator">.^</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>lambda<span class="token operator">*</span>xigma<span class="token operator">.^</span><span class="token number">3</span><span class="token operator">+</span>lambda<span class="token operator">^</span><span class="token number">2</span><span class="token operator">*</span>xigma<span class="token operator">.^</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">...</span>
+<span class="token operator">./</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span>lambda<span class="token operator">*</span>xigma<span class="token punctuation">)</span><span class="token operator">.*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>lambda<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>xigma<span class="token operator">+</span><span class="token number">3</span><span class="token operator">*</span>xigma<span class="token operator">.^</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>xigma<span class="token operator">.^</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token operator">+</span>lambda<span class="token operator">^</span><span class="token number">2</span><span class="token operator">*</span>xigma<span class="token operator">.^</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span><span class="token number">0.01</span><span class="token punctuation">,</span><span class="token number">0.001</span><span class="token punctuation">,</span><span class="token number">0.0001</span><span class="token punctuation">,</span><span class="token number">1e-005</span><span class="token punctuation">]</span>
+    <span class="token function">loglog</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token function">yita</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">% loglog函数将x,y分别以log形式表示出来</span>
+    hold on
+<span class="token keyword">end</span>
+<span class="token function">ylim</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1e-003</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">xlabel</span><span class="token punctuation">(</span><span class="token string">'\xi'</span><span class="token punctuation">)</span>
+<span class="token function">ylabel</span><span class="token punctuation">(</span><span class="token string">'\eta'</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">0.18</span><span class="token punctuation">,</span><span class="token number">0.09</span><span class="token punctuation">,</span><span class="token string">'\lambda = 0.1'</span><span class="token punctuation">,</span> <span class="token string">'Rotation'</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">0.7</span><span class="token punctuation">,</span><span class="token number">0.09</span><span class="token punctuation">,</span><span class="token string">'\lambda = 0.01'</span><span class="token punctuation">,</span> <span class="token string">'Rotation'</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">1.9</span><span class="token punctuation">,</span><span class="token number">0.09</span><span class="token punctuation">,</span><span class="token string">'\lambda = 0.001'</span><span class="token punctuation">,</span> <span class="token string">'Rotation'</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">4.5</span><span class="token punctuation">,</span><span class="token number">0.09</span><span class="token punctuation">,</span><span class="token string">'\lambda = 0.0001'</span><span class="token punctuation">,</span> <span class="token string">'Rotation'</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">)</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">10.2</span><span class="token punctuation">,</span><span class="token number">0.09</span><span class="token punctuation">,</span><span class="token string">'\lambda = 1e-005'</span><span class="token punctuation">,</span> <span class="token string">'Rotation'</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">)</span></code></pre>
+<pre><code>yita =
+
+  function_handle with value:
+
+    @(lambda,xigma)(lambda*xigma.*(3+6*xigma+4*xigma.^2+2*lambda*xigma.^3+lambda^2*xigma.^4)./((1+lambda*xigma).*(1+2*lambda*(2*xigma+3*xigma.^2+2*xigma.^3)+lambda^2*xigma.^4)))</code></pre><p><img src="output_16_1.png" alt="png"></p>
+<h2 id="习题7-1"><a href="#习题7-1" class="headerlink" title="习题7.1"></a>习题7.1</h2><h3 id="Baseball-scam"><a href="#Baseball-scam" class="headerlink" title="Baseball scam"></a>Baseball scam</h3><pre class=" language-matlab"><code class="language-matlab">a <span class="token operator">=</span> <span class="token number">0.4</span><span class="token punctuation">;</span>
+t <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span>a<span class="token punctuation">)</span><span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>t<span class="token operator">/</span><span class="token number">2</span><span class="token operator">+</span>a<span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+y <span class="token operator">=</span> <span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span>a<span class="token punctuation">)</span><span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.*</span><span class="token function">sin</span><span class="token punctuation">(</span>t<span class="token operator">/</span><span class="token number">2</span><span class="token operator">+</span>a<span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+z <span class="token operator">=</span> <span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span>a<span class="token punctuation">)</span><span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">plot3</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span>
+axis equal</code></pre>
+<p><img src="output_19_1.png" alt="png"></p>
+<h3 id="Concho-spiral"><a href="#Concho-spiral" class="headerlink" title="Concho spiral"></a>Concho spiral</h3><pre class=" language-matlab"><code class="language-matlab">a <span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">;</span>
+b <span class="token operator">=</span> <span class="token number">1.05</span><span class="token punctuation">;</span>
+c <span class="token operator">=</span> <span class="token number">2.0</span><span class="token punctuation">;</span>
+u <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+r <span class="token operator">=</span> a<span class="token operator">*</span>b<span class="token operator">.^</span>u<span class="token punctuation">;</span>
+phi <span class="token operator">=</span> u<span class="token punctuation">;</span>
+z <span class="token operator">=</span> c<span class="token operator">*</span>b<span class="token operator">.^</span>u<span class="token punctuation">;</span>
+<span class="token punctuation">[</span>x1<span class="token punctuation">,</span>y1<span class="token punctuation">,</span>z1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">pol2cart</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span>phi<span class="token punctuation">,</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">% 将柱坐标系转换为直角坐标系</span>
+<span class="token function">plot3</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span>y1<span class="token punctuation">,</span>z1<span class="token punctuation">)</span>
+axis equal</code></pre>
+<p><img src="output_21_1.png" alt="png"></p>
+<h2 id="习题7-2"><a href="#习题7-2" class="headerlink" title="习题7.2"></a>习题7.2</h2><h3 id="Astroidal-ellipsoid"><a href="#Astroidal-ellipsoid" class="headerlink" title="Astroidal ellipsoid"></a>Astroidal ellipsoid</h3><pre class=" language-matlab"><code class="language-matlab">a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+u1 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+v1 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>u<span class="token punctuation">,</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">meshgrid</span><span class="token punctuation">(</span>u1<span class="token punctuation">,</span>v1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.^</span><span class="token number">3</span><span class="token punctuation">;</span>
+y <span class="token operator">=</span> <span class="token punctuation">(</span>b<span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token operator">.*</span><span class="token function">cos</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.^</span><span class="token number">3</span><span class="token punctuation">;</span>
+z <span class="token operator">=</span> <span class="token punctuation">(</span>c<span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.^</span><span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token function">mesh</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span>
+axis equal vis3d</code></pre>
+<p><img src="output_24_1.png" alt="png"></p>
+<h3 id="Apple-surface"><a href="#Apple-surface" class="headerlink" title="Apple surface"></a>Apple surface</h3><pre class=" language-matlab"><code class="language-matlab">u1 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+v1 <span class="token operator">=</span> <span class="token function">linspace</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token keyword">pi</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>u<span class="token punctuation">,</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">meshgrid</span><span class="token punctuation">(</span>u1<span class="token punctuation">,</span>v1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token function">cos</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token operator">.*</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">+</span><span class="token number">3.8</span><span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+y <span class="token operator">=</span> <span class="token function">sin</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token operator">.*</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">+</span><span class="token number">3.8</span><span class="token operator">*</span><span class="token function">cos</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+z <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token function">cos</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">sin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">.*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span><span class="token function">sin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.*</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span><span class="token keyword">pi</span><span class="token operator">*</span>v<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">7.5</span><span class="token operator">*</span><span class="token function">sin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+h <span class="token operator">=</span> <span class="token function">mesh</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span>
+<span class="token function">set</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span><span class="token string">'FaceAlpha'</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+axis equal vis3d</code></pre>
+<pre><code>h = 
+
+  Surface with properties:
+
+       EdgeColor: &#39;flat&#39;
+       LineStyle: &#39;-&#39;
+       FaceColor: [1 1 1]
+    FaceLighting: &#39;none&#39;
+       FaceAlpha: 1
+           XData: [200×200 double]
+           YData: [200×200 double]
+           ZData: [200×200 double]
+           CData: [200×200 double]
+
+  Use GET to show all properties</code></pre><p><img src="output_26_1.png" alt="png"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2017/11/15/matlab_sixth_homework/">http://lovelyfrog.github.io/2017/11/15/matlab_sixth_homework/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/matlab/">
+                                    <span class="chip bg-color">matlab</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/11/19/tensorflow_review1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="tensorflow review 1(基础)">
+                        
+                        <span class="card-title">tensorflow review 1(基础)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            tensorflow 基础
+
+张量的类型张量在tensorflow中并没有真正的计算只是保存了计算过程。一个张量中主要保存了三个属性，name,shape和type
+计算图上一个节点就代表一个计算，计算的结果就保存在张量中。通常张量的命名通
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2017-11-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/deep-learning/" class="post-category">
+                                    deep learning
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/10/30/matlab_FourthAndFifth_homework/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="matlab FourthAndFifth homework">
+                        
+                        <span class="card-title">matlab FourthAndFifth homework</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            matlab工程分析第四次和第五次作业
+
+
+
+习题5.1% 5.1
+clear all
+clc
+D_d = [6.00,3.00,2.00,1.50,1.20,1.10,1.07,1.05,1.03,1.01];
+c = [0.88,0.8
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-10-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/matlab/" class="post-category">
+                                    matlab
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/matlab/">
+                        <span class="chip bg-color">matlab</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

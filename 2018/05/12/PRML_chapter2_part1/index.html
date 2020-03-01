@@ -1,0 +1,1218 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="PRML第二章笔记part1, lovelyfrog&#39;s blog">
+    <meta name="description" content="
+
+概率分布本章主要研究某些特殊的概率分布，它们是构成复杂模型的基石。
+本章中假设数据点独立同分布，我们考虑离散随机变量的二项分布和多项式分布，以及连续随机变量的高斯分布，这些分布都是参数分布的典型例子。在给定数据集的条件下，我们想确定参数">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>PRML第二章笔记part1 | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">PRML第二章笔记part1</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PRML/">
+                                <span class="chip bg-color">PRML</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                机器学习笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-05-12
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.8k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<h1 id="概率分布"><a href="#概率分布" class="headerlink" title="概率分布"></a>概率分布</h1><p>本章主要研究某些特殊的概率分布，它们是构成复杂模型的基石。</p>
+<p>本章中假设数据点独立同分布，我们考虑离散随机变量的二项分布和多项式分布，以及连续随机变量的高斯分布，这些分布都是参数分布的典型例子。在给定数据集的条件下，我们想确定参数的合适的值，频率学家通过最优化某些准则（如似然函数），而在贝叶斯观点中，引入参数的先验分布然后使用贝叶斯定理来计算后验概率分布。</p>
+<p>于是引出了共轭先验，它使得后验概率分布的函数形式与先验相同，因此使得贝叶斯分析得到极大的简化。</p>
+<p>参数方法是限制分布的函数形式，这对于一个具体应用来说是不合适的，另一种替代的方法叫非参数密度估计法，这些模型仍然具有参数，但是这些参数控制的是模型的复杂度而不是分布的形式。</p>
+<a id="more"></a>
+
+<h2 id="二元变量"><a href="#二元变量" class="headerlink" title="二元变量"></a>二元变量</h2><p>考虑一个二元随机变量 \(x \in \{0,1\}\) ，\(x=1\) 的概率被记作为参数 \(\mu\) ，\(0 \le \mu \le 1\) ，所以 \(x\) 的概率分布可以写成：</p>
+<p>$$Bern(x \ | \ \mu) = \mu^x (1-\mu)^{1-x}$$</p>
+<p>这被称为伯努利分布，可以证明：</p>
+<p><img src="1.jpg" alt="image"></p>
+<p>假设有一个 \(x\) 的观测值的数据集 \(\mathcal{D} = \{x_1,…,x_N\}\) ，且每次观测都是独立地从 \(p(x\ | \ \mu)\) 中抽取的，因此我们可以构造关于 \(\mu\) 的似然函数：</p>
+<p><img src="2.jpg" alt="image"></p>
+<p>从频率学家观点看我们可以用最大似然函数来估计 \(\mu\) 的值，或者最大话对数似然函数，在伯努利分布下，对数似然函数为：</p>
+<p><img src="3.jpg" alt="image"></p>
+<p>可以得到最大似然的估计值：</p>
+<p><img src="4.jpg" alt="image"></p>
+<p>假设我们扔一枚硬币三次，巧合的是三次都是正面向上，在最大似然下，我们得出 \(\mu_{ML}=1\) ，那么预测未来的观测值都是正面向上，这很明显是不合理的，事实上引入 \(\mu\) 的先验我们会得到一个更合理的结论。</p>
+<p> 我们也可以求解给定数据集规模N的条件下， \(x=1\) 出现的数量 m 的概率分布，这被称为二项分布：</p>
+<p><img src="5.jpg" alt="image"></p>
+<p>对于独立事件，加和的均值等于均值的加和，加和的方差等于方差的加和，由于 \(m=x_1 + … + x_N\) :</p>
+<p><img src="6.jpg" alt="image"></p>
+<h3 id="Beta-分布"><a href="#Beta-分布" class="headerlink" title="Beta 分布"></a>Beta 分布</h3><p>在二项分布中，最大似然解也是数据集中 \(x=1\) 的观测所占的比例。</p>
+<p>为了用贝叶斯的观点看待这个问题，我们需要引入一个关于 \(\mu\) 的先验概率分布 \(p(\mu)\) 。我们选择正比于 \(\mu\) 和 \(1-\mu\) 的幂指数的先验概率分布，那么后验分布就和先验分布有着相同的函数形式，这被称为共轭性，因此我们选择先验分布为 Beta分布：</p>
+<p><img src="7.jpg" alt="image"></p>
+<p><img src="8.jpg" alt="image"></p>
+<p>a,b被称为超参数，它们控制了参数 \(\mu\) 的概率分布。</p>
+<p><img src="9.jpg" alt="image"></p>
+<p>那么 \(\mu\) 的后验概率：</p>
+<p><img src="10.jpg" alt="image"></p>
+<p>其中 \(l = N-m\) ，我们发现它仅仅是另一个Beta分布：</p>
+<p><img src="11.jpg" alt="image"></p>
+<p>从先验到后验，a的值变大了m，b的值变大了l。我们可以把超参数a和b分别看成 \(x=1\) 和 \(x=0\) 的有效观测数，如果接下来观测到更多的数据，那么后验概率可以扮演先验概率的角色。</p>
+<p>我们可以假想每次值取一个观测值，然后在每次观测之后更新当前的后验分布，更新方法是让当前的后验分布与新观测值的似然函数相乘，然后归一化。在每个阶段，后验概率是一个Beta分布，观测到一个 \(x=1\)对英语把a的值加1，而观测到 \(x=0\) 会使b加1。</p>
+<p>由此我们可以引入顺序方法，顺序方法每次使用一个观测值，或一小批观测值，然后在使用下一个观测值之前丢弃它们，这可以应用到实时学习的场景中，输入为一个稳定持续的数据流，模型必须在观测到所有数据之前就进行预测，不需要将所有数据都存储到内存里。</p>
+<p><img src="12.jpg" alt="image"></p>
+<p>从图2.2可以看出，当我们观测的数量增加时，后验分布的图像变得更尖了，这通过Beta分布的方差可以看出来，事实上，随着我们观测到越来越多的数据，后验概率表示的不确定性将持续下降（平均意义上来说），考虑一个一般的贝叶斯推断问题，参数为 \(\theta\) ：</p>
+<p><img src="13.jpg" alt="image"></p>
+<p><img src="14.jpg" alt="image"></p>
+<h2 id="多项式变量"><a href="#多项式变量" class="headerlink" title="多项式变量"></a>多项式变量</h2><p>我们还会遇到可以取 K 个互斥状态中的某一种的离散变量，这个变量可以被表示成一个 K 维向量 \(x\) ，向量中的一个元素 \(x_k=1\) ，其他元素等于0，这样的向量满足：</p>
+<p>$$\sum_{k=1}^K x_k=1$$ </p>
+<p>用 (\mu_k\) 表示 \(x_k=1\) 的概率，那么 \(x\) 的分布就是：</p>
+<p><img src="15.jpg" alt="image"></p>
+<p>其中 \(\mu=(\mu_1,…,\mu_k)^T\)，参数 \(\mu_k\) 满足 \(\mu_k \ge 0\) 和 \(\sum_k \mu_k=1\)。</p>
+<p><img src="16.jpg" alt="image"></p>
+<p>现在考虑一个有 N 个独立观测值的数据集 \(\mathcal{D}\) ，似然函数为：</p>
+<p><img src="17.jpg" alt="image"></p>
+<p><img src="18.jpg" alt="image"></p>
+<p>它表示观测到 \(x_k=1\) 的次数，被称为这个分布的充分统计量。</p>
+<p>通过最大化似然，我们得到：</p>
+<p>$$\mu_k^{ML} = \frac{m_k}{N}$$</p>
+<p>考虑 \(m_1,…,m_k\) 在参数 \(\mu\) 和观测总数 N 条件下的联合分布：</p>
+<p><img src="19.jpg" alt="image"></p>
+<p>其中：</p>
+<p><img src="20.jpg" alt="image"></p>
+<p><img src="21.jpg" alt="image"></p>
+<h3 id="狄利克雷分布"><a href="#狄利克雷分布" class="headerlink" title="狄利克雷分布"></a>狄利克雷分布</h3><p>类似的，我们也想为多项式分布找到它的共轭先验：</p>
+<p><img src="22.jpg" alt="image"></p>
+<p>概率的归一化形式为：</p>
+<p><img src="23.jpg" alt="image"></p>
+<p>这被称为狄利克雷分布(Dirichlet distribution)，其中：</p>
+<p>$$\alpha_0 = \sum_{k=1}^K \alpha_k$$</p>
+<p>所以 \(\{\mu_k \}\) 的后验分布为：</p>
+<p><img src="24.jpg" alt="image"></p>
+<p>归一化：</p>
+<p><img src="25.jpg" alt="image"></p>
+<p>与二项分布的先验概率为 Beta 分布相同，我们可以把狄利克雷分布的参数 \(\alpha_k\) 看成 \(x_k=1\) 的有效观测数。</p>
+<p>我们也可以把二项分布表示成多项式分布中 K=2 的特殊形式，结果是一样的。</p>
+<h2 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h2><p>对于 D 维向量 \(x\) ，多元高斯分布的形式为：</p>
+<p><img src="26.jpg" alt="image"></p>
+<p>对于一个一元实值向量，使熵取得最大的是高斯分布，这个性质对多元高斯也成立。</p>
+<p>中心极限定理告诉我们，在某些温和的条件下，一组随机变量的和随着和式中项的增加而逐渐趋向高斯分布：</p>
+<p><img src="27.jpg" alt="image"></p>
+<p>下面讨论一下高斯分布的性质。</p>
+<p>高斯对 \(x\) 的依赖是通过下面形式的二次型：</p>
+<p><img src="28.jpg" alt="image"></p>
+<p>\(\Delta\) 被称作 \(\mu\) 和 \(x\) 的马式距离，当 \(\sum\) 为单位矩阵时，就变成了欧式距离。</p>
+<p>协方差矩阵的特征向量：</p>
+<p><img src="29.jpg" alt="image"></p>
+<p>而特征向量可以选择为单位正交的：</p>
+<p><img src="30.jpg" alt="image"></p>
+<p>那么 \(\sum\) 可以表示成特征向量展开的形式：</p>
+<p><img src="31.jpg" alt="image"></p>
+<p><img src="32.jpg" alt="image"></p>
+<p>令：</p>
+<p><img src="33.jpg" alt="image"></p>
+<p>那么二次型可以表示为：</p>
+<p><img src="34.jpg" alt="image"></p>
+<p>定义向量 \(y=(y_1,…,y_D)^T\)：</p>
+<p><img src="35.jpg" alt="image"></p>
+<p>其中\(\mathcal{D}\) 是一个矩阵，它的行是向量 \(u_i^T \)，可以看出 \(U\) 是一个正交矩阵，它满足：</p>
+<p>\(UU^T=I\) 和 \(U^TU=I\)</p>
+<p>且有：</p>
+<p><img src="36.jpg" alt="image"></p>
+<p>那么高斯分布在y坐标系上就是：</p>
+<p><img src="37.jpg" alt="image"></p>
+<p>高斯分布的期望和二阶矩：</p>
+<p><img src="38.jpg" alt="image"></p>
+<p><img src="39.jpg" alt="image"></p>
+<p>方差：</p>
+<p><img src="40.jpg" alt="image"></p>
+<p>高斯分布被广泛的用作概率密度模型，但是它的一个局限性是自由参数的数量太多了，一个通常的对称协方差矩阵 \(\sum\) 有 \(\frac{D(D+1)}{2}\) 个独立参数，\(\mu\) 有 \(D\) 个独立参数，共有 \(\frac{D(D+3)}{2}\) 个参数。</p>
+<p>但我们可以限制协方差的形式，比如考虑对角阵 \(\sum = diag(\sigma_i^2)\) ，这时有 2D 个独立参数，常数密度对应的轮廓线是与轴对齐的椭球。考虑 \(\sum=\sigma^2 I\) ，这被称为各向同性协方差，共有D+1 个独立参数，常数概率密度是球面。这些限制可以减少分布的自由度，但是也限制了描述模型中的一些相关性的能力。</p>
+<p><img src="41.jpg" alt="image"></p>
+<p>高斯分布的另一个局限是它是单峰的，但通过引入latent variables or hidden variables（隐变量），可以将多峰分布使用混合高斯模型来描述。</p>
+<h3 id="条件高斯分布"><a href="#条件高斯分布" class="headerlink" title="条件高斯分布"></a>条件高斯分布</h3><p>多元高斯分布的一个重要性质是，如果两组变量是联合高斯分布，那么以一组变量为条件，另一组变量同样是高斯分布。任何一个变量的边缘分布也是高斯分布。</p>
+<p>我们把 \(x\) 划分为 两个不相交的子集 \(x_a\) 和 \(x_b\) ，不失一般性，可以令 \(x_a\) 为 \(x\) 的前M个分量，令 \(x_b\) 为后 D-M 个分量：</p>
+<p><img src="42.jpg" alt="image"></p>
+<p>也定义对应的均值向量 \(\mu\) 和 协方差矩阵 \(\sum \)的划分：</p>
+<p><img src="43.jpg" alt="image"></p>
+<p>引入精度矩阵:</p>
+<p><img src="44.jpg" alt="image"></p>
+<p>精度矩阵的划分：</p>
+<p><img src="45.jpg" alt="image"></p>
+<p>则有：</p>
+<p><img src="46.jpg" alt="image"></p>
+<p>那么我们可以求出：</p>
+<p><img src="48.jpg" alt="image"></p>
+<p><img src="47.jpg" alt="image"></p>
+<p><img src="49.jpg" alt="image"></p>
+<p>可以发现用精度矩阵确实要简洁一些。</p>
+<h3 id="边缘高斯分布"><a href="#边缘高斯分布" class="headerlink" title="边缘高斯分布"></a>边缘高斯分布</h3><p>我们要讨论边缘概率分布：</p>
+<p><img src="50.jpg" alt="image"></p>
+<p>则有：</p>
+<p><img src="51.jpg" alt="image"></p>
+<p><img src="52.jpg" alt="image"></p>
+<h3 id="高斯变量的贝叶斯定理"><a href="#高斯变量的贝叶斯定理" class="headerlink" title="高斯变量的贝叶斯定理"></a>高斯变量的贝叶斯定理</h3><p>假定我们被给定一个高斯边缘分布 \(p(x)\) 和一个高斯条件分布 \(p(y|x)\) ，其中 \(p(y|x)\) 的均值是 \(x\) 的线性函数，协方差与 \(x\) 无关，这是线性高斯模型。我们想找到边缘概率分布 \(p(y)\) 和 条件概率分布 \(p(x|y)\)</p>
+<p>假设 \(x\) 的维度是 M，\(y\) 的维度是 \(D\)：</p>
+<p><img src="53.jpg" alt="image"></p>
+<p>首先找到 \(x\) 和 \(y\) 的联合分布表达式，定义</p>
+<p><img src="54.jpg" alt="image"></p>
+<p>则有</p>
+<p><img src="55.jpg" alt="image"></p>
+<p>可以看出这是 \(z\) 的分量的一个二次函数，所以 \(p(z)\) 是一个高斯分布</p>
+<p>可以得出：</p>
+<p><img src="56.jpg" alt="image"></p>
+<p><img src="57.jpg" alt="image"></p>
+<p>那么就有边缘分布 \(p(y)\)：</p>
+<p><img src="58.jpg" alt="image"></p>
+<p>条件分布 \(p(x|y)\) ：</p>
+<p><img src="59.jpg" alt="image"></p>
+<p>总结如下：</p>
+<p><img src="60.jpg" alt="image"></p>
+<p>其中</p>
+<p><img src="61.jpg" alt="image"></p>
+<h3 id="高斯分布的最大似然估计"><a href="#高斯分布的最大似然估计" class="headerlink" title="高斯分布的最大似然估计"></a>高斯分布的最大似然估计</h3><p>给定一个数据集 <strong>X</strong>=\((x_1,…x_N)^T\)，假定观测 \(\{x_n\}\) 是独立地从多元高斯分布中抽取的，可以使用最大似然法估计分布的参数：</p>
+<p><img src="62.jpg" alt="image"></p>
+<p>通过简单的整理，我们发现似然函数对数据集的依赖只通过下面两个量体现：</p>
+<p><img src="63.jpg" alt="image"></p>
+<p>这被称为高斯分布的充分统计量。</p>
+<p>令这个导数为0:</p>
+<p><img src="64.jpg" alt="image"></p>
+<p>我们得到 \(\mu\) 的最大似然估计：</p>
+<p><img src="65.jpg" alt="image"></p>
+<p>同样也可以得到 \(\sum\) 的最大似然估计：</p>
+<p><img src="66.jpg" alt="image"></p>
+<p>分别对均值和协方差求期望：</p>
+<p><img src="67.jpg" alt="image"></p>
+<p>我们看到协方差的最大似然估计的期望小于真正的值，它是有偏的。我们可以定义一个不同的估计值来修正这个误差：</p>
+<p><img src="68.jpg" alt="image"></p>
+<p>它的期望和 \(\sum\) 相等</p>
+<h3 id="顺序估计"><a href="#顺序估计" class="headerlink" title="顺序估计"></a>顺序估计</h3><p>顺序估计允许每次处理一个数据点，然后丢弃这个点，这对于在线应用很重要，并且当数据集很大以至于无法一次处理所有数据点时，顺序估计也很重要。</p>
+<p>考虑 \(\mu_{ML}\) ，当它依赖于第 N 次观察时，记作 \( \mu_{ML}^{(N)}\) ：</p>
+<p><img src="69.jpg" alt="image"></p>
+<p>这个结果很有意思，在观察到 N-1 个数据点后，我们把 \(\mu\) 估计为 \( \mu_{ML}^{(N-1)}\) ，然后观察到了数据点 \(x_N\) ，这样就得到了一个修正的估计 \( \mu_{ML}^{(N)}\) ，这个估计的获得方式是：把旧的估计沿着“错误信号（ \(x_N- \mu_{ML}^{(N-1)}\) ）” 方向移动一个微小的量。随着 N 增加，后续数据点的贡献也会变小。</p>
+<p>但是不总能用上面的方法推导出一个顺序的算法，下面我们寻找一个更通用的顺序学习方法：Robbins-Monro算法。</p>
+<p>考虑一对随机变量 \(\theta\) 和 \(z\) ，已知 \(\theta\) 的条件下，\(z\) 的条件期望定义了一个确定的函数 \(f(\theta)\)：</p>
+<p><img src="70.jpg" alt="image"></p>
+<p>我们的目标是寻找根 \(\theta^<em>\) 使得 \(f(\theta^</em>)=0\)</p>
+<p><img src="71.jpg" alt="image"></p>
+<p>假设每次观测到一个 \(z\) 值，我们想找到一个顺序估计方法来找到 \(\theta^<em>\) 。Robbins-Monro方法定义了一个根 \(\theta^</em>\) 的顺序估计序列：</p>
+<p><img src="72.jpg" alt="image"></p>
+<p>其中 \(z(\theta^{(N)})\) 是当 \(\theta\) 取 \(\theta^{(N)}\) 时 \(z\) 的观测值，系数 {\(\alpha_N\)} 表示满足下列条件的正数序列：</p>
+<p><img src="73.jpg" alt="image"></p>
+<p><img src="74.jpg" alt="image"></p>
+<p>第一个条件确保后续修正的幅度会逐渐减小，第二个条件确保算法不会收敛不到根的值，第三个条件保证了累计的噪声具有有限的方差，因此不会导致收敛失败。</p>
+<p>现在考虑一个一般的最大似然问题如何用这种方法顺序求解，最大似然解 \(\theta_{ML}\) 是负对数似然函数的一个驻点：</p>
+<p><img src="75.jpg" alt="image"></p>
+<p><img src="76.jpg" alt="image"></p>
+<p>其中：</p>
+<p>$$z(x,\theta)=-\frac{\partial }{\partial \theta} ln \ p(x\ |\ \theta)$$</p>
+<p>那么：</p>
+<p><img src="77.jpg" alt="image"></p>
+<h3 id="高斯分布的贝叶斯推断"><a href="#高斯分布的贝叶斯推断" class="headerlink" title="高斯分布的贝叶斯推断"></a>高斯分布的贝叶斯推断</h3><p>首先考虑一个一元高斯随机变量 \(x\) ，假设方差 \(\sigma^2\) 已知，我们的任务是从一组 N 次观测 <strong>x</strong>=\(\{x_1,…,x_N\}\) 中推断均值 \(\mu\) ，似然函数：</p>
+<p><img src="78.jpg" alt="image"></p>
+<p>似然函数不是 \(\mu\) 的概率密度，它没有被归一化。</p>
+<p>若我们选择先验分布 \(p(\mu)\) 为高斯分布，因为对应的后验概率是两个 \(\mu\) 的二次函数的指数的乘积，因此后验也是一个高斯分布，假设先验分布为：</p>
+<p><img src="79.jpg" alt="image"></p>
+<p>可以证明后验概率形式为：</p>
+<p><img src="80.jpg" alt="image"></p>
+<p>其中 \(\mu_{ML}\) 为 \(\mu\) 的最大似然解，</p>
+<p><img src="81.jpg" alt="image"></p>
+<p>我们发现，后验分布的均值是先验分布的均值和最大似然解的折中，若 N=0，那么后验均值就变成了先验均值，若 N 趋近于正无穷，后验均值由最大似然解给出。类似的，对于后验方差，若N=0，后验的方差就是先验方差，若 N 趋近于正无穷，后验方差趋于0，那么后验分布在最大似然解附近变成了无限大的尖峰。</p>
+<p><img src="82.jpg" alt="image"></p>
+<p>同样的，可以直接把结论推广到方差已知，均值未知的 D 维高斯随机变量 \(x\) 中。</p>
+<p>对于推断问题，如果从一个顺序观点来看，贝叶斯方法非常自然：</p>
+<p><img src="83.jpg" alt="image"></p>
+<p>可以看到观测到 N-1 个数据点之后的后验概率分布，它可以被看成一个先验分布，然后使用贝叶斯定理与似然函数(与 \(x_N\) 有关)结合到一起，得到观察 N 个点之后的后验概率。</p>
+<p>现在我们假设均值已知，要推断方差，我们使用精度 \(\lambda = \frac{1}{\sigma^2}\) 来进行计算是方便的， \(\lambda\) 的似然函数为：</p>
+<p><img src="84.jpg" alt="image"></p>
+<p>对应的共轭先验因此应该正比于 \(\lambda\) 的幂指数和 \(\lambda\) 的线性函数的指数，这对应于Gamma分布：</p>
+<p><img src="85.jpg" alt="image"></p>
+<p>它的均值和方差：</p>
+<p><img src="86.jpg" alt="image"></p>
+<p><img src="87.jpg" alt="image"></p>
+<p>\(\lambda\) 后验分布：</p>
+<p><img src="88.jpg" alt="image"></p>
+<p>可以把它看成形式为 \(Gam(\lambda\ |\ a_N,\ b_N)\) 的Gamma分布，其中：</p>
+<p><img src="89.jpg" alt="image"></p>
+<p>我们看到观测 N 个数据点的效果是把系数 a 的值增加了 \(\frac{N}{2}\) ，因此可以把先验分布中的参数 \(a_0\) 看成 2\(a_0\) 个有效先验观测，同理对于参数 \(b_0\) 可以看成方差为 \(\frac{b_0}{a_0}\) 的 2\(a_0\) 个有效先验观测。对于指数族分布来说，把共轭先验看成有效假想数据点是很通用的思想。</p>
+<p>现在假设精度和均值均未知，想找到这一情况下的共轭先验：</p>
+<p><img src="90.jpg" alt="image"></p>
+<p>现在想找到一个先验分布 \(p(\mu, \lambda)\) 它对于 \(\mu, \lambda\) 的依赖与似然函数有着相同的形式：</p>
+<p><img src="91.jpg" alt="image"></p>
+<p>其中 \(c,d,\beta\) 都是常数，我们可以把它看成高斯分布和 Gamma分布的乘积：</p>
+<p><img src="92.jpg" alt="image"></p>
+<p>这被称为正态-Gamma分布，其中<img src="93.jpg" alt="image"></p>
+<p>这不是独立高斯和独立Gamma的乘积，因为 \(\mu\) 的精度是 \(\lambda\) 的线性函数。</p>
+<p>对于 D 维向量 \(x\) 的多元高斯分布，假设精度已知，则均值的先验分布仍是高斯分布。若均值已知，精度矩阵未知，共轭先验是 \(Wishart\) 分布。若均值和精度均未知，共轭先验为正态-Wishsart分布。</p>
+<h3 id="学生t分布"><a href="#学生t分布" class="headerlink" title="学生t分布"></a>学生t分布</h3><p>我们看到高斯分布的精度的共轭先验是Gamma分布，如果我们有一个一元高斯分布 \(N(x\ |\mu,\ \tau^{-1})\) 和 一个Gamma先验分布 \(Gam(\tau\ |a,\ b)\) ，我们把精度积分出来，可以得到 \(x\) 的边缘分布：</p>
+<p><img src="94.jpg" alt="image"></p>
+<p>定义新的参数 \(v=2a, \ \lambda=\frac{a}{b}\) ，使用新的参数，分布 \(p(x|\mu,a,b)\) 的形式为：</p>
+<p><img src="95.jpg" alt="image"></p>
+<p>这被称为学生t分布，参数 \(\lambda\) 有时被称为t分布的精度，即使通常它并不等于方差的倒数，参数 \(v\) 被称为自由度，对于 \(v \) 趋于无穷的情况下，t分布变成了高斯分布，均值为 \(\mu\) ，精度为 \(\lambda\) 。</p>
+<p><img src="96.jpg" alt="image"></p>
+<p> t分布有个重要的性质：鲁棒性。我们发现它通常比高斯分布有着更长的尾巴，所以它对于数据集中的离群点不会像高斯分布那样敏感。</p>
+<p><img src="97.jpg" alt="image"></p>
+<p>与一元变量相同的方法，可以求出多元变量的t分布</p>
+<p><img src="98.jpg" alt="image"></p>
+<p>它有下列性质：</p>
+<p><img src="99.jpg" alt="image"></p>
+<h3 id="周期变量"><a href="#周期变量" class="headerlink" title="周期变量"></a>周期变量</h3><p>无论是高斯变量本身，还是它作为更复杂的概率模型的基石，高斯分布在实际应用中都非常重要。但对于周期变量，用高斯分布建模并不合适。</p>
+<p>如果对周期变量应用传统的概率分布的话，这强烈依赖于原点的选择，很明显是不合理的。</p>
+<p>考虑周期变量的观测数据集 \(\mathcal{D}=\{\theta_1,…,\theta_N\}\) 的均值问题，我们假定\(\theta\) 的单位为弧度，为了找到均值的一个不变的度量，我们注意到观测可以被看成单位圆上的点，因此可以被描述为一个二维单位向量 \(x_1,…x_N\)，我们可以对它求平均：</p>
+<p><img src="100.jpg" alt="image"></p>
+<p>然后找到这个均值对应的角度 \(\overline{\theta}\) ，这个定义保证了均值的位置与极坐标原点的选择无关，可以得出：</p>
+<p><img src="101.jpg" alt="image"></p>
+<p><img src="102.jpg" alt="image"></p>
+<p>然后可以推出高斯分布对于周期变量的推广：von Mises分布。</p>
+<h3 id="混合高斯模型"><a href="#混合高斯模型" class="headerlink" title="混合高斯模型"></a>混合高斯模型</h3><p>之前已经提到，单一的高斯分布高斯分布只有一个峰值，这不能很好的描述现实中的很多数据的分布，但是我们如果把一些高斯分布线性组合起来，往往会有很好的效果。</p>
+<p><img src="103.jpg" alt="image"></p>
+<p>事实上我们通过足够多的高斯分布，并调节他们的均值和方差以及组合系数，几乎所有的连续概率密度都能以任意的精度近似。</p>
+<p>考虑 K 个高斯概率密度的叠加：</p>
+<p><img src="104.jpg" alt="image"></p>
+<p>要求混合系数 \(\pi_k\) 满足：</p>
+<p><img src="105.jpg" alt="image"></p>
+<p><img src="106.jpg" alt="image"></p>
+<p>根据概率的加和规则和乘积规则，边缘概率密度为：</p>
+<p><img src="107.jpg" alt="image"></p>
+<p>我们把 \(\pi_k=p(k)\) 看成选择第 k 个成分的先验概率，把\(N(x|\mu_k,\sum_k)=p(x|k)\) 看成以 k 为条件的 \(x\) 的概率。后验概率 \(p(x|k)\) 起着一个重要作用，也被称为 responsibilities。后验概率可以表示为：</p>
+<p><img src="108.jpg" alt="image"></p>
+<p>高斯混合分布由三组参数控制：\(\pi,\mu,\sum\) ，令 \(\pi = \{\pi_1,…,\pi_K\},\mu = \{\mu_1,…,\mu_K\},\sum = \{\sum_1,…,\sum_K\}\) ，用最大似然法确定这些参数值：</p>
+<p><img src="109.jpg" alt="image"></p>
+<p>这个无法求出闭式解，可以通过 EM 算法求解。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2018/05/12/PRML_chapter2_part1/">http://lovelyfrog.github.io/2018/05/12/PRML_chapter2_part1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PRML/">
+                                    <span class="chip bg-color">PRML</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/05/12/GenerativeModels/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="生成式模型">
+                        
+                        <span class="card-title">生成式模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+Unsupervised Learning：只有数据没有标签，我们的目标是学到一些潜在的数据中的结构，比如聚类，降维PCA，特征学习，密度估计等。
+
+
+
+Generative Models:
+给定训练数据，学得一个p-model，并用p
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-05-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/deep-learning/" class="post-category">
+                                    deep learning
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/cs231n/">
+                        <span class="chip bg-color">cs231n</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/05/07/PRML_chapter1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="PRML第一章笔记">
+                        
+                        <span class="card-title">PRML第一章笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+贝叶斯概率\(p(D \ | \ w)\) 由观测数据集 \(\mathcal{D}\) 来估计，称作似然函数，它表达了在不同的参数向量 \(w\) 下，观测数据出现的可能性的大小。
+在贝叶斯观点和频率学家观点中，似然函数 \(p(D 
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-05-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    机器学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PRML/">
+                        <span class="chip bg-color">PRML</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

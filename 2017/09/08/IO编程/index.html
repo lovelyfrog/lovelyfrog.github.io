@@ -1,0 +1,1123 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="IO编程, lovelyfrog&#39;s blog">
+    <meta name="description" content="IO编程
+
+文件读写
+在磁盘上读写文件的功能都是由操作系统提供的，现在操作系统不允许程序直接读取磁盘，所以读写文件就是请求操作系统打开一个文件对象，然后通过操作系统提供的这个接口从这个文件对象中读写文件
+文件使用完毕后必须关闭，因为文件对象">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>IO编程 | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">IO编程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/python/" class="post-category">
+                                python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-09-08
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.4k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>IO编程</p>
+<a id="more"></a>
+<h1 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h1><hr>
+<p>在磁盘上读写文件的功能都是由操作系统提供的，现在操作系统不允许程序直接读取磁盘，所以读写文件就是请求操作系统打开一个文件对象，然后通过操作系统提供的这个接口从这个文件对象中读写文件</p>
+<p>文件使用完毕后必须关闭，因为文件对象会占用操作系统的资源</p>
+<p>由于文件读写时可能会产生IOError,一旦出错，f.close()就不会执行。所以我们用try,finally</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">try</span><span class="token punctuation">:</span>
+    f <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">finally</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> f<span class="token punctuation">:</span>
+        f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>但是每次这么写很费事，python给我们提供了with语句</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>with语句的功能和try…finally的功能是一样的，但是不用写f.close()</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">for</span> line <span class="token keyword">in</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>line<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>要读取二进制文件，如图片视频等</p>
+<pre class=" language-python"><code class="language-python">f <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">,</span> <span class="token string">'rb'</span><span class="token punctuation">)</span></code></pre>
+<ul>
+<li>要读取非utf-8编码的文本文件，需要给open函数传入encoding参数</li>
+<li>如果遇到编码不规范的文件，可能会遇到UnicodeDecodeError,可以在open函数中传入errors参数，表示如果遇到编码错误则忽略</li>
+</ul>
+<pre class=" language-python"><code class="language-python">f<span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">'gbk_file'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'gbk'</span><span class="token punctuation">,</span> errors<span class="token operator">=</span><span class="token string">'ignore'</span><span class="token punctuation">)</span></code></pre>
+<p>写文件也同样如此</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>要写入特定编码的文本文件，需要给open函数传入encoding参数，将字符串自动转换成指定编码</p>
+<h1 id="StringIO和BytesIO"><a href="#StringIO和BytesIO" class="headerlink" title="StringIO和BytesIO"></a>StringIO和BytesIO</h1><hr>
+<p>很多时候，数据读写也不一定是文件，也可以再内存中读写</p>
+<p>StringIO就是在内存中读写数据</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> io <span class="token keyword">import</span> StringIO
+f <span class="token operator">=</span> StringIO<span class="token punctuation">(</span><span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'hello world'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>11</code></pre><pre class=" language-python"><code class="language-python">f<span class="token punctuation">.</span>getvalue<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>&#39;hello world&#39;</code></pre><p>如果要操作二进制数据，则要用BytesIO</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+f <span class="token operator">=</span> BytesIO<span class="token punctuation">(</span><span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'中文'</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#写入的是经过utf-8编码的bytes</span>
+f<span class="token punctuation">.</span>getvalue<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;</code></pre><h1 id="操作文件和目录"><a href="#操作文件和目录" class="headerlink" title="操作文件和目录"></a>操作文件和目录</h1><hr>
+<p>python 内置的os模块可以直接调用操作系统提供的接口函数</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">print</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>name<span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#操作系统类型 nt是window,posix是linux系统</span></code></pre>
+<pre><code>nt</code></pre><pre class=" language-python"><code class="language-python">os<span class="token punctuation">.</span>environ</code></pre>
+<pre><code>environ({&#39;PROGRAMFILES&#39;: &#39;C:\\Program Files&#39;, &#39;USERDOMAIN&#39;: &#39;DESKTOP-H547PQ0&#39;, &#39;FPS_BROWSER_USER_PROFILE_STRING&#39;: &#39;Default&#39;, &#39;PAGER&#39;: &#39;cat&#39;, &#39;USERPROFILE&#39;: &#39;C:\\Users\\lovelyfrog&#39;, &#39;CHOCOLATEYINSTALL&#39;: &#39;C:\\ProgramData\\chocolatey&#39;, &#39;HOMEDRIVE&#39;: &#39;C:&#39;, &#39;PATH&#39;: &#39;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files\\PHP\\v7.0;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Users\\lovelyfrog\\Python27\\;C:\\Users\\lovelyfrog\\Python27\\Scripts;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Redis\\;C:\\ProgramData\\chocolatey\\bin;C:\\ProgramData\\chocolatey\\lib\\msys2;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\lovelyfrog\\Documents\\机器学习实战;C:\\Users\\lovelyfrog\\Documents\\python crawler\\phantomjs-2.1.1-windows\\bin\\;C:\\tools\\msys64;C:\\Users\\lovelyfrog\\AppData\\Roaming\\npm;D:\\biomechanics\\code;D:\\amp\\php;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\lovelyfrog\\Documents\\机器学习实战;C:\\Users\\lovelyfrog\\Documents\\python crawler\\phantomjs-2.1.1-windows\\bin\\;C:\\ProgramData\\chocolatey\\lib\\msys2;C:\\tools\\msys64;C:\\Users\\lovelyfrog\\AppData\\Roaming\\npm;D:\\biomechanics\\code;&#39;, &#39;OS&#39;: &#39;Windows_NT&#39;, &#39;PROGRAMFILES(X86)&#39;: &#39;C:\\Program Files (x86)&#39;, &#39;COMPUTERNAME&#39;: &#39;DESKTOP-H547PQ0&#39;, &#39;CHOCOLATEYTOOLSLOCATION&#39;: &#39;C:\\tools&#39;, &#39;PROCESSOR_REVISION&#39;: &#39;3d04&#39;, &#39;CLICOLOR&#39;: &#39;1&#39;, &#39;PSMODULEPATH&#39;: &#39;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules&#39;, &#39;JPY_PARENT_PID&#39;: &#39;1276&#39;, &#39;MOZ_PLUGIN_PATH&#39;: &#39;C:\\Program Files (x86)\\Foxit Software\\Foxit Reader\\plugins\\&#39;, &#39;TEMP&#39;: &#39;C:\\Users\\LOVELY~1\\AppData\\Local\\Temp&#39;, &#39;MPLBACKEND&#39;: &#39;module://ipykernel.pylab.backend_inline&#39;, &#39;USERNAME&#39;: &#39;lovelyfrog&#39;, &#39;PROGRAMW6432&#39;: &#39;C:\\Program Files&#39;, &#39;PROCESSOR_ARCHITECTURE&#39;: &#39;AMD64&#39;, &#39;PUBLIC&#39;: &#39;C:\\Users\\Public&#39;, &#39;TMP&#39;: &#39;C:\\Users\\LOVELY~1\\AppData\\Local\\Temp&#39;, &#39;ALLUSERSPROFILE&#39;: &#39;C:\\ProgramData&#39;, &#39;PROCESSOR_IDENTIFIER&#39;: &#39;Intel64 Family 6 Model 61 Stepping 4, GenuineIntel&#39;, &#39;SYSTEMROOT&#39;: &#39;C:\\WINDOWS&#39;, &#39;COMSPEC&#39;: &#39;C:\\WINDOWS\\system32\\cmd.exe&#39;, &#39;HOMEPATH&#39;: &#39;\\Users\\lovelyfrog&#39;, &#39;COMMONPROGRAMFILES&#39;: &#39;C:\\Program Files\\Common Files&#39;, &#39;PROMPT&#39;: &#39;$P$G&#39;, &#39;JPY_INTERRUPT_EVENT&#39;: &#39;1272&#39;, &#39;WINDIR&#39;: &#39;C:\\WINDOWS&#39;, &#39;NUMBER_OF_PROCESSORS&#39;: &#39;4&#39;, &#39;LOCALAPPDATA&#39;: &#39;C:\\Users\\lovelyfrog\\AppData\\Local&#39;, &#39;TERM&#39;: &#39;xterm-color&#39;, &#39;LOGONSERVER&#39;: &#39;\\\\DESKTOP-H547PQ0&#39;, &#39;PATHEXT&#39;: &#39;.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC&#39;, &#39;PROCESSOR_LEVEL&#39;: &#39;6&#39;, &#39;ONEDRIVE&#39;: &#39;C:\\Users\\lovelyfrog\\OneDrive&#39;, &#39;COMMONPROGRAMW6432&#39;: &#39;C:\\Program Files\\Common Files&#39;, &#39;USERDOMAIN_ROAMINGPROFILE&#39;: &#39;DESKTOP-H547PQ0&#39;, &#39;GIT_PAGER&#39;: &#39;cat&#39;, &#39;SYSTEMDRIVE&#39;: &#39;C:&#39;, &#39;CHOCOLATEYLASTPATHUPDATE&#39;: &#39;周四 7月 20 13:52:42 2017&#39;, &#39;APPDATA&#39;: &#39;C:\\Users\\lovelyfrog\\AppData\\Roaming&#39;, &#39;PROGRAMDATA&#39;: &#39;C:\\ProgramData&#39;, &#39;IPY_INTERRUPT_EVENT&#39;: &#39;1272&#39;, &#39;SESSIONNAME&#39;: &#39;Console&#39;, &#39;FPS_BROWSER_APP_PROFILE_STRING&#39;: &#39;Internet Explorer&#39;, &#39;VS140COMNTOOLS&#39;: &#39;C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\&#39;, &#39;COMMONPROGRAMFILES(X86)&#39;: &#39;C:\\Program Files (x86)\\Common Files&#39;})</code></pre><pre class=" language-python"><code class="language-python">os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'PATH'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>&#39;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files\\PHP\\v7.0;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Users\\lovelyfrog\\Python27\\;C:\\Users\\lovelyfrog\\Python27\\Scripts;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Redis\\;C:\\ProgramData\\chocolatey\\bin;C:\\ProgramData\\chocolatey\\lib\\msys2;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\lovelyfrog\\Documents\\机器学习实战;C:\\Users\\lovelyfrog\\Documents\\python crawler\\phantomjs-2.1.1-windows\\bin\\;C:\\tools\\msys64;C:\\Users\\lovelyfrog\\AppData\\Roaming\\npm;D:\\biomechanics\\code;D:\\amp\\php;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Programs\\Python\\Python35\\;C:\\Users\\lovelyfrog\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\lovelyfrog\\Documents\\机器学习实战;C:\\Users\\lovelyfrog\\Documents\\python crawler\\phantomjs-2.1.1-windows\\bin\\;C:\\ProgramData\\chocolatey\\lib\\msys2;C:\\tools\\msys64;C:\\Users\\lovelyfrog\\AppData\\Roaming\\npm;D:\\biomechanics\\code;&#39;</code></pre><p>操作文件和目录</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#查看当前目录</span>
+os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>&#39;D:\\python_project\\some_thought&#39;</code></pre><p>把两个路径合成一个时，不要直接拼接字符串，而要用os.path.join(),这样可以正确处理不同操作系统的分隔符，同理拆分路径时要用os.path.split()</p>
+<pre class=" language-python"><code class="language-python">os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">'D:\python'</span><span class="token punctuation">,</span><span class="token string">'sss'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>&#39;D:\\python\\sss&#39;</code></pre><pre class=" language-python"><code class="language-python">os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'D:\python_project\cat.jpg'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>(&#39;D:\\python_project&#39;, &#39;cat.jpg&#39;)</code></pre><pre class=" language-python"><code class="language-python">os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span><span class="token string">'D:\python_project\cat.jpg'</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#有时会非常方便</span></code></pre>
+<pre><code>(&#39;D:\\python_project\\cat&#39;, &#39;.jpg&#39;)</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#文件操作</span>
+os<span class="token punctuation">.</span>rename<span class="token punctuation">(</span><span class="token string">'test.txt'</span><span class="token punctuation">,</span><span class="token string">'test.py'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">os<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token string">'test.py'</span><span class="token punctuation">)</span></code></pre>
+<p>但是复制文件的函数在os中是不存在的，幸运的是shutil模块提供了copyfile()函数，shutil模块可以看作是os的补充</p>
+<p>利用python的一些特性来过滤文件</p>
+<pre class=" language-python"><code class="language-python"><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span> <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isdir<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true">#获取当前目录下所有文件夹</span></code></pre>
+<pre><code>[&#39;.idea&#39;, &#39;.ipynb_checkpoints&#39;, &#39;ItChat-master&#39;]</code></pre><pre class=" language-python"><code class="language-python"><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span> <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isfile<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">and</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token string">'.py'</span><span class="token punctuation">]</span></code></pre>
+<pre><code>[&#39;custom_made_class.py&#39;]</code></pre><h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><hr>
+<p>我们把变量从内存中编程可存储或者可传输的过程就叫做序列化，在python中叫pickling.序列化后就可以将序列化后的内容写入磁盘或者传输到网上</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> pickle
+d <span class="token operator">=</span> dict<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'lovelyfrog'</span><span class="token punctuation">,</span> age<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> score<span class="token operator">=</span><span class="token number">90</span><span class="token punctuation">)</span>
+pickle<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>d<span class="token punctuation">)</span></code></pre>
+<pre><code>b&#39;\x80\x03}q\x00(X\x05\x00\x00\x00scoreq\x01KZX\x04\x00\x00\x00nameq\x02X\n\x00\x00\x00lovelyfrogq\x03X\x03\x00\x00\x00ageq\x04K\x14u.&#39;</code></pre><pre class=" language-python"><code class="language-python">f <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">'dump.txt'</span><span class="token punctuation">,</span><span class="token string">'wb'</span><span class="token punctuation">)</span>
+pickle<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>d<span class="token punctuation">,</span> f<span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">f <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">'dump.txt'</span><span class="token punctuation">,</span> <span class="token string">'rb'</span><span class="token punctuation">)</span>
+d <span class="token operator">=</span> pickle<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+d</code></pre>
+<pre><code>{&#39;age&#39;: 20, &#39;name&#39;: &#39;lovelyfrog&#39;, &#39;score&#39;: 90}</code></pre><p>pickle只适用于python</p>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><hr>
+<p>如果在不同编程语言中传递对象，就必须把对象序列化为标准格式，最好的方法是序列成JSON,JSON表示的对象就是标准的JavaScript语言的对象</p>
+<p>python内置的json模块提供了非常完善的从python对象到JSON格式的转换，类似的dump()可以将JSON写入一个file-like-object中<br>从JSON反序列化，可以用loads(),或者load()从一个file-like object中读取字符串并反序列化</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
+d <span class="token operator">=</span> dict<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'lovelyfrog'</span><span class="token punctuation">,</span> age<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> score<span class="token operator">=</span><span class="token number">90</span><span class="token punctuation">)</span>
+json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>d<span class="token punctuation">)</span></code></pre>
+<pre><code>&#39;{&quot;score&quot;: 90, &quot;name&quot;: &quot;lovelyfrog&quot;, &quot;age&quot;: 20}&#39;</code></pre><pre class=" language-python"><code class="language-python">json_str <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>d<span class="token punctuation">)</span>
+json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>json_str<span class="token punctuation">)</span></code></pre>
+<pre><code>{&#39;age&#39;: 20, &#39;name&#39;: &#39;lovelyfrog&#39;, &#39;score&#39;: 90}</code></pre><pre class=" language-python"><code class="language-python">json_str<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span></code></pre>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-37-c351198a8340&gt; in &lt;module&gt;()
+----&gt; 1 json_str[&#39;name&#39;]
+
+
+TypeError: string indices must be integers</code></pre><p>类对象不是一个可以json序列化的对象，但是我们可以更改default参数，为类写一个转换函数</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>name<span class="token punctuation">,</span>age<span class="token punctuation">,</span>score<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name<span class="token operator">=</span>name
+        self<span class="token punctuation">.</span>age<span class="token operator">=</span>age
+        self<span class="token punctuation">.</span>score<span class="token operator">=</span>score
+
+s <span class="token operator">=</span> Student<span class="token punctuation">(</span><span class="token string">'lovelyfrog'</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>s<span class="token punctuation">)</span></code></pre>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-33-2531144bea7e&gt; in &lt;module&gt;()
+----&gt; 1 json.dumps(s)
+
+
+~\AppData\Local\Programs\Python\Python35\lib\json\__init__.py in dumps(obj, skipkeys, ensure_ascii, check_circular, allow_nan, cls, indent, separators, default, sort_keys, **kw)
+    228         cls is None and indent is None and separators is None and
+    229         default is None and not sort_keys and not kw):
+--&gt; 230         return _default_encoder.encode(obj)
+    231     if cls is None:
+    232         cls = JSONEncoder
+
+
+~\AppData\Local\Programs\Python\Python35\lib\json\encoder.py in encode(self, o)
+    196         # exceptions aren&#39;t as detailed.  The list call should be roughly
+    197         # equivalent to the PySequence_Fast that &#39;&#39;.join() would do.
+--&gt; 198         chunks = self.iterencode(o, _one_shot=True)
+    199         if not isinstance(chunks, (list, tuple)):
+    200             chunks = list(chunks)
+
+
+~\AppData\Local\Programs\Python\Python35\lib\json\encoder.py in iterencode(self, o, _one_shot)
+    254                 self.key_separator, self.item_separator, self.sort_keys,
+    255                 self.skipkeys, _one_shot)
+--&gt; 256         return _iterencode(o, 0)
+    257 
+    258 def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
+
+
+~\AppData\Local\Programs\Python\Python35\lib\json\encoder.py in default(self, o)
+    177 
+    178         &quot;&quot;&quot;
+--&gt; 179         raise TypeError(repr(o) + &quot; is not JSON serializable&quot;)
+    180 
+    181     def encode(self, o):
+
+
+TypeError: &lt;__main__.Student object at 0x000001BE15084518&gt; is not JSON serializable</code></pre><p>同样的道理，如果我们要把JSON反序列化为一个Student对象实例，loads()方法首先转换出一个dict对象，然后，我们传入的object_hook函数负责把dict转换为Student实例</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">student2dict</span><span class="token punctuation">(</span>std<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token string">'name'</span><span class="token punctuation">:</span>std<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+    <span class="token string">'age'</span><span class="token punctuation">:</span>std<span class="token punctuation">.</span>age<span class="token punctuation">,</span>
+    <span class="token string">'score'</span><span class="token punctuation">:</span>std<span class="token punctuation">.</span>score
+    <span class="token punctuation">}</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>s<span class="token punctuation">,</span> default<span class="token operator">=</span>student2dict<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>{&quot;score&quot;: 90, &quot;name&quot;: &quot;lovelyfrog&quot;, &quot;age&quot;: 20}</code></pre><p>通常class都有一个<strong>dict</strong>属性用来储存实例变量，</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>s<span class="token punctuation">.</span>__dict__<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>{&quot;score&quot;: 90, &quot;age&quot;: 20, &quot;name&quot;: &quot;lovelyfrog&quot;}</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">dict2student</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> Student<span class="token punctuation">(</span>d<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> d<span class="token punctuation">[</span><span class="token string">'age'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> d<span class="token punctuation">[</span><span class="token string">'score'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>json_str<span class="token punctuation">,</span> object_hook<span class="token operator">=</span>dict2student<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>&lt;__main__.Student object at 0x000001BE1510A198&gt;</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2017/09/08/IO%E7%BC%96%E7%A8%8B/">http://lovelyfrog.github.io/2017/09/08/IO%E7%BC%96%E7%A8%8B/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/09/18/%E5%BC%82%E6%AD%A5IO/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="异步IO">
+                        
+                        <span class="card-title">异步IO</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            异步IO
+
+协程def odd():
+    n=1
+    while True:
+        yield n
+        n+=2
+odd_num = odd()
+count = 0
+for o in odd_num:
+    
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2017-09-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/09/08/itchat%E5%85%A5%E9%97%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="itchat入门">
+                        
+                        <span class="card-title">itchat入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            itchat入门
+
+
+import itchat
+itchat.auto_login()
+Getting uuid of QR code.
+Downloading QR code.
+Please scan the QR code to lo
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

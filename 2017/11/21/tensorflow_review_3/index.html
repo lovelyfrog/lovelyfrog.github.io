@@ -1,0 +1,2171 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="tensorflow review 3(tensorflow中的mnist数据集读取以及一些高级操作), lovelyfrog&#39;s blog">
+    <meta name="description" content="tensorflow 进阶
+
+tensorflow中的mnist数据集读取以及一些高级操作tensorflow的封装让使用MNIST数据集变得更加方便，它包含了60000张图片作为训练数据,10000张图片作为测试数据，每张图片大小为28x">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>tensorflow review 3(tensorflow中的mnist数据集读取以及一些高级操作) | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">tensorflow review 3(tensorflow中的mnist数据集读取以及一些高级操作)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/tensorflow/">
+                                <span class="chip bg-color">tensorflow</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/deep-learning/" class="post-category">
+                                deep learning
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2017-11-21
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>tensorflow 进阶</p>
+<a id="more"></a>
+<h2 id="tensorflow中的mnist数据集读取以及一些高级操作"><a href="#tensorflow中的mnist数据集读取以及一些高级操作" class="headerlink" title="tensorflow中的mnist数据集读取以及一些高级操作"></a>tensorflow中的mnist数据集读取以及一些高级操作</h2><pre><code>tensorflow的封装让使用MNIST数据集变得更加方便，它包含了60000张图片作为训练数据,10000张图片作为测试数据，每张图片大小为28x28</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>examples<span class="token punctuation">.</span>tutorials<span class="token punctuation">.</span>mnist <span class="token keyword">import</span> input_data</code></pre>
+<pre class=" language-python"><code class="language-python">mnist <span class="token operator">=</span> input_data<span class="token punctuation">.</span>read_data_sets<span class="token punctuation">(</span><span class="token string">"data/"</span><span class="token punctuation">,</span>one_hot<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Successfully downloaded train-images-idx3-ubyte.gz 9912422 bytes.
+Extracting data/train-images-idx3-ubyte.gz
+Successfully downloaded train-labels-idx1-ubyte.gz 28881 bytes.
+Extracting data/train-labels-idx1-ubyte.gz
+Successfully downloaded t10k-images-idx3-ubyte.gz 1648877 bytes.
+Extracting data/t10k-images-idx3-ubyte.gz
+Successfully downloaded t10k-labels-idx1-ubyte.gz 4542 bytes.
+Extracting data/t10k-labels-idx1-ubyte.gz</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>mnist<span class="token punctuation">.</span>train<span class="token punctuation">.</span>num_examples<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>mnist<span class="token punctuation">.</span>validation<span class="token punctuation">.</span>num_examples<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>mnist<span class="token punctuation">.</span>test<span class="token punctuation">.</span>num_examples<span class="token punctuation">)</span></code></pre>
+<pre><code>55000
+5000
+10000</code></pre><pre class=" language-python"><code class="language-python">mnist<span class="token punctuation">.</span>train<span class="token punctuation">.</span>images<span class="token punctuation">.</span>shape</code></pre>
+<pre><code>(55000, 784)
+
+
+
+为了方便使用随机梯度下降，提供了mnist.train.next_batch函数，可以从所有训练数据中读取一小部分作为一个bacth</code></pre><h3 id="变量管理"><a href="#变量管理" class="headerlink" title="变量管理"></a>变量管理</h3><pre><code>inference这个函数中包含了神经网络中的所有参数，调用这个函数时需要传入所有这些函数，非常麻烦，有没有什么更简单的办法呢？
+
+tensorflow提供了通过变量名称来创建或者获取一个变量的机制，通过这个机制在不同函数中可以直接通过变量的名字来使用变量而不需要将变量通过参数的形式到处传递
+主要通过tf.get_variable和tf.variable_scope来实现</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 下面两个定义等价</span>
+v1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'v1'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>constant_initializer<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v2'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">v1</code></pre>
+<pre><code>&lt;tf.Variable &#39;v1:0&#39; shape=(1,) dtype=float32_ref&gt;</code></pre><pre class=" language-python"><code class="language-python">v2</code></pre>
+<pre><code>&lt;tf.Variable &#39;v2:0&#39; shape=(1,) dtype=float32_ref&gt;
+
+
+
+对于tf.Variable，变量名称name是一个可选的参数，然而对于tf.get_variable,变量名称必须指定，它会根据这个名字去创建或者获取变量。
+
+如果需要通过tf.get_variable获取一个已创建的变量，需要通过tf.variable_scope来生成一个上下文管理器，并明确指定在这个上下文管理器中，tf.get_variable将直接获取已经生成的变量</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 在名字为foo的命名空间内创建名字为v的变量</span>
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    v <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'v'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>constant_initializer<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 将参数reuse设置为True这样tf.get_varible可以直接获取已经声明的变量</span>
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> reuse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    v1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'v'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token operator">==</span>v<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token punctuation">)</span></code></pre>
+<pre><code>True
+&lt;tf.Variable &#39;foo/v:0&#39; shape=(1,) dtype=float32_ref&gt;
+
+
+除此之外tf.variable_scope是可以嵌套的</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'root'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 可以通过tf.get_variable_scope().reuse获取当前上下文管理器中reuse参数的值</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>tf<span class="token punctuation">.</span>get_variable_scope<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reuse<span class="token punctuation">)</span>
+    <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> reuse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>tf<span class="token punctuation">.</span>get_variable_scope<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reuse<span class="token punctuation">)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>tf<span class="token punctuation">.</span>get_variable_scope<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reuse<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>tf<span class="token punctuation">.</span>get_variable_scope<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reuse<span class="token punctuation">)</span></code></pre>
+<pre><code>False
+True
+True
+False</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 可以直接通过带命名空间名称的变量名来获取其他命名空间的变量</span>
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> reuse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    v5 <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'foo/bar/v'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<pre><code>利用这两个函数对inference做出改进</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">inference</span><span class="token punctuation">(</span>input_tensor<span class="token punctuation">,</span> reuse<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'layer1'</span><span class="token punctuation">,</span> reuse<span class="token operator">=</span>reuse<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 根据传进来的reuse来判断是创建新变量还是使用已经创建好的</span>
+        weights <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'weights'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>INPUT_NODE<span class="token punctuation">,</span> LAYER1_NODE<span class="token punctuation">]</span><span class="token punctuation">,</span> initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>truncated_normal_initializer<span class="token punctuation">(</span>stddev<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        biases <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'biases'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>LAYER1_NODE<span class="token punctuation">]</span><span class="token punctuation">,</span> initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>constant_initializer<span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        layer1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>input_tensor<span class="token punctuation">,</span> weights<span class="token punctuation">)</span> <span class="token operator">+</span> biases<span class="token punctuation">)</span>
+    <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'layer2'</span><span class="token punctuation">,</span> reuse<span class="token operator">=</span>reuse<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 根据传进来的reuse来判断是创建新变量还是使用已经创建好的</span>
+        weights <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'weights'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>LAYER1_NODE<span class="token punctuation">,</span> OUTPUT_NODE<span class="token punctuation">]</span><span class="token punctuation">,</span> initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>truncated_normal_initializer<span class="token punctuation">(</span>stddev<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        biases <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span><span class="token string">'biases'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>OUTPUT_NODE<span class="token punctuation">]</span><span class="token punctuation">,</span> initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>constant_initializer<span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        layer2 <span class="token operator">=</span> tf<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>layer1<span class="token punctuation">,</span> weights<span class="token punctuation">)</span> <span class="token operator">+</span> biases
+    <span class="token keyword">return</span> layer2
+
+<span class="token comment" spellcheck="true"># 在程序中如果需要使用训练好的神经网络进行推导时，可以直接调用inference(x, True)</span></code></pre>
+<h3 id="模型持久化"><a href="#模型持久化" class="headerlink" title="模型持久化"></a>模型持久化</h3><pre><code>以往的代码在训练完成后就直接退出了，并没有将训练得到的模型保存下来便于以后使用。tensorflow提供了可以持久化模型的方法，便于保存和还原</code></pre><pre class=" language-python"><code class="language-python">v1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span>shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v1'</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span>shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v2'</span><span class="token punctuation">)</span>
+result <span class="token operator">=</span> v1 <span class="token operator">+</span> v2
+init_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>global_variables_initializer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+saver <span class="token operator">=</span> tf<span class="token punctuation">.</span>train<span class="token punctuation">.</span>Saver<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
+    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_op<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 将模型保存到 'tensorboard\model.ckpt'文件</span>
+    saver<span class="token punctuation">.</span>save<span class="token punctuation">(</span>sess<span class="token punctuation">,</span><span class="token string">'tensorboard\model.ckpt'</span><span class="token punctuation">)</span></code></pre>
+<pre><code>tensorflow模型一般保存在后缀为.ckpt的文件中，虽然上面只指定了一个文件路径，但是在这个文件目录下会出现三个文件，因为tensorflow会将计算图的结构和图上参数取值分开保存
+
+第一个文件为model.ckpt.meta,它保存了计算图的结构（可以理解为神经网络的结构）
+第二个文件为model.ckpt，保存了每一个变量的取值。
+最后一个文件为checkpoint，保存了一个目录下所有模型的文件列表</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 加载已保存的模型,没有运行变量初始化的过程而是将变量的值通过已保存的模型加载及进来</span>
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
+    saver<span class="token punctuation">.</span>restore<span class="token punctuation">(</span>sess<span class="token punctuation">,</span> <span class="token string">'tensorboard\model.ckpt'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>INFO:tensorflow:Restoring parameters from tensorboard\model.ckpt
+[ 3.]
+
+
+如果不希望重复定义图上的运算，也可以直接加载已经持久化的图</code></pre><pre class=" language-python"><code class="language-python">saver <span class="token operator">=</span> tf<span class="token punctuation">.</span>train<span class="token punctuation">.</span>import_meta_graph<span class="token punctuation">(</span> <span class="token string">'tensorboard\model.ckpt.meta'</span><span class="token punctuation">)</span>
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
+    saver<span class="token punctuation">.</span>restore<span class="token punctuation">(</span>sess<span class="token punctuation">,</span>  <span class="token string">'tensorboard\model.ckpt'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>get_default_graph<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get_tensor_by_name<span class="token punctuation">(</span><span class="token string">'add:0'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>INFO:tensorflow:Restoring parameters from tensorboard\model.ckpt
+[ 3.]
+
+
+有时只希望加载部分变量，这时可以在加载模型时指定需要加载的变量
+saver = tf.train.Saver([v1])这样就只有v1会被加载进来
+
+除此之外，也可以在保存或加载时给变量重命名</code></pre><p><img src="https://note.youdao.com/yws/public/resource/12d299227186ab82b1985e86114cad3f/xmlnote/3480F88FF6AF4140A4F48707FA2159BA/597" alt="image"></p>
+<pre><code>变量取值和计算图结构分成不同的文件存储有时候并不方便，tensorflow提供了convert_variables_to_constants函数，可以将计算图中的变量及其取值通过常量的方式保存，这样整个计算图就可以统一存放在一个文件中。</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>python<span class="token punctuation">.</span>framework <span class="token keyword">import</span> graph_util</code></pre>
+<pre class=" language-python"><code class="language-python">v1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v1'</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v2'</span><span class="token punctuation">)</span>
+result <span class="token operator">=</span> v1 <span class="token operator">+</span> v2
+
+init_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>global_variables_initializer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
+    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_op<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 导出当前计算图的GraphDef</span>
+    graph_def <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_default_graph<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>as_graph_def<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#将图中变量及其取值转换为常量</span>
+    out_graph_def <span class="token operator">=</span> graph_util<span class="token punctuation">.</span>convert_variables_to_constants<span class="token punctuation">(</span>sess<span class="token punctuation">,</span> graph_def<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'add'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 将导出的模型存入文件中</span>
+    <span class="token keyword">with</span> tf<span class="token punctuation">.</span>gfile<span class="token punctuation">.</span>GFile<span class="token punctuation">(</span><span class="token string">'tensorboard\combined_model.pb'</span><span class="token punctuation">,</span> <span class="token string">'wb'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>out_graph_def<span class="token punctuation">.</span>SerializeToString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>INFO:tensorflow:Froze 2 variables.
+Converted 2 variables to const ops.
+
+
+读取已保存的模型</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>python<span class="token punctuation">.</span>platform <span class="token keyword">import</span> gfile
+<span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
+    model_filename <span class="token operator">=</span> <span class="token string">'tensorboard\combined_model.pb'</span>
+    <span class="token comment" spellcheck="true"># 读取保存的模型，并将文件解析成GraphDef Protocol Buffer</span>
+    <span class="token keyword">with</span> gfile<span class="token punctuation">.</span>FastGFile<span class="token punctuation">(</span>model_filename<span class="token punctuation">,</span> <span class="token string">'rb'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        graph_def <span class="token operator">=</span> tf<span class="token punctuation">.</span>GraphDef<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        graph_def<span class="token punctuation">.</span>ParseFromString<span class="token punctuation">(</span>f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 将graph_def中保存的图加载到当前的图中</span>
+    result <span class="token operator">=</span> tf<span class="token punctuation">.</span>import_graph_def<span class="token punctuation">(</span>graph_def<span class="token punctuation">,</span> return_elements<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'add:0'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>[array([ 3.], dtype=float32)]</code></pre><h3 id="持久化原理及数据格式"><a href="#持久化原理及数据格式" class="headerlink" title="持久化原理及数据格式"></a>持久化原理及数据格式</h3><pre><code>tensorflow通过元图(MetaGraph)来记录计算图节点的信息以及计算图中节点所需要的元数据，它是由MetaGraphDef Protocol Buffer定义的，这就构成了持久化的第一个文件medel.ckpt.meta</code></pre><pre class=" language-python"><code class="language-python">message MetaGraphDef <span class="token punctuation">{</span>
+    MetaInfoDef meta_info_def <span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+    GraphDef graph_def <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    SaverDef saver_def <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> CollectionDef<span class="token operator">></span> collection_def <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> SignatureDef<span class="token operator">></span> signature_def <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 通过export_meta_graph函数将以json格式导出MetaGraphDef</span>
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+v1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v1'</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'v2'</span><span class="token punctuation">)</span>
+result <span class="token operator">=</span> v1 <span class="token operator">+</span> v2
+
+saver <span class="token operator">=</span> tf<span class="token punctuation">.</span>train<span class="token punctuation">.</span>Saver<span class="token punctuation">(</span><span class="token punctuation">)</span>
+saver<span class="token punctuation">.</span>export_meta_graph<span class="token punctuation">(</span><span class="token string">'tensorboard\model.ckpt.meta.json'</span><span class="token punctuation">,</span> as_text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre>
+<pre><code>meta_info_def {
+  stripped_op_list {
+    op {
+      name: &quot;Add&quot;
+      input_arg {
+        name: &quot;x&quot;
+        type_attr: &quot;T&quot;
+      }
+      input_arg {
+        name: &quot;y&quot;
+        type_attr: &quot;T&quot;
+      }
+      output_arg {
+        name: &quot;z&quot;
+        type_attr: &quot;T&quot;
+      }
+      attr {
+        name: &quot;T&quot;
+        type: &quot;type&quot;
+        allowed_values {
+          list {
+            type: DT_HALF
+            type: DT_FLOAT
+            type: DT_DOUBLE
+            type: DT_UINT8
+            type: DT_INT8
+            type: DT_INT16
+            type: DT_INT32
+            type: DT_INT64
+            type: DT_COMPLEX64
+            type: DT_COMPLEX128
+            type: DT_STRING
+          }
+        }
+      }
+    }
+    op {
+      name: &quot;Assign&quot;
+      input_arg {
+        name: &quot;ref&quot;
+        type_attr: &quot;T&quot;
+        is_ref: true
+      }
+      input_arg {
+        name: &quot;value&quot;
+        type_attr: &quot;T&quot;
+      }
+      output_arg {
+        name: &quot;output_ref&quot;
+        type_attr: &quot;T&quot;
+        is_ref: true
+      }
+      attr {
+        name: &quot;T&quot;
+        type: &quot;type&quot;
+      }
+      attr {
+        name: &quot;validate_shape&quot;
+        type: &quot;bool&quot;
+        default_value {
+          b: true
+        }
+      }
+      attr {
+        name: &quot;use_locking&quot;
+        type: &quot;bool&quot;
+        default_value {
+          b: true
+        }
+      }
+      allows_uninitialized_input: true
+    }
+    op {
+      name: &quot;Const&quot;
+      output_arg {
+        name: &quot;output&quot;
+        type_attr: &quot;dtype&quot;
+      }
+      attr {
+        name: &quot;value&quot;
+        type: &quot;tensor&quot;
+      }
+      attr {
+        name: &quot;dtype&quot;
+        type: &quot;type&quot;
+      }
+    }
+    op {
+      name: &quot;Identity&quot;
+      input_arg {
+        name: &quot;input&quot;
+        type_attr: &quot;T&quot;
+      }
+      output_arg {
+        name: &quot;output&quot;
+        type_attr: &quot;T&quot;
+      }
+      attr {
+        name: &quot;T&quot;
+        type: &quot;type&quot;
+      }
+    }
+    op {
+      name: &quot;NoOp&quot;
+    }
+    op {
+      name: &quot;RestoreV2&quot;
+      input_arg {
+        name: &quot;prefix&quot;
+        type: DT_STRING
+      }
+      input_arg {
+        name: &quot;tensor_names&quot;
+        type: DT_STRING
+      }
+      input_arg {
+        name: &quot;shape_and_slices&quot;
+        type: DT_STRING
+      }
+      output_arg {
+        name: &quot;tensors&quot;
+        type_list_attr: &quot;dtypes&quot;
+      }
+      attr {
+        name: &quot;dtypes&quot;
+        type: &quot;list(type)&quot;
+        has_minimum: true
+        minimum: 1
+      }
+    }
+    op {
+      name: &quot;SaveV2&quot;
+      input_arg {
+        name: &quot;prefix&quot;
+        type: DT_STRING
+      }
+      input_arg {
+        name: &quot;tensor_names&quot;
+        type: DT_STRING
+      }
+      input_arg {
+        name: &quot;shape_and_slices&quot;
+        type: DT_STRING
+      }
+      input_arg {
+        name: &quot;tensors&quot;
+        type_list_attr: &quot;dtypes&quot;
+      }
+      attr {
+        name: &quot;dtypes&quot;
+        type: &quot;list(type)&quot;
+        has_minimum: true
+        minimum: 1
+      }
+    }
+    op {
+      name: &quot;VariableV2&quot;
+      output_arg {
+        name: &quot;ref&quot;
+        type_attr: &quot;dtype&quot;
+        is_ref: true
+      }
+      attr {
+        name: &quot;shape&quot;
+        type: &quot;shape&quot;
+      }
+      attr {
+        name: &quot;dtype&quot;
+        type: &quot;type&quot;
+      }
+      attr {
+        name: &quot;container&quot;
+        type: &quot;string&quot;
+        default_value {
+          s: &quot;&quot;
+        }
+      }
+      attr {
+        name: &quot;shared_name&quot;
+        type: &quot;string&quot;
+        default_value {
+          s: &quot;&quot;
+        }
+      }
+      is_stateful: true
+    }
+  }
+  tensorflow_version: &quot;1.2.1&quot;
+  tensorflow_git_version: &quot;b\&#39;unknown\&#39;&quot;
+}
+graph_def {
+  node {
+    name: &quot;Const&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_FLOAT
+          tensor_shape {
+            dim {
+              size: 1
+            }
+          }
+          float_val: 1.0
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;v1&quot;
+    op: &quot;VariableV2&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;container&quot;
+      value {
+        s: &quot;&quot;
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;shape&quot;
+      value {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;shared_name&quot;
+      value {
+        s: &quot;&quot;
+      }
+    }
+  }
+  node {
+    name: &quot;v1/Assign&quot;
+    op: &quot;Assign&quot;
+    input: &quot;v1&quot;
+    input: &quot;Const&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@v1&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;use_locking&quot;
+      value {
+        b: true
+      }
+    }
+    attr {
+      key: &quot;validate_shape&quot;
+      value {
+        b: true
+      }
+    }
+  }
+  node {
+    name: &quot;v1/read&quot;
+    op: &quot;Identity&quot;
+    input: &quot;v1&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@v1&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;Const_1&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_FLOAT
+          tensor_shape {
+            dim {
+              size: 1
+            }
+          }
+          float_val: 2.0
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;v2&quot;
+    op: &quot;VariableV2&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;container&quot;
+      value {
+        s: &quot;&quot;
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;shape&quot;
+      value {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;shared_name&quot;
+      value {
+        s: &quot;&quot;
+      }
+    }
+  }
+  node {
+    name: &quot;v2/Assign&quot;
+    op: &quot;Assign&quot;
+    input: &quot;v2&quot;
+    input: &quot;Const_1&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@v2&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;use_locking&quot;
+      value {
+        b: true
+      }
+    }
+    attr {
+      key: &quot;validate_shape&quot;
+      value {
+        b: true
+      }
+    }
+  }
+  node {
+    name: &quot;v2/read&quot;
+    op: &quot;Identity&quot;
+    input: &quot;v2&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@v2&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;add&quot;
+    op: &quot;Add&quot;
+    input: &quot;v1/read&quot;
+    input: &quot;v2/read&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/Const&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+          }
+          string_val: &quot;model&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/SaveV2/tensor_names&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 2
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+            dim {
+              size: 2
+            }
+          }
+          string_val: &quot;v1&quot;
+          string_val: &quot;v2&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/SaveV2/shape_and_slices&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 2
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+            dim {
+              size: 2
+            }
+          }
+          string_val: &quot;&quot;
+          string_val: &quot;&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/SaveV2&quot;
+    op: &quot;SaveV2&quot;
+    input: &quot;save/Const&quot;
+    input: &quot;save/SaveV2/tensor_names&quot;
+    input: &quot;save/SaveV2/shape_and_slices&quot;
+    input: &quot;v1&quot;
+    input: &quot;v2&quot;
+    attr {
+      key: &quot;dtypes&quot;
+      value {
+        list {
+          type: DT_FLOAT
+          type: DT_FLOAT
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/control_dependency&quot;
+    op: &quot;Identity&quot;
+    input: &quot;save/Const&quot;
+    input: &quot;^save/SaveV2&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@save/Const&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+          }
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/RestoreV2/tensor_names&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+            dim {
+              size: 1
+            }
+          }
+          string_val: &quot;v1&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/RestoreV2/shape_and_slices&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+            dim {
+              size: 1
+            }
+          }
+          string_val: &quot;&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/RestoreV2&quot;
+    op: &quot;RestoreV2&quot;
+    input: &quot;save/Const&quot;
+    input: &quot;save/RestoreV2/tensor_names&quot;
+    input: &quot;save/RestoreV2/shape_and_slices&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            unknown_rank: true
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtypes&quot;
+      value {
+        list {
+          type: DT_FLOAT
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/Assign&quot;
+    op: &quot;Assign&quot;
+    input: &quot;v1&quot;
+    input: &quot;save/RestoreV2&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@v1&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;use_locking&quot;
+      value {
+        b: true
+      }
+    }
+    attr {
+      key: &quot;validate_shape&quot;
+      value {
+        b: true
+      }
+    }
+  }
+  node {
+    name: &quot;save/RestoreV2_1/tensor_names&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+            dim {
+              size: 1
+            }
+          }
+          string_val: &quot;v2&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/RestoreV2_1/shape_and_slices&quot;
+    op: &quot;Const&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtype&quot;
+      value {
+        type: DT_STRING
+      }
+    }
+    attr {
+      key: &quot;value&quot;
+      value {
+        tensor {
+          dtype: DT_STRING
+          tensor_shape {
+            dim {
+              size: 1
+            }
+          }
+          string_val: &quot;&quot;
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/RestoreV2_1&quot;
+    op: &quot;RestoreV2&quot;
+    input: &quot;save/Const&quot;
+    input: &quot;save/RestoreV2_1/tensor_names&quot;
+    input: &quot;save/RestoreV2_1/shape_and_slices&quot;
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            unknown_rank: true
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;dtypes&quot;
+      value {
+        list {
+          type: DT_FLOAT
+        }
+      }
+    }
+  }
+  node {
+    name: &quot;save/Assign_1&quot;
+    op: &quot;Assign&quot;
+    input: &quot;v2&quot;
+    input: &quot;save/RestoreV2_1&quot;
+    attr {
+      key: &quot;T&quot;
+      value {
+        type: DT_FLOAT
+      }
+    }
+    attr {
+      key: &quot;_class&quot;
+      value {
+        list {
+          s: &quot;loc:@v2&quot;
+        }
+      }
+    }
+    attr {
+      key: &quot;_output_shapes&quot;
+      value {
+        list {
+          shape {
+            dim {
+              size: 1
+            }
+          }
+        }
+      }
+    }
+    attr {
+      key: &quot;use_locking&quot;
+      value {
+        b: true
+      }
+    }
+    attr {
+      key: &quot;validate_shape&quot;
+      value {
+        b: true
+      }
+    }
+  }
+  node {
+    name: &quot;save/restore_all&quot;
+    op: &quot;NoOp&quot;
+    input: &quot;^save/Assign&quot;
+    input: &quot;^save/Assign_1&quot;
+  }
+  versions {
+    producer: 22
+  }
+}
+saver_def {
+  filename_tensor_name: &quot;save/Const:0&quot;
+  save_tensor_name: &quot;save/control_dependency:0&quot;
+  restore_op_name: &quot;save/restore_all&quot;
+  max_to_keep: 5
+  keep_checkpoint_every_n_hours: 10000.0
+  version: V2
+}
+collection_def {
+  key: &quot;trainable_variables&quot;
+  value {
+    bytes_list {
+      value: &quot;\n\004v1:0\022\tv1/Assign\032\tv1/read:0&quot;
+      value: &quot;\n\004v2:0\022\tv2/Assign\032\tv2/read:0&quot;
+    }
+  }
+}
+collection_def {
+  key: &quot;variables&quot;
+  value {
+    bytes_list {
+      value: &quot;\n\004v1:0\022\tv1/Assign\032\tv1/read:0&quot;
+      value: &quot;\n\004v2:0\022\tv2/Assign\032\tv2/read:0&quot;
+    }
+  }
+}</code></pre><h4 id="meta-info-def属性："><a href="#meta-info-def属性：" class="headerlink" title="meta_info_def属性："></a>meta_info_def属性：</h4><pre><code> 它是通过MetaInfoDef定义的，它记录了计算图中的元数据以及所有使用到的运算方法的信息
+ meta_graph_version记录了计算图的版本号，如果没在saver中特殊指定，这些属性默认都为空。
+ stripped_op_list 记录了计算图上使用到的所有运算方法的信息，这个属性的类型是OpList</code></pre><pre class=" language-python"><code class="language-python">message MetaInfoDef <span class="token punctuation">{</span>
+    string meta_graph_version <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    OpList stripped_op_list <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    google<span class="token punctuation">.</span>protobuf<span class="token punctuation">.</span>Any any_info <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    repeated string tags <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p><img src="https://note.youdao.com/yws/public/resource/12d299227186ab82b1985e86114cad3f/xmlnote/1FFA7F0FD93B4F04B4F9B489C3135ACA/599" alt="image"></p>
+<h4 id="graph-def属性："><a href="#graph-def属性：" class="headerlink" title="graph_def属性："></a>graph_def属性：</h4><pre><code>graph_def属性主要记录了计算图上的节点信息，计算图上的每一个节点对应了程序中的一个运算，因为在meta_info_def中已经包含了所有运算的具体信息，所以graph_def属性只关注运算的连接结构</code></pre><pre class=" language-python"><code class="language-python">message GraphDef <span class="token punctuation">{</span>
+    repeated NodeDef node <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    VersionDef versions <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+message NodeDef <span class="token punctuation">{</span>
+    string name <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    string op <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    repeated string input <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    string device <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> AttrValue<span class="token operator">></span> attr <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code>versions存储了tensorflow的版本号，GraphDef的主要信息都存在node属性中，它记录了计算图上的节点信息。NodeDef 类型有一个name属性，这是一个节点的唯一标识符，在tensorflow中可以通过节点的名称来获取相应的节点，op属性给出了该节点使用的运算方法的名称，可以在meta_info_def中找到该运算的具体信息。
+
+NodeDef类型中的input属性是一个字符串列表，定义了运算的输入。input属性中每个字符串的取值格式为node:src_output,其中node给出了一个节点的名称，src_out表明了这个输入是指定节点的第几个输出。
+
+attr属性指定了和当前运算相关的配置信息</code></pre><p><img src="https://note.youdao.com/yws/public/resource/12d299227186ab82b1985e86114cad3f/xmlnote/B7268B513C7F4CE68A34A7051DF1B35C/601" alt="image"></p>
+<h4 id="saver-def属性"><a href="#saver-def属性" class="headerlink" title="saver_def属性"></a>saver_def属性</h4><pre><code>该属性中记录了持久化模型时需要用到的一些参数，比如保存到文件的文件名，保存操作和加载操作的名称以及保存频率，清理历史记录等</code></pre><p><img src="https://note.youdao.com/yws/public/resource/12d299227186ab82b1985e86114cad3f/xmlnote/678E62D2327B41AAAD0050578665BF9B/603" alt="image"></p>
+<h4 id="collection-def-属性"><a href="#collection-def-属性" class="headerlink" title="collection_def 属性"></a>collection_def 属性</h4><pre><code>计算图可以维护不同集合，而维护这些集合的底层实现就是通过collection_def 这个属性</code></pre><p><img src="https://note.youdao.com/yws/public/resource/12d299227186ab82b1985e86114cad3f/xmlnote/00360C20A8084CE08035E92020C75A28/605" alt="image"></p>
+<pre><code>model.ckpt文件保存了所有变量的取值，大致可以理解为（key,value)列表。
+tensorflow提供了tf.train.NewCheckpointReader类来查看model.ckpt中保存的变量信息</code></pre><pre class=" language-python"><code class="language-python">reader <span class="token operator">=</span> tf<span class="token punctuation">.</span>train<span class="token punctuation">.</span>NewCheckpointReader<span class="token punctuation">(</span><span class="token string">'tensorboard\model.ckpt'</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">all_variables <span class="token operator">=</span> reader<span class="token punctuation">.</span>get_variable_to_shape_map<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> variable_name <span class="token keyword">in</span> all_variables<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable_name<span class="token punctuation">,</span> all_variables<span class="token punctuation">[</span>variable_name<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>v2_4 [1]
+v2_9 [1]
+v2_10 [1]
+v1_9 [1]
+v1_3 [1]
+v1 [1]
+v2_11 [1]
+v2_6 [1]
+v2_2 [1]
+v1_2 [1]
+v1_10 [1]
+v2 [1]
+v1_4 [1]
+v1_11 [1]
+v1_1 [1]
+v2_3 [1]
+v1_8 [1]
+v1_5 [1]
+v2_1 [1]
+v2_8 [1]
+v [1]
+v2_7 [1]
+v1_7 [1]
+v2_5 [1]
+foo/v [1]
+v_1 [1]
+v1_6 [1]</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 获取名称为v1的变量的取值</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'value for variable v1 is '</span><span class="token punctuation">,</span> reader<span class="token punctuation">.</span>get_tensor<span class="token punctuation">(</span><span class="token string">'v1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>value for variable v1 is  [ 1.]</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2017/11/21/tensorflow_review_3/">http://lovelyfrog.github.io/2017/11/21/tensorflow_review_3/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/tensorflow/">
+                                    <span class="chip bg-color">tensorflow</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2017/11/23/logistic+%E5%9B%9E%E5%BD%92/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="logistic回归建立病例预测模型">
+                        
+                        <span class="card-title">logistic回归建立病例预测模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            logistic回归预建立病例预测模型
+
+用logistic 回归拟合病例data之前用的深度学习的方法建立预测模型，现在用机器学习的方法来建立模型，首先想到的就是线性模型，可以用logistic回归来训练模型
+
+关于logistic回归的
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2017-11-23
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/11/20/tensorflow_review_2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="tensorflow review 2(用全连接层训练病例data)">
+                        
+                        <span class="card-title">tensorflow review 2(用全连接层训练病例data)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            tensorflow 全连接层
+
+用全连接层训练病例data然后测试其准确性import tensorflow as tf
+import numpy as np
+import random
+info = np.loadtxt(r'D:\深度
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-11-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/deep-learning/" class="post-category">
+                                    deep learning
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
