@@ -304,6 +304,19 @@ ubuntu可以多用户
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -624,23 +637,28 @@ ubuntu可以多用户
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2017/10/30/linux%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                <a href="/2017/10/30/linux%E5%91%BD%E4%BB%A4-%E6%96%87%E4%BB%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="linux常用服务器">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="linux命令-文件">
                         
-                        <span class="card-title">linux常用服务器</span>
+                        <span class="card-title">linux命令-文件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            linux常用服务器
+                            linux命令-文件
 
-ftp服务器ftp : file transfer protocol 用于internet上控制文件的双向传输。
-基于不同的操作系统有不同的ftp应用程序，而这些应用程序都遵守一种协议传输文件
-1. 安装vsftpd
+命令行下:
+
+tree 显示所有结构
+ctrl shift + 增大命令行号显示字体
+ctrl - 减小命令行显示字体
+pwd 显示当前路径
+ls 显示当前所有文件夹
+cd (change directory) 更改
                         
                     </div>
                     <div class="publish-info">
@@ -677,24 +695,23 @@ ftp服务器ftp : file transfer protocol 用于internet上控制文件的双向�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2017/10/30/ubuntu%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/">
+                <a href="/2017/10/30/linux%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="ubuntu软件安装与卸载">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="linux常用服务器">
                         
-                        <span class="card-title">ubuntu软件安装与卸载</span>
+                        <span class="card-title">linux常用服务器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ubuntu软件安装与卸载
+                            linux常用服务器
 
-国内镜像源安装软件首先要备份:  
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
-
-然后找到镜像源的内容复制到 sources.list,
+ftp服务器ftp : file transfer protocol 用于internet上控制文件的双向传输。
+基于不同的操作系统有不同的ftp应用程序，而这些应用程序都遵守一种协议传输文件
+1. 安装vsftpd
                         
                     </div>
                     <div class="publish-info">
