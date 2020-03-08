@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Rabin-Karp算法, lovelyfrog&#39;s blog">
-    <meta name="description" content="本文先简单分析了字符串匹配中暴力搜索效率低的原因，然后引出了两类改进的算法，然后重点关注第二类Rabin-Karp算法，分析了它的算法实现，以及它在多模式串匹配上的高效率。
-字符串匹配在计算机科学中是一个非常重要的问题。给定一个长度为m的p">
+    <meta name="keywords" content="3月第一周周记, lovelyfrog&#39;s blog">
+    <meta name="description" content="3月第一周周记">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Rabin-Karp算法 | lovelyfrog&#39;s blog</title>
+    <title>3月第一周周记 | lovelyfrog&#39;s blog</title>
     <link rel="icon" type="image/jpeg" href="/reborn.jpg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,7 +303,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '';
+        let pwd = 'ddc4f2e6753b87abd02f106328ae5ac399708043a0a83ece59d795d6bd7a00c0';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！');
@@ -317,12 +316,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Rabin-Karp算法</h1>
+                    <h1 class="description center-align post-title">3月第一周周记</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +438,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">
-                                <span class="chip bg-color">字符串匹配</span>
-                            </a>
-                        
-                            <a href="/tags/hash/">
-                                <span class="chip bg-color">hash</span>
+                            <a href="/tags/%E5%91%A8%E8%AE%B0/">
+                                <span class="chip bg-color">周记</span>
                             </a>
                         
                     </div>
@@ -455,8 +450,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                数据结构
+                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                总结
                             </a>
                         
                     </div>
@@ -468,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-02
+                    2020-03-08
                 </div>
                 
 
@@ -477,7 +472,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    399
                 </div>
                 
 
@@ -490,56 +485,32 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本文先简单分析了字符串匹配中暴力搜索效率低的原因，然后引出了两类改进的算法，然后重点关注第二类<code>Rabin-Karp算法</code>，分析了它的算法实现，以及它在多模式串匹配上的高效率。</p>
-<p>字符串匹配在计算机科学中是一个非常重要的问题。给定一个长度为m的pattern串，我们想要在一个长度为n的input串中查询是否存在子串与pattern匹配。</p>
-<p>最先想到的是<strong>暴力搜索</strong>，但是这样效率太低了，最坏情况下它的计算时间是$O(mn)$</p>
-<p>为什么暴力搜索的效率低呢？</p>
+                <p>3月第一周是3.2-3.8</p>
+<p>我先记录一下3.8的日记</p>
+<p>今天主要是在看Contour Detection那篇论文，因为今天要交周报所以看的比较粗糙，最终还是在晚上把周报写好交了上去。现在主要是周末两天看分割相关的论文，时间难免不够，但是没办法，周一到周五要学其他的东西。</p>
+<p>下午出了趟门，买了点东西。</p>
+<p>晚上就一直在看论文写周报，然后做了一会锻炼。</p>
+<p>下面总结一下本周的内容。</p>
+<p>这周完成了cs61B从week9-week12的lecture的内容，但是guide中的题目其实都没有做，project,lab,hw这些也基本上没怎么做，下周首先要把week12之前的作业全部完成。</p>
+<p>上周也把博客迁移好了，并且写了几篇文章，一篇关于自律的，一篇讲一个叫Rabin-karp的字符串匹配的算法，以及一篇论文阅读，一个数学书籍推荐。</p>
+<p>也开始恢复锻炼了，恢复学英语。</p>
+<p>开始了记日记，周记以及写每日计划的习惯，一定要坚持。</p>
+<p>明天就是我的23岁生日了，时间过的真的很快，接下来的时光一定要好好利用。</p>
+<p>下周的目标是：</p>
 <ul>
-<li>因为它没有用到之前误匹配的信息，一步一步的往前移动当然很慢了。所以我们希望能够最大限度的利用误匹配的信息，使得下一次移动时可以跳过一些肯定不会发生匹配的位置。这样的代表算法有 <code>Knuth-Morris-Pratt(KMP)算法</code> 和 <code>Boyer-Moore string-search算法</code>。</li>
-<li>在每次移动的时候，都要重新逐位比较对应的位置上的字符是否相等，这样每次的最坏的计算时间都是$O(m)$. 能不能把它降到$O(1)$ 呢？我们可以把这整个长为m的子串看成一个整体，计算它的hash值，通过前一个子串的hash值我们可以在$O(1)$的时间下推出当前子串的hash值。如果当前子串的hash值和pattern的hash值相等，这个时候我们还要逐位比较一下看是否完全匹配，如果非完全匹配，则需要继续往后移动（因为hash值的范围可能小于不同子串的个数的，所以一定会存在hash冲突）。这就是<code>Rabin-Karp算法</code>的思想，最坏情况下它的计算时间是$O(n+m)$。</li>
+<li><p>cs61B 最后两周lec学完，week12前作业全部写完</p>
+</li>
+<li><p>做一个cs61B的思维导图，并整理各个算法的要点</p>
+</li>
+<li><p>每天精听一篇听力</p>
+</li>
+<li><p>完成摩登家庭第一集的跟读</p>
+</li>
+<li><p>托福词汇复习到list16</p>
+</li>
+<li><p>cs61C lec2和lec3</p>
+</li>
 </ul>
-<p>下面我们详细介绍一下<code>Rabin-Karp算法</code>。</p>
-<h2 id="1-Rabin-Karp算法"><a href="#1-Rabin-Karp算法" class="headerlink" title="1.Rabin-Karp算法"></a>1.Rabin-Karp算法</h2><p>先看一下它的伪代码：</p>
-<pre class=" language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">RabinKarp</span><span class="token punctuation">(</span><span class="token keyword">string</span> s<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">string</span> pattern<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    hpattern <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>pattern<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>                <span class="token comment" spellcheck="true">//A: O(m)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">from</span> <span class="token number">1</span> to n<span class="token operator">-</span>m<span class="token operator">+</span><span class="token number">1</span>                            <span class="token comment" spellcheck="true">//B: O(n)</span>
-        hs <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token operator">...</span>i<span class="token operator">+</span>m<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>                    <span class="token comment" spellcheck="true">//C: O(m) or O(1)?</span>
-        <span class="token keyword">if</span> hs <span class="token operator">=</span> hpattern                                            
-            <span class="token keyword">if</span> s<span class="token punctuation">[</span>i<span class="token operator">...</span>i<span class="token operator">+</span>m<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">=</span> pattern<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>m<span class="token punctuation">]</span>        <span class="token comment" spellcheck="true">//D: O(m)</span>
-                <span class="token keyword">return</span> i
-    <span class="token keyword">return</span> not found</code></pre>
-<p>可以看到，A,C,D行的计算时间都是$O(m)$, 而B行是$O(n)$，D行只在少数子串和pattern串hash值相等的时候才会执行，而C行在循环中每次都要执行，所以我们的计算时间取决于它，我们要把它降到$O(1)$。</p>
-<p>我们可以用<strong>Rolling hash</strong>，看一个最简单的 rolling hash 式子：</p>
-<pre class=" language-typescript"><code class="language-typescript">s<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token operator">...</span>i<span class="token operator">+</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>i<span class="token operator">...</span>i<span class="token operator">+</span>m<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">-</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i<span class="token operator">+</span>m<span class="token punctuation">]</span></code></pre>
-<p>它可以让C行的计算时间为$O(1)$，但是这样会使得D行执行的次数更多，所以它不是一个好的rolling hash function.</p>
-<p>所以就产生两个问题，即如何计算hash，如何从前一项的hash推到后一项的hash</p>
-<h3 id="1-1-计算hash"><a href="#1-1-计算hash" class="headerlink" title="1.1 计算hash"></a>1.1 计算hash</h3><p><code>Rabin finger</code> 是一个比较流行且高效的hash函数，给定一个base B（通常是字符串所有能取到的字符的个数，这样可以确保对每个字符串的hash值唯一），对于<code>s[1...m]</code> 可以这样计算它的hash值<br>$$hash(s[1…m]) = \sum_{i=1}^m s[i]*B^{m-i}$$</p>
-<p>如果m很大的话，这里的hash值可能会很大，甚至超过最大能处理的整数导致溢出，所以我们这里取一个质数的模数P（为什么要取质数？），所以我们的hash值可以这样计算：<br>$$ hash(s[1…m]) = (\sum_{i=1}^m s[i]*B^{m-i}) \ mod P $$</p>
-<p>但是这样括号中的数仍然可能会溢出，这里我们需要用到取模的性质来简化运算：<br>$$(x + y) \ mod \ P = x \ mod \ P + y \ mod \ P$$ $$(xy) \ mod \ P = ((x \ mod \ P) *(y \ mod \ P)) \ mod \ P $$</p>
-<p>对于上面的hash函数我们还可以从内向外的运算：<br>$$ hash(s[1…m]) =  \{(…((s[i] * B+s[i-1]) * B+s[i-2]…) * B + s[1] \} mod \ P $$</p>
-<p>令$Z = \{(…((s[i] * B+s[i-1]) * B+s[i-2]…) * B + s[1] \}  $  , $X = (…((s[i]*B+s[i-1])*B+s[i-2]…)$ 则<br>$$ hash(s[1…m]) = Z \ mod \ P $$ $$= (X * B+s[1]) \ mod \ P $$ $$= \{(X * B)\ mod\ P + s[1]\} \ mod \ P $$ $$ = \{(X \ mod \ P) * B)\ mod\ P + s[1]\} \ mod \ P $$</p>
-<p>对于$X$取模$P$我们可以进一步往里面迭代的计算取模，可以得到最终的hash函数的伪代码:</p>
-<pre class=" language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">hash</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    shash <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> i <span class="token keyword">from</span> <span class="token number">1</span> to m
-      shash <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>shash <span class="token operator">*</span> B <span class="token operator">%</span> P<span class="token punctuation">)</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> P</code></pre>
-<h3 id="1-2-Roll-string-hash"><a href="#1-2-Roll-string-hash" class="headerlink" title="1.2 Roll string hash"></a>1.2 Roll string hash</h3><p>接下来需要考虑的是如何从 $hash(s[i…m+i-1])$ 到 $hash(s[i+1…m+i])$, 令$s[i…m+i-1]$ 取模前的值为$Z_i$, $s[i+1…m+i]$取模前的值为$Z_{i+1}$，则:<br>$$ hash(s[i…m+i-1]) = Z_i \ mod \ P $$ $$hash(s[i+1…m+i]) = Z_{i+1} \ mod \ P $$<br>而<br>$$<br>Z_{i+1} = (Z_i - s[i]*B^{m-1})*B + s[m+i]<br>$$<br>所以<br>$$ hash(s[i+1…m+i]) = \{(Z_i - s[i]*B^{m-1})*B + s[m+i] \} \ mod \ P $$ $$ = \{(hash(s[i..m+i-1]) - hash(s[i]*B^{m-1}) + P) * B + s[m+i]\}  \ mod \ P $$<br>至此，两个问题就都解决了。</p>
-<h2 id="2-Java-实现"><a href="#2-Java-实现" class="headerlink" title="2.Java 实现"></a>2.Java 实现</h2><p>以cs61B sp19的clab8的Problem2为框架，代码参见</p>
-<p><a href="https://github.com/lovelyfrog/cs61B/blob/master/clab8/RollingString.java" target="_blank" rel="noopener">RollingString.java</a></p>
-<p><a href="https://github.com/lovelyfrog/cs61B/blob/master/clab8/RabinKarpAlgorithm.java" target="_blank" rel="noopener">RabinKarpAlgorithm.java</a></p>
-<h2 id="3-多模式串匹配"><a href="#3-多模式串匹配" class="headerlink" title="3.多模式串匹配"></a>3.多模式串匹配</h2><p>思考一下<code>Rabin-Karp算法</code>还有哪些不足的地方，它依然是一位一位向后移来比较的，没有利用错误匹配信息，这也决定了它效率没有<code>KMP</code>高。但是它在多模式串(模式串长度一样)匹配上是高效率的。</p>
-<p>考虑在一个文本串上，查询给定模式串集合（包含k个模式串，每个模式串的长度都是m）是否在该文本串上出现。直接看伪代码:</p>
-<pre class=" language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">RabinKarpSet</span><span class="token punctuation">(</span><span class="token keyword">string</span> s<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">set</span> of <span class="token keyword">string</span> subs<span class="token punctuation">,</span> m<span class="token punctuation">)</span>
-    <span class="token keyword">set</span> hsubs <span class="token punctuation">:</span><span class="token operator">=</span> emptySet
-    <span class="token keyword">for</span> sub <span class="token keyword">in</span> subs
-        insert <span class="token function">hash</span><span class="token punctuation">(</span>sub<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">.</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span> into subs
-  hs <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">...</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">from</span> <span class="token number">1</span> to n<span class="token operator">-</span>m<span class="token operator">+</span><span class="token number">1</span>
-        <span class="token keyword">if</span> hs <span class="token keyword">in</span> hsubs and s<span class="token punctuation">[</span>i<span class="token operator">...</span>i<span class="token operator">+</span>m<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token keyword">in</span> subs
-            <span class="token keyword">return</span> i
-        hs <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token operator">...</span>i<span class="token operator">+</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> not found</code></pre>
-<p>可以发现该算法的计算时间为$O(n+k*m)$</p>
 
             </div>
             <hr/>
@@ -565,7 +536,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://lovelyfrog.github.io/2020/03/02/Rabin-Karp/">http://lovelyfrog.github.io/2020/03/02/Rabin-Karp/</a>
+                    <a href="http://lovelyfrog.github.io/2020/03/08/2020-03-1st-week-summary/">http://lovelyfrog.github.io/2020/03/08/2020-03-1st-week-summary/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -603,12 +574,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">
-                                    <span class="chip bg-color">字符串匹配</span>
-                                </a>
-                            
-                                <a href="/tags/hash/">
-                                    <span class="chip bg-color">hash</span>
+                                <a href="/tags/%E5%91%A8%E8%AE%B0/">
+                                    <span class="chip bg-color">周记</span>
                                 </a>
                             
                         </div>
@@ -649,84 +616,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/02/cautions-on-pushing-blog/">
+                <a href="/2020/03/08/2020-03-1st-week-summary/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="博客数学公式问题">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="3月第一周周记">
                         
-                        <span class="card-title">博客数学公式问题</span>
+                        <span class="card-title">3月第一周周记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在本站点中，目前已知数学公式书写问题：
-
-* 要用 \* 来转义
-
-在$$$$ 中书写数学公式，不能用\\换行
-
-
-
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
-                        <span class="chip bg-color">博客数学公式</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/02/3-2%E5%91%A8%E8%AE%B0/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="2月第四周周记">
-                        
-                        <span class="card-title">2月第四周周记</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            2月第四周周记
+                            3月第一周周记
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
                             </span>
                         <span class="publish-author">
                             
@@ -740,11 +652,61 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/%E5%91%A8%E8%AE%B0/">
                         <span class="chip bg-color">周记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/08/CDHIS-note/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="CDHIS_note">
+                        
+                        <span class="card-title">CDHIS_note</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了Contour Detection and Hierarchical Image Segmentation这篇论文的主要思路。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category">
+                                    论文阅读
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CV/">
+                        <span class="chip bg-color">CV</span>
                     </a>
                     
                 </div>
@@ -881,13 +843,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
     <footer class="page-footer bg-color">
