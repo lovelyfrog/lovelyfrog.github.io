@@ -1,0 +1,1038 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CDHIS_note, lovelyfrog&#39;s blog">
+    <meta name="description" content="本文介绍了Contour Detection and Hierarchical Image Segmentation这篇论文的主要思路。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>CDHIS_note | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CDHIS_note</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/CV/">
+                                <span class="chip bg-color">CV</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category">
+                                论文阅读
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-08
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.2k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>[toc]<br>本文介绍了Contour Detection and Hierarchical Image Segmentation这篇论文的主要思路。</p>
+<h2 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h2><p>这篇文章介绍了边缘检测和图像分割统一的方法，贡献有：</p>
+<ul>
+<li>结合了<strong>局部</strong>和<strong>全局</strong>信息的高性能的边缘检测器</li>
+<li>在<strong>不丢失边缘的质量</strong>的情况下将边缘信号转化为<strong>层级信息</strong></li>
+<li>广泛的定量评估并且提出了一个新的有标签的数据集</li>
+</ul>
+<p>边缘检测和分割的相关性很大，但又不完全一样。总的来说，边缘检测不保证能够产生封闭的边缘，因此也就未必能够将图像划分成不同的区域。</p>
+<h2 id="2-边缘检测"><a href="#2-边缘检测" class="headerlink" title="2. 边缘检测"></a>2. 边缘检测</h2><p>通过比较局部图像的<strong>亮度，颜色以及纹理通道</strong>的差别，Martin等人定义了$Pb(x, y, \theta)$ 来预测一个角度为$\theta$的在像素点$(x,y)$的边缘的<strong>后验概率</strong>。在这部分，作者回顾了这些线索，并提出了他们自己的多尺度的$Pb$检测器，描述了他们运行在这个探测器上新的全局化方法。</p>
+<h3 id="2-1-亮度，颜色，纹理梯度"><a href="#2-1-亮度，颜色，纹理梯度" class="headerlink" title="2.1 亮度，颜色，纹理梯度"></a>2.1 亮度，颜色，纹理梯度</h3><p>$Pb$ 检测器的<strong>basic building block</strong> 是从强度图像$I$中计算得到的<strong>定向梯度信号</strong>$G(x,y,\theta)$。该计算通过在$(x,y)$位置放置圆盘，以角度$\theta$沿直径分割成两个半圆盘来进行。对于每个半圆盘，对其覆盖的像素的强度值建立直方图。$(x,y)$处的<strong>梯度幅值</strong>根据两个半圆盘直方图$g$和$h$之间的$\chi^2$距离来定义：<br>$$<br>\chi^2(g,h) = \frac{1}{2} \sum_i \frac{(g(i)-h(i))^2}{g(i)+h(i)}<br>$$<br>然后应用<strong>二阶最小二乘平滑滤波（Savitzky-Golay）</strong>来增强局部最大值并在与$\theta$正交的方向上平滑多个检测峰值。</p>
+<p><img src="1.jpg" alt="image"></p>
+<p>图4.直方图的定向梯度。为了便于说明，选取了较大的圆盘（半径为50像素）</p>
+<p>该计算的动机是边缘对应图像的<strong>不连续性</strong>，直方图提供了用于对图像区域进行建模的鲁棒机制。强的方向梯度相应意味着像素可能位于两个不同区域的边界上。</p>
+<p>$Pb$检测器从输入图像的变换中获得方向梯度信号，组成四个单独的特征通道。前三个对应<strong>CIE Lab颜色空间</strong>的通道，称其为亮度，颜色a，颜色b通道。对于灰度图，亮度通道就是图像本身，所以不使用颜色通道。</p>
+<p>第四个通道是纹理通道，给每个像素分配一个<strong>纹理基元id</strong>。先将图像转化为灰度图，然后用一个包含16个<strong>高斯导数滤波器</strong>和1个<strong>中心环绕滤波器</strong>的集合来与它卷积。</p>
+<p><img src="2.jpg" alt="image"></p>
+<p>图5.创建纹理基元的滤波器。作者使用了8个偶数和8个奇数对称的高斯导数滤波器和一个中心环绕滤波器。</p>
+<p>每个像素点都与一个17维的响应向量关联，然后对这些向量使用<strong>K-means聚类</strong>。聚类的中心被赋予一个纹理基元id，所以每个像素根据其最近的类被分配一个$[1,K]$范围的id。实验显示$K$取32就足够了。</p>
+<p>图6中左列，从顶部开始的第四个面板就是依据纹理得到的图像。在此图像上，用和亮度、颜色通道相同的方式计算定向梯度。</p>
+<p><img src="3.jpg" alt="image"></p>
+<p>图6.多尺度$Pb$。右下方的红色边框显示了多尺度边缘检测器的最终输出$mPb$</p>
+<h3 id="2-2-多尺度结合"><a href="#2-2-多尺度结合" class="headerlink" title="2.2 多尺度结合"></a>2.2 多尺度结合</h3><p>现在介绍作者使用的$Pb$检测器的<strong>多尺度扩展</strong>。为了检测<strong>精细</strong>和<strong>粗糙</strong>结构，作者考虑三个尺度的梯度:$[\sigma/2, \sigma, 2\sigma]$，用于每个<strong>亮度</strong>，<strong>颜色</strong>和<strong>纹理</strong>通道。对于亮度通道，使用$\sigma=5$的像素。对于颜色和纹理，使用$\sigma=10$的像素。然后将这些局部线索线性组合成一个多尺度信号：<br>$$<br>mPb(x,y,\theta)=\sum_s \sum_i \alpha_{i,s} G_{i,\sigma(i,s)}(x,y,\theta)<br>$$<br>其中$s$表示尺度index，$i$表示特征通道index(亮度，颜色a，颜色b和纹理)。$G_{i, \sigma(i,s)}(x,y,\theta)$ 度量通道$i$中以$(x,y)$为中心，半径为$\sigma(i,s)$，沿角度为$\theta$切割成两个半圆盘之间直方图差异。$\alpha_{i,s}$是每个定向梯度的<strong>权重</strong>。作者将区间$[0, \pi]$分成8等分取样$\theta$，取$\theta$对应的最大的那个$mPb(x,y,\theta)$作为每个像素的边界强度的度量。<br>$$<br>mPb(x,y)=\max_{\theta}{mPb(x,y,\theta)}<br>$$<br>作者使用训练图像和相应的ground-truth，在F-measure上通过<strong>梯度上升</strong>学习权重$\alpha_{i,s}$</p>
+<h3 id="2-3-全局化"><a href="#2-3-全局化" class="headerlink" title="2.3 全局化"></a>2.3 全局化</h3><p><strong>谱聚类</strong>是作者全局机制的核心，作者使用从谱划分中获得的<strong>特征向量</strong>。</p>
+<p>作为谱聚类的输入，作者使用<em>intervening contour</em>构建了一个<strong>稀疏对称</strong>的<strong>关联矩阵</strong>$W$（通过沿着一条线上连接的两个像素的$mPb$的最大值来得到）。在固定的的半径$r$内，连接像素点$i$和$j$：<br>$$<br>W_{ij} = exp\left(-\max_{p \in \overline{ij}} \{mPb(p) \}/\rho \right)<br>$$<br>其中$\overline{ij}$是连接$i$和$j$的线段，$\rho$是一个常数。作者使用$r=5$像素，$\rho=0.1$</p>
+<p>为了引入全局信息，作者定义 $ D_{ii}=\sum_{i} W_{ij}$并求解 $(D-W)\bold{v}=\lambda D \bold{v}$ 广义特征向量$\{\bold{v_0},\bold{v_1},…,\bold{v_n} \}$，其对应$n+1$个最小特征值 $0=\lambda_0 \leq \lambda_1 \leq … \leq \lambda_n$。图7显示了具有四个特征向量的示例</p>
+<p><img src="4.jpg" alt="image"></p>
+<p>图7.左二：稀疏的非最大抑制多尺度$Pb$信号定义了稀疏关联矩阵，像素$i$和$j$关联度低，因为有一个强的边界分离了它们，然而$i$和$k$具有很高的关联度。中间：从谱聚类中得到的前四个广义特征向量。右二：通过在特征向量上运行K-means聚类对图像划分会错误的破坏平滑区域。右一：相反，作者计算特征向量的梯度，然后转化回边缘信号。</p>
+<p>此时，标准的NCut将每个像素与来自n个特征向量形成的长度为n的描述子关联，使用诸如K-means的聚类算法对图像进行硬分割。但是，这样会导致错误的分割，因为特征向量区别很平滑的大的统一区域被打破。</p>
+<p>为了解决这个问题，作者观察到特征向量本身带有边缘信息。将每个特征向量$\bold{v}_k$作为图像处理，作者在多个方向$\theta$将其与<strong>高斯方向导数滤波器</strong>卷积，获得定向信号$\nabla_{\theta} \bold{v}_k(x,y)$ ，这样会忽略之前错误的平滑变化。然后组合来自不同特征向量的信息来作为边缘检测器的谱分量。<br>$$<br>sPb(x,y,\theta)=\sum_{k=1}^n \frac{1}{\sqrt{\lambda_k}} \cdot \nabla_{\theta} \bold{v}_k(x,y)<br>$$<br>使用$1/\sqrt{\lambda_k}$加权的动机是广义特征值问题作为质量弹簧系统的特征值解释。</p>
+<p>$mPb$和$sPb$传递不同的信息，前者在所有的边缘处发射，而后者仅提取图像中最显著的曲线。作者发现简单的线性组合就可以获得很好的效果。最终的全局边界概率就可以写成局部信号和谱信号的加权和：<br>$$<br>gPb(x,y,\theta) = mPb(x,y,\theta)=\sum_s \sum_i \beta_{i,s} G_{i,\sigma(i,s)}(x,y,\theta) + \gamma \cdot sPb(x,y,\theta)<br>$$<br>然后使用一个sigmoid函数来得到$gPb$对应的概率。与$mPb$一样，使用训练图像在F-measure上通过<strong>梯度上升</strong>学习权重$\beta_{i,s}$和$\gamma$</p>
+<h3 id="2-4-结果"><a href="#2-4-结果" class="headerlink" title="2.4 结果"></a>2.4 结果</h3><p><img src="5.jpg" alt="image"></p>
+<p>图9. 全局化的好处：与局部探测器$Pb$相比，$gPb$减少了杂波并完成了轮廓。</p>
+<h2 id="3-分割"><a href="#3-分割" class="headerlink" title="3. 分割"></a>3. 分割</h2><p>在前一部分产生的非最大值抑制$gPb$ 边缘通常不是闭合的，因此无法将图像分割成区域。这些边缘可能是很有用的，在本节中作者介绍了如何从边缘恢复闭合轮廓，同时不丢失边界质量。</p>
+<p>作者的通过利用边缘信号中的信息来构建分层分割，引入<strong>分水岭变换</strong>的新变体——<strong>定向分水岭变换(OWT)</strong>，用于从边缘检测器中输出产生一组初始区域，然后从这些初始区域的边界构造一个<strong>超度量轮廓图(UCW)</strong>。</p>
+<p><strong>OWT-UCM</strong>可以被认为是从边缘到区域分层树的通用机制。在生成的分层分割并被其编码的边缘保留了真实权重，描述了它们作为真实边界的可能性。对于给定的阈值，输出是闭合轮廓的集合，这组闭合轮廓可以看作为分段分割或者作为以基准为目的的边缘检测器。</p>
+<p>现在考虑任意边缘检测器，其输出$E(x,y,\theta)$预测位置$(x,y)$和方向$\theta$处的图像边界的概率。</p>
+<h3 id="3-1-定向分水岭变换"><a href="#3-1-定向分水岭变换" class="headerlink" title="3.1 定向分水岭变换"></a>3.1 定向分水岭变换</h3><p>使用边缘信号，作者首先为层次结构构造了一个最佳划分——一个过分割，其区域决定了所考虑的最高细节级别。这是通过计算$E(x,y)=\max_{\theta} E(x,y,\theta)$，边缘检测器在方向上的最大响应来完成的。作者将$E(x,y)$的区域最小值作为均匀段的种子位置，并将数学形态学中使用的分水岭变换应用在由$E(x,y)$定义的地形表面。最小值的积水盆地，标注成$\mathcal{P_0}$，提供了区域的最细划分；对应的分水岭弧线$\mathcal{K}_0$就是边界的可能区域。</p>
+<p>图11显示了标准分水岭变换的例子。然而，简单的通过弧上像素的$E(x,y)$的平均值对弧加权，会引入伪像。这个问题的根本原因是边缘检测器在强边界附近产生了一个空间扩展的响应。例如，一个像素可能位于附近但不在一个强垂直边界上。如果这个像素也恰巧在一个水平分水线弧上，这个弧将被错误的向上加权。从图11中可以看到很多这样的情况。当我们从所有局部极小值灌水时，最初的流域过度分割包含了许多本来应当是弱的，但是与附近的强边界相交的弧。</p>
+<p><img src="6.jpg" alt="image"></p>
+<p>图11.分水岭变换。中左：边界强度$E(x,y)$ ；中右：将图像分割成积水盆地$\mathcal{P}_0$和边界弧$\mathcal{K}_0$。右：每个弧都被均值$E(x,y)$加权，但是这样会导致伪像，比如两个雕塑之间的小间隙的强水平轮廓。</p>
+<p>为了解决这个问题，作者使用<strong>OWT</strong>——强制$\mathcal{K}_0$边界强度与$E(x,y,\theta)$的一致性，如图12所示。重新加权的第一步，从弧本身的局部形状中估计弧上每个像素的方向，这些方向是通过近似线段上的分水弧获得的，如图13所示。通过线段连接弧的端点，不断递归细分任何不适合的弧。通过描述近似准则（根据弧上点离线段的最大距离）作为线段长度的一部分，获得了尺度不变的细分。作者给每个像素$(x,y)$在细分弧上分配对应线段方向$o(x,y) \in [0, \pi)$。</p>
+<p>接下来，使用$E(x,y,\theta)$分配每个弧上的像素$(x,y)$一个强度为$E(x,y,o(x,y))$的边界强度。最后，每个在$\mathcal{K}_0$中的原始弧都被分配一个等于像素包含的平均边界强度的权重。</p>
+<p><img src="7.jpg" alt="image"></p>
+<p>图12. OWT。左：输入边界信号$E(x,y)=\max_{\theta} E(x,y,\theta)$；中左：从$E(x,y)$得到的分水弧；中：近似线段覆盖的分水弧。中右：四个方向的$E(x,y,\theta)$，在实践中，作者用了8个方向；右：根据$E$在相关线段上的方向重新加权分水弧，可以看到中间的伪像被抑制，因为它们的方向与$E(x,y,\theta)$不同。</p>
+<p><img src="8.jpg" alt="image"></p>
+<p>图13.边缘细分。左：初始弧颜色编码。如果弧上任意一点到连接其端点的直线段的距离大于线段长度的固定比例，就在弧上的最大距离点处细分，图上的虚线段表示了一个新的细分。中间：从尺度不变的递归细分中得到最后的弧集。右：叠加在细分弧上的近似直线段。</p>
+<h3 id="3-2-超度量轮廓图"><a href="#3-2-超度量轮廓图" class="headerlink" title="3.2 超度量轮廓图"></a>3.2 超度量轮廓图</h3><p>边缘具有这样的优点：在存在真实轮廓的前提下，它相当直观的表示了不确定性。例如给它关联一个二元随机变量。通过上一节OWT分配给弧的边界强度可以解释为该弧是真实轮廓的概率估计。</p>
+<p>如何表示分割的不确定性还是不明显的。作者采用的是超度量轮廓图(UCM)，它定义了封闭的，非自相交的加权边缘和区域的层次结构之间的对偶性。该层次结构的Base level甚至可以考虑弱边缘，因此是图像的过分割。Upper level只考虑强边缘，导致欠分割。在各个level之间移动可以得到一个trade-off。</p>
+<p>作者采用的层级结构基于贪心graph-based region merging算法。作者定义了一个初始图$G=(\mathcal{P}_0, \mathcal{K}_0, W(\mathcal{K}_0))$，其中节点是区域$\mathcal{P}_0$，链接是分割相邻区域的弧$\mathcal{K}_0$，权重$W(\mathcal{K}_0)$是区域之间不相似性的度量。该算法通过相似度排序链接，然后迭代合并最相似的区域：</p>
+<ol>
+<li><p>选择最小的加权边缘:<br>$$<br>C^* = \arg \min_{C\in \mathcal{K}_0} W(C)<br>$$</p>
+</li>
+<li><p>设$R_1,R_2 \in P_0$ 是由$C^*$分割的区域。</p>
+</li>
+<li><p>设置$R=R_1 \cup R_2$并更新：<br>$$<br>\mathcal{P}_0 \leftarrow \mathcal{P}_0-\{R_1, R_2 \} \cup \{ R\}  \ and \ \mathcal{K}_0 \leftarrow \mathcal{K}_0-\{C^* \}<br>$$</p>
+</li>
+<li><p>如果$\mathcal{K}_0$为空，停止；否则继续更新权重$W(\mathcal{K_0})$并重复。</p>
+</li>
+</ol>
+<p>这个过程生产一个区域树，其中叶子是$\mathcal{P}_0$的初始元素，根是整个图像，区域按包含关系排序。</p>
+<p>作者将两个相邻区域的不相似度定义为为它们在$\mathcal{K}_0$中公共边界的平均强度。由于在算法的每个步骤中，所有剩余边缘必须具有大于或者等于先前移除的轮廓的强度，因此在合并过程中被移除的边缘权重不会减小。因此，区域树具有索引层次结构，并且可以用树形图来描述，其中每个区域的高度$H(R)$是其首次出现的不相似度的值。等价的说，$H(R)=W(C)$ 其中 $C$是通过去除边缘$C$得到$R$的那个边缘。该层级结构也得到了一个在$\mathcal{P}_0 \times \mathcal{P}_0 $度量，两个区域之间的距离由最小区域的高度给出：<br>$$<br>D(R_1,R_2) = \min \{H(R): R_1, R_2 \subseteq R\}<br>$$</p>
+<p>图14给我们一个作者方法的例子。UCM是一种加权边缘图像，通过构造，具有为任何阈值产生一组闭合曲线的特性。而且可以通过对UCM进行阈值处理来得到在level k上的分割结果。因为notion of scale 是平均轮廓强度，所以UCM的值反映了相邻区域的对比度。</p>
+<p><img src="9.jpg" alt="image"><br>图14.中左：从OWT-UCM算法使用$gPb$作为输入得到的权重边缘，它编码了整个层级分割。通过构造，对它应用不同的阈值可以得到一组闭合边缘，也就定义了分割。中右：初始的过分割对应了UCM的最精细的level。右：边缘和对应的分割，由在level 0.5时的UCM得到。</p>
+<h3 id="3-3-结果"><a href="#3-3-结果" class="headerlink" title="3.3 结果"></a>3.3 结果</h3><p><img src="10.jpg" alt="image"></p>
+<p>图15</p>
+<p>虽然OWT-UCM算法可以使用任何边缘源作为输入（比如在阈值处理之前的Canny边缘检测器），但是作者通过使用$gPb$检测器得到了最好的结果。</p>
+<p>图15显示了来自BSDS500数据集上的$gPb$-OWT-UCM结果，可以看到效果还是非常好的。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2020/03/08/CDHIS-note/">http://lovelyfrog.github.io/2020/03/08/CDHIS-note/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/CV/">
+                                    <span class="chip bg-color">CV</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/08/CDHIS-note/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="CDHIS_note">
+                        
+                        <span class="card-title">CDHIS_note</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了Contour Detection and Hierarchical Image Segmentation这篇论文的主要思路。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category">
+                                    论文阅读
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CV/">
+                        <span class="chip bg-color">CV</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/07/math-books/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="数学相关书籍推荐">
+                        
+                        <span class="card-title">数学相关书籍推荐</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            数学相关（整理了一些好的书籍和视频, MIT open course是个好东西）。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
+                                    数学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%B9%A6%E5%8D%95/">
+                        <span class="chip bg-color">书单</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
