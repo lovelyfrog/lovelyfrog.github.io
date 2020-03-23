@@ -4,15 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="正则表达式, lovelyfrog&#39;s blog">
-    <meta name="description" content="正则表达式
-
-
-\d可以匹配一个数字，\w可以匹配一个字母或数字，\s可以匹配一个空格(也包括tab等空白符)
-
-.可以匹配任意字符
-
-匹配变长字符的话，*表示任意字符，包括0个；+表示至少一个字符；?表示0个或者1个字符；{n}表示n个字">
+    <meta name="keywords" content="3月第三周周记, lovelyfrog&#39;s blog">
+    <meta name="description" content="3月第三周周记">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>正则表达式 | lovelyfrog&#39;s blog</title>
+    <title>3月第三周周记 | lovelyfrog&#39;s blog</title>
     <link rel="icon" type="image/jpeg" href="/reborn.jpg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,7 +303,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '';
+        let pwd = 'ddc4f2e6753b87abd02f106328ae5ac399708043a0a83ece59d795d6bd7a00c0';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！');
@@ -323,12 +316,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">正则表达式</h1>
+                    <h1 class="description center-align post-title">3月第三周周记</h1>
                 </div>
             </div>
         </div>
@@ -445,8 +438,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
+                            <a href="/tags/%E5%91%A8%E8%AE%B0/">
+                                <span class="chip bg-color">周记</span>
                             </a>
                         
                     </div>
@@ -457,8 +450,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/python/" class="post-category">
-                                python
+                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                总结
                             </a>
                         
                     </div>
@@ -470,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2017-09-08
+                    2020-03-23
                 </div>
                 
 
@@ -479,7 +472,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    721
+                    343
                 </div>
                 
 
@@ -492,55 +485,29 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>正则表达式</p>
-<a id="more"></a>
+                <p>这是3月的第三周。</p>
+<p>这周前三天做的是与实验室无关的内容，从周四开始复现了4天代码。</p>
+<p>把cs61B所有的lec都看完了，但是proj3还没有做，之后要找个时间做一下。cs61B其中的一些算法总结也需要写一下。</p>
+<p>cs61C, cs170, cs188都开始了，也把MIT 的18.06 Linear Algebra的第一讲看了。</p>
+<p>预计两个月把cs61C, 170, 188完成，18.06也要刷完。这周还要把嵌入式技术实验和APUE好好看一下，这两节课上周几乎没听。</p>
+<p>又mark了cmu的几门课，之后也要好好刷一下。</p>
+<p>CV方向的一些基础知识还是欠缺，打算看一下cornel的computer vision课，做一下他们的作业，好像是c++的代码。u1s1，c++这周看的我真的恶心。</p>
+<p>之前说的把计算机应用编程实验算法整理还没有整理，改写也还没有改写。</p>
+<p>这周还有一个重要的事情，我被介绍了个女生。很优秀的女生，希望能跟她多交流，看看能不能进一步发展。</p>
+<p>下周的目标：</p>
 <ul>
-<li><p>\d可以匹配一个数字，\w可以匹配一个字母或数字，\s可以匹配一个空格(也包括tab等空白符)</p>
-</li>
-<li><p>.可以匹配任意字符</p>
-</li>
-<li><p>匹配变长字符的话，*表示任意字符，包括0个；+表示至少一个字符；?表示0个或者1个字符；{n}表示n个字符；{n,m}表示n-m个字符</p>
-</li>
-<li><p>要做更精确的匹配可以用[]表示范围：</p>
-<ul>
-<li>[0-9a-zA-Z_]可以匹配一个数字、字母或者下划线</li>
-<li>[a-zA-Z_][0-9a-zA-Z_]{0, 19}更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）</li>
-<li>^表示行的开头，^\d表示必须以数字开头。$表示行的结尾</li>
+<li>cs61C lec3, lec4, lec5, proj1, discussion 1, 2, lab1</li>
+<li>cs170 lec2, lec3, lec4, section1, 2, hw1, hw2</li>
+<li>cs188 week1 lec, P0, section1 </li>
+<li>18.06 lec2, lec3, lec4</li>
+<li>CDHIS contour detection 复现完成</li>
+<li>嵌入式</li>
+<li>APUE</li>
+<li>cs6670 lec0, 2, 3, 3a</li>
+<li>cs131 lec1, lec2, lec3, lec4, hw0</li>
+<li>听力三篇</li>
 </ul>
-</li>
-</ul>
-<h2 id="Re模块"><a href="#Re模块" class="headerlink" title="Re模块"></a>Re模块</h2><p>由于python字符串本身是用\转义的，所以我们通常使用r前缀，就不用考虑转义问题了</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> re
-re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">'^\d{3}\-\d{3,8}$'</span><span class="token punctuation">,</span><span class="token string">'010-12345'</span><span class="token punctuation">)</span></code></pre>
-<pre><code>&lt;_sre.SRE_Match object; span=(0, 9), match=&#39;010-12345&#39;&gt;</code></pre><p>$ match()方法判断是否匹配，如果匹配成功，返回一个Match对象，否则返回None  $</p>
-<pre class=" language-python"><code class="language-python">test <span class="token operator">=</span> <span class="token string">'字符串'</span>
-<span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">'正则表达式'</span><span class="token punctuation">,</span> test<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span>
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'failed'</span><span class="token punctuation">)</span></code></pre>
-<h2 id="切分字符串"><a href="#切分字符串" class="headerlink" title="切分字符串"></a>切分字符串</h2><p>用正则表达式切分字符串比用固定的字符更灵活</p>
-<pre class=" language-python"><code class="language-python"><span class="token string">'a b  c'</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span></code></pre>
-<pre><code>[&#39;a&#39;, &#39;b&#39;, &#39;&#39;, &#39;c&#39;]</code></pre><pre class=" language-python"><code class="language-python">re<span class="token punctuation">.</span>split<span class="token punctuation">(</span>r<span class="token string">'\s+'</span><span class="token punctuation">,</span> <span class="token string">'a b  c'</span><span class="token punctuation">)</span></code></pre>
-<pre><code>[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</code></pre><pre class=" language-python"><code class="language-python">re<span class="token punctuation">.</span>split<span class="token punctuation">(</span>r<span class="token string">'[\s+\,\;]+'</span><span class="token punctuation">,</span> <span class="token string">'a b;; c  ,d'</span><span class="token punctuation">)</span></code></pre>
-<pre><code>[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</code></pre><h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>$ 正则表达式还有提取字符串的功能，用()表示的就是要提取的分组(group) $</p>
-<p> ^(\d{3})-(\d{3,8})$分别定义了两个组，可以直接从匹配的字符串中提取出区号和本地号码 </p>
-<pre class=" language-python"><code class="language-python">m <span class="token operator">=</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">'^(\d{3})-(\d{3,8})'</span><span class="token punctuation">,</span> <span class="token string">'010-12345'</span><span class="token punctuation">)</span></code></pre>
-<pre class=" language-python"><code class="language-python">m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre>
-<pre><code>&#39;010-12345&#39;</code></pre><pre class=" language-python"><code class="language-python">m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
-<pre><code>&#39;010&#39;</code></pre><pre class=" language-python"><code class="language-python">m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></code></pre>
-<pre><code>&#39;12345&#39;</code></pre><h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>正则表达式默认是贪婪匹配，即尽可能匹配多的字符</p>
-<pre class=" language-python"><code class="language-python">m <span class="token operator">=</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">'^(\d+)(0*)'</span><span class="token punctuation">,</span><span class="token string">'1023000'</span><span class="token punctuation">)</span></code></pre>
-<pre class=" language-python"><code class="language-python">m<span class="token punctuation">.</span>groups<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<pre><code>(&#39;1023000&#39;, &#39;&#39;)</code></pre><p>必须要让\d+采取非贪婪模式，才能匹配到后面的0，加个?就行了</p>
-<pre class=" language-python"><code class="language-python">re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">'^(\d+?)(0*)$'</span><span class="token punctuation">,</span><span class="token string">'1023000'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>groups<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<pre><code>(&#39;1023&#39;, &#39;000&#39;)</code></pre><pre class=" language-python"><code class="language-python">re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">'^(\d+?)(0*)'</span><span class="token punctuation">,</span><span class="token string">'1023000'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>groups<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<pre><code>(&#39;1&#39;, &#39;0&#39;)</code></pre><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>当我们在Python中使用正则表达式时，re模块内部会干两件事情：</p>
-<pre><code>1.编译正则表达式，如果正则表达式的字符串本身不合法，会报错；
 
-2.用编译后的正则表达式去匹配字符串。</code></pre><p>如果一个正则表达式要重复使用几千次，出于效率的考虑，我们可以预编译该正则表达式，接下来重复使用时就不需要编译这个步骤了，直接匹配</p>
-<pre class=" language-python"><code class="language-python">re_telephone <span class="token operator">=</span> re<span class="token punctuation">.</span>compile<span class="token punctuation">(</span>r<span class="token string">'^(\d{3})-(\d{3,8})$'</span><span class="token punctuation">)</span>
-re_telephone<span class="token punctuation">.</span>match<span class="token punctuation">(</span><span class="token string">'010-111111'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>groups<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<pre><code>(&#39;010&#39;, &#39;111111&#39;)</code></pre>
             </div>
             <hr/>
 
@@ -565,7 +532,7 @@ re_telephone<span class="token punctuation">.</span>match<span class="token punc
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://lovelyfrog.github.io/2017/09/08/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">http://lovelyfrog.github.io/2017/09/08/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</a>
+                    <a href="http://lovelyfrog.github.io/2020/03/23/3%E6%9C%88%E7%AC%AC%E4%B8%89%E5%91%A8%E5%91%A8%E8%AE%B0/">http://lovelyfrog.github.io/2020/03/23/3%E6%9C%88%E7%AC%AC%E4%B8%89%E5%91%A8%E5%91%A8%E8%AE%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -603,8 +570,8 @@ re_telephone<span class="token punctuation">.</span>match<span class="token punc
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
+                                <a href="/tags/%E5%91%A8%E8%AE%B0/">
+                                    <span class="chip bg-color">周记</span>
                                 </a>
                             
                         </div>
@@ -645,54 +612,48 @@ re_telephone<span class="token punctuation">.</span>match<span class="token punc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2017/09/08/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">
+                <a href="/2020/03/23/3%E6%9C%88%E7%AC%AC%E4%B8%89%E5%91%A8%E5%91%A8%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="错误处理">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="3月第三周周记">
                         
-                        <span class="card-title">错误处理</span>
+                        <span class="card-title">3月第三周周记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            错误处理
-
-记录错误
-python内置的logging模块可以非常容易的记录错误信息程序打印完错误信息后会继续执行，并正常退出
-import logging
-def foo(s):
-    return 10/int(s)
-
-def bar
+                            3月第三周周记
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/%E5%91%A8%E8%AE%B0/">
+                        <span class="chip bg-color">周记</span>
                     </a>
                     
                 </div>
@@ -706,38 +667,31 @@ def bar
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2017/09/08/%E5%B8%B8%E7%94%A8%E5%86%85%E5%BB%BA%E6%A8%A1%E5%9D%97/">
+                <a href="/2020/03/08/2020-03-1st-week-summary/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="常用内建模块">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="3月第一周周记">
                         
-                        <span class="card-title">常用内建模块</span>
+                        <span class="card-title">3月第一周周记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            常用内建模块
-
-
-from datetime import datetime
-m = datetime.now()
-class ss(object):
-    def __init__(cls, name):
-        cls.nam
+                            3月第一周周记
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2017-09-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
                                 </a>
                             
                             
@@ -747,8 +701,8 @@ class ss(object):
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/%E5%91%A8%E8%AE%B0/">
+                        <span class="chip bg-color">周记</span>
                     </a>
                     
                 </div>
@@ -885,6 +839,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
     <footer class="page-footer bg-color">
