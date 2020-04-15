@@ -503,8 +503,8 @@
 </ul>
 <h3 id="2-2-Use-Defined-Constants"><a href="#2-2-Use-Defined-Constants" class="headerlink" title="2.2 Use Defined Constants"></a>2.2 Use Defined Constants</h3><ul>
 <li><p>Bad pattern:</p>
-<pre class=" language-C"><code class="language-C">int i, ar[10];
-for (i = 0; i < 10; i++) {...}</code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> i<span class="token punctuation">,</span> ar<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span></code></pre>
 </li>
 <li><p>Better pattern: </p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">const</span> <span class="token keyword">int</span> ARRAY_SIZE <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
@@ -543,21 +543,21 @@ for (i = 0; i < 10; i++) {...}</code></pre>
 <li>declaring a pointer just allocates space to hold the pointer—does not allocate thing being pointed to.</li>
 <li>Local variables in C are not initialized, they may contain anything </li>
 </ul>
-<h3 id="4-2-Pointer-and-Structures"><a href="#4-2-Pointer-and-Structures" class="headerlink" title="4.2 Pointer and Structures"></a>4.2 Pointer and Structures</h3><pre class=" language-C"><code class="language-C">typedef struct {
-  int x;
-  int y;
-} Point;
+<h3 id="4-2-Pointer-and-Structures"><a href="#4-2-Pointer-and-Structures" class="headerlink" title="4.2 Pointer and Structures"></a>4.2 Pointer and Structures</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> Point<span class="token punctuation">;</span>
 
-Point p1;
-Point p2;
-Point *paddr;
+Point p1<span class="token punctuation">;</span>
+Point p2<span class="token punctuation">;</span>
+Point <span class="token operator">*</span>paddr<span class="token punctuation">;</span>
 
-/* arrow notation, the two below are equal */
-int h = paddr->x;
-int h = (*paddr).x;
+<span class="token comment" spellcheck="true">/* arrow notation, the two below are equal */</span>
+<span class="token keyword">int</span> h <span class="token operator">=</span> paddr<span class="token operator">-></span>x<span class="token punctuation">;</span>
+<span class="token keyword">int</span> h <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>paddr<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">;</span>
 
-/* structure assignment */
-p2 = p1;</code></pre>
+<span class="token comment" spellcheck="true">/* structure assignment */</span>
+p2 <span class="token operator">=</span> p1<span class="token punctuation">;</span></code></pre>
 <p>Note, C stucture assignment is not a “deep copy”. All members are copied, but not things pointed to by members.</p>
 <h3 id="4-3-Pointers-in-C"><a href="#4-3-Pointers-in-C" class="headerlink" title="4.3 Pointers in C"></a>4.3 Pointers in C</h3><ul>
 <li>Why use pointers?<ul>
@@ -599,32 +599,32 @@ p2 = p1;</code></pre>
 </li>
 <li>An array is passed to a function as a pointer, but the array size is lost</li>
 </ul>
-<pre class=" language-C"><code class="language-C">int foo(int array[], unsigned int size)
-{
-  ...array[size-1]...;
-  // It will be 8, because array is a pointer
-  printf("%d\n", sizeof(array));
-}
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>array<span class="token punctuation">[</span>size<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// It will be 8, because array is a pointer</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int main(void) 
-{
-  int a[10], b[5];
-  ...foo(a, 10)...foo(b, 5);
-  // It will be 40
-  printf("%d\n", sizeof(a));
-}</code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// It will be 40</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h3 id="4-6-Changing-a-Pointer-Argument"><a href="#4-6-Changing-a-Pointer-Argument" class="headerlink" title="4.6 Changing a Pointer Argument"></a>4.6 Changing a Pointer Argument</h3><ul>
 <li>Solution: Pass a pointer to a pointer, declared as <code>**h</code></li>
 </ul>
-<pre class=" language-C"><code class="language-C">void inc_ptr(int **h)
-{
-  *h = *h + 1;
-}
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">inc_ptr</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">*</span>h<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token operator">*</span>h <span class="token operator">=</span> <span class="token operator">*</span>h <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int A[3] = {50, 60, 70};
-int *q = A;
-inc_ptr(&q);
-printf("*q = %d", *q);</code></pre>
+<span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>q <span class="token operator">=</span> A<span class="token punctuation">;</span>
+<span class="token function">inc_ptr</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"*q = %d"</span><span class="token punctuation">,</span> <span class="token operator">*</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3 id="4-7-sizeof-operator"><a href="#4-7-sizeof-operator" class="headerlink" title="4.7 sizeof() operator"></a>4.7 sizeof() operator</h3><ul>
 <li>sizeof(type) returns number of bytes in object</li>
 <li>By definition, <code>sizeof(char) == 1</code></li>
@@ -752,15 +752,15 @@ TreeNode <span class="token operator">*</span>tp <span class="token operator">=<
 </li>
 <li><p>Examples:</p>
 </li>
-<li><pre class=" language-C"><code class="language-C">int *ip;
-ip = (int *) malloc(sizeof(int));
-...
-free((void*) ip);
+<li><pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>ip<span class="token punctuation">;</span>
+ip <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token function">free</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span> ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-typdef struct {...} TreeNode;
-TreeNode *tp = (TreeNode *) malloc(sizeof(TreeNode));
-...
-free((void*) tp)</code></pre>
+typdef <span class="token keyword">struct</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span> TreeNode<span class="token punctuation">;</span>
+TreeNode <span class="token operator">*</span>tp <span class="token operator">=</span> <span class="token punctuation">(</span>TreeNode <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>TreeNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token function">free</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span> tp<span class="token punctuation">)</span></code></pre>
 </li>
 </ul>
 <p><img src="6.jpg" alt="image"></p>
@@ -936,30 +936,29 @@ free((void*) tp)</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/23/cs61C-note2/">
+                <a href="/2020/04/15/cs61C-note3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="cs61C note2">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="cs61C note3">
                         
-                        <span class="card-title">cs61C note2</span>
+                        <span class="card-title">cs61C note3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文介绍了C数组，字符串，指针，以及内存管理
+                            本文继续介绍了C指针一些高级操作，内存分配以及常见内存分配bug
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -972,7 +971,6 @@ free((void*) tp)</code></pre>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

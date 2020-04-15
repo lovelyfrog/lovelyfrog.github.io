@@ -1,0 +1,1321 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="cs61C note6, lovelyfrog&#39;s blog">
+    <meta name="description" content="本文介绍了RISC-V中register的具体用法">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>cs61C note6 | lovelyfrog&#39;s blog</title>
+    <link rel="icon" type="image/jpeg" href="/reborn.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/reborn.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lovelyfrog's blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/reborn.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lovelyfrog's blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/lovelyfrog" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/lovelyfrog" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">cs61C note6</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/cs61C/">
+                                <span class="chip bg-color">cs61C</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/computer-architecture/" class="post-category">
+                                computer architecture
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-15
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.7k
+                </div>
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>It’s rigid that each RISC-V arithmetic instruction performs only <strong>one operation</strong> and must always have 3 variables. </p>
+<p>Hardware for a variable number of operands is more complicated for a fixed number.</p>
+<p><em>Design Principle 1: Simplicity favors regularity</em></p>
+<h2 id="1-Operands-of-the-computer-hardware"><a href="#1-Operands-of-the-computer-hardware" class="headerlink" title="1. Operands of the computer hardware"></a>1. Operands of the computer hardware</h2><p>The operands of arithmetic instructions are restricted, they must be from a limited number of special locations built directly in hardware design called <strong>registers</strong>. </p>
+<p>There are only 32 registers on current computers, like RISC-V.  The reason for the limits of 32 registers is the second design principle of hardware:</p>
+<p><em>Design Principle 2: Smaller is faster</em></p>
+<p> Effective use of registers is critical to program performance.</p>
+<h3 id="1-1-Memory-Operands"><a href="#1-1-Memory-Operands" class="headerlink" title="1.1 Memory Operands"></a>1.1 Memory Operands</h3><p>The processor can keep only a small amount of data in registers, but computer memory contains billions of data elements. </p>
+<p>Data structures (arrays and structures) are kept in memory.</p>
+<p>RISC-V has instructions that tansfer data between memory and registers which are called <strong>data transfer instructions</strong>. </p>
+<p><img src="1.jpg" alt="image"></p>
+<p>The real name for this instruction is <code>ld</code>, standing for <em>load doubleword</em>.</p>
+<p>Assume <code>A</code> is an array of 100 doublewords whose base address is in <code>x22</code>, <code>g</code> and <code>h</code> with registers <code>x20</code> and <code>x21</code>. Compile this C assigenment statement:</p>
+<pre class=" language-c"><code class="language-c">g <span class="token operator">=</span> h <span class="token operator">+</span> A<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-assembly"><code class="language-assembly">ld x9, 64(x22)
+add x20, x21, x9</code></pre>
+<p><img src="2.jpg" alt="image"></p>
+<p>The instruction complementary to load is called store, which is <code>sd</code> in RISC-V.</p>
+<p>In many architectures, words must start at addresses that are multiples of 4 and doublewords must start at addresses that are multiples of 8. This requirement is called an <strong>alignment restriction</strong>, which leads to faster data transfers.</p>
+<p>RISC-V and Intel x86 don’t have alignment restrictions, but MIPS does.</p>
+<p>Many programs have more variables than computers have registers. Consequently, the compiler tries to keep the most frequently used variables in registers and places the rest in memory, using loads and stores to move variables between registers and memory. The process of putting less frequently used variables (or those needed later) into memory is called <strong>spilling registers</strong>.</p>
+<h3 id="Constant-or-Immediate-Operands"><a href="#Constant-or-Immediate-Operands" class="headerlink" title="Constant or Immediate Operands"></a>Constant or Immediate Operands</h3><p> Many times a program will use a constant in an operation. </p>
+<p>Add immediate or <code>addi</code>:</p>
+<pre class=" language-assembly"><code class="language-assembly">addi x22, x22, 4</code></pre>
+<p>RISC-V dedicates register <code>x0</code> to be hard-wired to the value zero.</p>
+<h2 id="2-Representing-Instructions-in-the-Computer"><a href="#2-Representing-Instructions-in-the-Computer" class="headerlink" title="2. Representing Instructions in the Computer"></a>2. Representing Instructions in the Computer</h2><h3 id="2-1-R-type"><a href="#2-1-R-type" class="headerlink" title="2.1 R-type"></a>2.1 R-type</h3><p>Most data we work with is in words(32-bit chunks), RISC-V represent instructions as fixed-size 32-bit words.</p>
+<p>Translate a RISC-V assembly instruction into a machine instruction:</p>
+<pre class=" language-assembly"><code class="language-assembly">add x9, x20, x21</code></pre>
+<p>The decimal representation:</p>
+<p><img src="3.jpg" alt="image"></p>
+<p>Each of these segements of an instruction is called a <em>field</em>. The first, fourth, and sixth fields (0, 0, 51) tell that this instruction performs addition. The second field (21 for <code>x21</code>), The third field (20 for <code>x20</code>), the fifth field (9 for <code>x9</code>).</p>
+<p>This instruction can also be represented as fields of binary numbers instead of decimal:</p>
+<p><img src="4.jpg" alt="image"></p>
+<p>This layout of the instruction is called the <strong>instruction format</strong>. This RISC-V instruction takes exactly 32 bits.</p>
+<p>We call the numeric version of instructions <strong>machine language</strong> and a sequence of such instructions <em>machine code</em>.</p>
+<p>RISC-V Fields:</p>
+<p><img src="5.jpg" alt="image"></p>
+<p><em>opcode</em>: Basic operation of the instruction.</p>
+<p><em>rd</em>: The register destination operand</p>
+<p><em>func3</em>: an additional opcode field</p>
+<p><em>rs1</em>: The first register source operand</p>
+<p><em>rs2</em>: The second…</p>
+<p><em>func7</em>: an additional opcode field</p>
+<p>A problem occurs when an instruction needs longer fields. If we load array from memory that the element index is larger than 31, it will get in trouble. Hence, we have a conflict between the desire to keep all instructions the same length and the desire to have a single instruction format. This conflict leads us to the final hardware design principle:</p>
+<p><em>Design Principle 3: Good design demands good compromises</em></p>
+<p>We use distinct instruction formats for different kinds of instructions. The format above is called <em>R-type</em> (for register). </p>
+<p>Example:</p>
+<pre class=" language-assembly"><code class="language-assembly">add x18 x19 x10</code></pre>
+<p><img src="18.jpg" alt="image"></p>
+<p>All RV32 R-format instructions:</p>
+<p><img src="19.jpg" alt="image"></p>
+<h3 id="2-2-I-type"><a href="#2-2-I-type" class="headerlink" title="2.2 I-type"></a>2.2 I-type</h3><p>A second type of instruction format is <em>I-type</em> and is used by arithmetic operands with one constant operand, including <code>addi</code> and load instructions.</p>
+<p>I-type:</p>
+<p><img src="6.jpg" alt="image"></p>
+<p>Example:</p>
+<pre class=" language-assembly"><code class="language-assembly">addi x15 x1 -50</code></pre>
+<p><img src="20.jpg" alt="image"></p>
+<p>All RV32 I-format Arithmetic/Logical Instructions:<br><img src="21.jpg" alt="image"></p>
+<p>Load instructions are also I-type:</p>
+<p><img src="22.jpg" alt="image"></p>
+<p>load example:</p>
+<pre class=" language-assembly"><code class="language-assembly">lw x14, 8(x2)</code></pre>
+<p><img src="23.jpg" alt="image"></p>
+<p>All RV32 load instructions</p>
+<p><img src="24.jpg" alt="image"></p>
+<h3 id="2-3-S-type"><a href="#2-3-S-type" class="headerlink" title="2.3 S-type"></a>2.3 S-type</h3><p>We also need a format for the store doubleword instruction, <code>sd</code>, which needs 2 source registers (for the base address and the store data) and an immediate for the address offset. The field of the <em>S-type</em> format are:</p>
+<p><img src="7.jpg" alt="image"></p>
+<p>Example:</p>
+<pre class=" language-assembly"><code class="language-assembly">sw x14, 8(x2)</code></pre>
+<p><img src="25.jpg" alt="image"></p>
+<p>All RV32 Store Instructions:</p>
+<p><img src="26.jpg" alt="image"></p>
+<h3 id="2-4-B-type"><a href="#2-4-B-type" class="headerlink" title="2.4 B-type"></a>2.4 B-type</h3><p>Instructions stored in a localized area of memory(code/text)</p>
+<ul>
+<li>Largest branch distance limited by size of code</li>
+<li>address of current instruction stored in the program counter</li>
+</ul>
+<p>If we don’t take the branch:</p>
+<p><code>PC = PC + 4</code> (next instruction)</p>
+<p>If we do take the branch:</p>
+<p><code>PC = PC + immediate</code> (immediate is the number of bytes to jump)</p>
+<p>B-format:</p>
+<p><img src="27.jpg" alt="image"></p>
+<p>The 12 immediate bits encode 13-bit signed byte offsets (lowest bit of offset is always zero, no need to store it)</p>
+<p>Example:</p>
+<p><img src="28.jpg" alt="image"></p>
+<p><img src="29.jpg" alt="image"></p>
+<p>All RISC-V Branch Instructions</p>
+<p><img src="30.jpg" alt="image"></p>
+<h3 id="2-5-U-type"><a href="#2-5-U-type" class="headerlink" title="2.5 U-type"></a>2.5 U-type</h3><p>U-format for upper immediate instructions</p>
+<p><img src="31.jpg" alt="image"></p>
+<p>Used for 2 instructions:</p>
+<ul>
+<li><code>LUI</code>: load upper immediate</li>
+<li><code>AUIPC</code>: add upper immediate to PC</li>
+</ul>
+<p><code>LUI</code> writes the upper 20 bits of the destination with immediate value, and clears the lower 12 bits. Together with <code>ADDI</code> to set low 12bits, can create any 32-bit value.</p>
+<pre class=" language-assembly"><code class="language-assembly">LUI x10 0x87654            # x10 = 0x87654000
+ADDI x10 x10 0x321    # x10 = 0x87654321</code></pre>
+<p>One corner case:</p>
+<p>How to set 0xDEADBEEF?</p>
+<pre class=" language-assembly"><code class="language-assembly">LUI x10 0xDEADC            # x10 = 0xDEADC000
+ADDI x10 x10 0xEEF    # x10 = 0xDEADBEEF</code></pre>
+<p>The reason is <code>addi</code> 12-bit immediate is always sign-extended, if top bit is set, will subtract.</p>
+<p>For short:</p>
+<pre class=" language-assembly"><code class="language-assembly">li x10 0xDEADBEEF            # creates two instructions</code></pre>
+<h3 id="2-6-J-type"><a href="#2-6-J-type" class="headerlink" title="2.6 J-type"></a>2.6 J-type</h3><p>J-format for jump instructions.</p>
+<p><img src="32.jpg" alt="image"></p>
+<p><code>jal</code> saves PC+4 in <code>rd</code>. </p>
+<p><code>j</code> is short for <code>jal x0 Procedure</code>.</p>
+<p><code>jalr rd, rs, immediate</code>:</p>
+<p><img src="33.jpg" alt="image"></p>
+<ul>
+<li>writes PC+4 to <code>rd</code></li>
+<li>Sets PC = rs + immediate</li>
+</ul>
+<p>Example of <code>jalr</code>:</p>
+<p><code>ret = jr ra = jalr x0, ra, 0</code></p>
+<pre class=" language-assembly"><code class="language-assembly"># call function at any 32-bit absolute address
+lui x1 <hi20bits>
+jalr ra x1 <lo20bits></code></pre>
+<h3 id="2-Sum"><a href="#2-Sum" class="headerlink" title="2. Sum"></a>2. Sum</h3><p>Today’s computers are built on two key principles:</p>
+<ul>
+<li>Instructions are represented as numbers</li>
+<li>Programs are stored in memory to be read or written, just like data</li>
+</ul>
+<p>These princicples lead to the <em>stored-program</em> concept</p>
+<p><img src="8.jpg" alt="image"></p>
+<p>There are 6 basic types of instruction formats:</p>
+<ul>
+<li>R-format</li>
+<li>I-format</li>
+<li>S-format</li>
+<li>B-format</li>
+<li>U-format</li>
+<li>J-format</li>
+</ul>
+<p><img src="17.jpg" alt="image"></p>
+<h2 id="3-Logical-Operations"><a href="#3-Logical-Operations" class="headerlink" title="3. Logical Operations"></a>3. Logical Operations</h2><p><img src="9.jpg" alt="image"></p>
+<p><code>slli</code>: shift left logical immediate</p>
+<p><code>srli</code>: shift right logical immediate</p>
+<pre class=" language-assembly"><code class="language-assembly">slli x11, x19, 4    // reg x11 = reg x19 << 4 bits</code></pre>
+<p>This shift instruction use the I-type format. Only the lower 6 bits of the I-type format’s 12-bit immediate are actually used. The remaining 6 bits are repurposed as an additional opcode field, func6.</p>
+<p><img src="10.jpg" alt="image"></p>
+<p><code>srai</code>: shift right arithmetic immediate, it fills the vatated bits on the left with copies of the old sign bit.</p>
+<h2 id="4-Instructions-for-Making-Decisions"><a href="#4-Instructions-for-Making-Decisions" class="headerlink" title="4. Instructions for Making Decisions"></a>4. Instructions for Making Decisions</h2><h3 id="4-1-Conditional-Branches"><a href="#4-1-Conditional-Branches" class="headerlink" title="4.1. Conditional Branches:"></a>4.1. Conditional Branches:</h3><p><code>beq</code>: branch if equal</p>
+<pre class=" language-assembly"><code class="language-assembly">beq rs1, rs2, L1</code></pre>
+<p><code>bne</code>: branch if not equal</p>
+<pre class=" language-assembly"><code class="language-assembly">bne rs1, rs2, L1</code></pre>
+<p>Compiling a if-else in C:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> j<span class="token punctuation">)</span>
+  f <span class="token operator">=</span> g <span class="token operator">+</span> h<span class="token punctuation">;</span>
+<span class="token keyword">else</span>
+  f <span class="token operator">=</span> g <span class="token operator">-</span> h<span class="token punctuation">;</span></code></pre>
+<p>The five variables <code>f</code> through <code>j</code> correspond to the five registers <code>x19</code> through <code>x23</code>.</p>
+<pre class=" language-assembly"><code class="language-assembly">bne x22, x23, Else
+add x19, x20, x21
+beq x0, x0, Exit        // A: if 0 == 0, go to Exit
+Else:sub x19, x20, x21
+Exit:</code></pre>
+<p>A: We now need to go to the end of the <code>if</code>, so we introduce another kind of branch called <code>unconditional branch</code>.</p>
+<h3 id="4-2-Loops"><a href="#4-2-Loops" class="headerlink" title="4.2 Loops"></a>4.2 Loops</h3><p>Compiling a while Loop in C:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">while</span> <span class="token punctuation">(</span>save<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> k<span class="token punctuation">)</span>
+  i <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre>
+<p>Assume that <code>i</code> and <code>k</code> correspond to registers <code>x22</code> and <code>x24</code> and the base of the array <code>save</code> is in <code>x25</code>.</p>
+<pre class=" language-assembly"><code class="language-assembly">Loop: slli x10, x22, 3    // Temp reg x10 = i * 8
+add x10, x10, x25        // x10 = address of save[i]
+ld x9, 0(x10)        // Temp reg x9 = save[i]
+bne x9, x24, Exit    // go to Exit if save[i] != k
+addi x22, x22, 1    // i = i + 1
+beq x0, x0, Loop    // A: go to Loop
+Exit: </code></pre>
+<p>A: The end of the loop branches back to the <em>while</em> test at the top of the loop</p>
+<h3 id="4-3-Other-branches"><a href="#4-3-Other-branches" class="headerlink" title="4.3 Other branches"></a>4.3 Other branches</h3><p><code>blt</code>: branch if less than</p>
+<p><code>bge</code>: branch if greater than or equal</p>
+<p><code>bltu</code>: unsigned version of <code>blt</code>, which treated the value as unsigned numbers</p>
+<p><code>bgeu</code>: the opposite case of <code>bltu</code></p>
+<h3 id="4-4-Bounds-Check-Shortcut"><a href="#4-4-Bounds-Check-Shortcut" class="headerlink" title="4.4 Bounds Check Shortcut"></a>4.4 Bounds Check Shortcut</h3><p>Treating signed numbers as if they were unsigned gives us a low-cost way of checking if $0 \leq x &lt; y$, which matches the index out-of-bounds check for arrays.</p>
+<pre class=" language-assembly"><code class="language-assembly">bgeu x20, x11, IndexOutOfBounds        // if x20 >= x11 or x20 < 0, go to IndexOutOfBounds</code></pre>
+<h2 id="5-Supporting-Procedures-in-Computer-Hardware"><a href="#5-Supporting-Procedures-in-Computer-Hardware" class="headerlink" title="5. Supporting Procedures in Computer Hardware"></a>5. Supporting Procedures in Computer Hardware</h2><h3 id="5-1-jump-and-link"><a href="#5-1-jump-and-link" class="headerlink" title="5.1 jump and link"></a>5.1 jump and link</h3><p>Procedures allow the programmer to concentrate on just one portion of the task at a time. Procedures are one way to implement <strong>abstraction</strong> in software</p>
+<p>In the execution of a procedure, the program must follow the six step:</p>
+<ol>
+<li>Put parameters in a place where the procedure can access them</li>
+<li>Transfer control to the procedure</li>
+<li>Acquire the storage resources needed for the procedure</li>
+<li>Perform the desired task</li>
+<li>Put the result value in a place where the calling program can access it</li>
+<li>Return control to the point of origin, since a procedure can be called from several points in a program.</li>
+</ol>
+<p>RISC-V follows the following convention for procedure calling in allocating its 32 registers:</p>
+<p><code>x10-x17</code>: 8 parameter registers in which to pass parameters or return values.</p>
+<p><code>x1</code>: one return address register to return to the point of origin.</p>
+<p><code>jal</code>: jump and link</p>
+<pre class=" language-assembly"><code class="language-assembly">jal x1, ProcedureAddress    // jump to ProcedureAddress and write return address to x1</code></pre>
+<p>This link, stored in register <code>x1</code> is called the <strong>return address</strong>. </p>
+<p>To support the return from a procedure, computers like RISC-V use an indirect jump:</p>
+<pre class=" language-assembly"><code class="language-assembly">jalr x0, 0(x1)</code></pre>
+<p>This jump and link register instruction branches to the address stored in register <code>x1</code>. Then, the calling program, or <strong>caller</strong>, puts the parameter values in <code>x10-x17</code> and uses <code>jal x1, x</code> to branch to procedure <code>x</code> (sometimes called the <strong>callee</strong>). The callee then performs the calculations, places the results in the same parameter registers, and return control to the caller using <code>jalr x0, 0(x1)</code>.</p>
+<p>Program counter(PC): The register containing the address of the instruction in the program being executed.</p>
+<p>The jump and link instruction can also be used to perform an unconditional branch within a procedure by using <code>x0</code> as the destination register. Since <code>x0</code> is hard-wired to zero, the effect is to discard the return address:</p>
+<pre class=" language-assembly"><code class="language-assembly">jal x0, Label</code></pre>
+<h3 id="5-2-stack-pointer"><a href="#5-2-stack-pointer" class="headerlink" title="5.2 stack pointer"></a>5.2 stack pointer</h3><p>Suppose a compiler needs more registers for a procedure than the 8 argument registers. Since we must cover our tracks after our mission is complete, any registers needed by the caller must be restored to the values that they contained before the procedure was invoked. </p>
+<p>The ideal data structure for spilling registers is a <strong>stack</strong>. In RISC-V, the <strong>stack pointer</strong> is register <code>x2</code>, also known as the name <code>sp</code>. </p>
+<p>By historical precedent, stacks grow from higher addresses to lower addresses. This means that you push values onto the stack by substracting from the stack pointer.</p>
+<p>Compiling a C procedure:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> <span class="token function">leaf_example</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> g<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> h<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> f<span class="token punctuation">;</span>
+  f <span class="token operator">=</span> <span class="token punctuation">(</span>g <span class="token operator">+</span> h<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> f<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Assume <code>g, h, i, j</code> correspond to the argument registers <code>x10, x11,x12, x13</code> and <code>f</code> corresponds to <code>x20</code>.  </p>
+<p>The compiled program starts with the label of the procedure:</p>
+<pre class=" language-assembly"><code class="language-assembly">leaf_example:</code></pre>
+<p>Then we need save the registers used by the procedure: push the old values onto the stack by creating space for 3 doublewords (24 bytes) on the stack and then store them:</p>
+<pre class=" language-assembly"><code class="language-assembly">addi sp, sp, -24    // adjust stack to make room for 3 items
+sd x5, 16(sp)    // save x5 for use afterwards
+sd x6, 8(sp)    // save x6 for use afterwards
+sd x20, 0(sp)    // save x20 for use afterwards</code></pre>
+<p><img src="11.jpg" alt="image"><br>Then:</p>
+<pre class=" language-assembly"><code class="language-assembly">add x5, x10, x11
+add x6, x12, x13
+sub x20, x5, x6
+addi x10, x20, 0    // return f (x10 = x20 + 0)</code></pre>
+<p>Before returning, we restore the three old values of the registers we saved:</p>
+<pre class=" language-assembly"><code class="language-assembly">ld x20, 0(sp)
+ld x6, 8(sp)
+ld x5, 16(sp)
+addi sp, sp, 24    // adjust stack to delete 3 items
+jalr x0, 0(x1)    // branch back to calling routine</code></pre>
+<p>To avoid saving and restoring a register whose value is never used, which might happen with a temporary register, RISC-V separates 19 of the registers into 2 groups:</p>
+<ul>
+<li><code>x5-x7</code> and <code>x28-x31</code>: temporary registers that are not preserved by the callee(called procedure) on a procedure call</li>
+<li><code>x8-x9</code> and <code>x18-x27</code>: saved registers that must be preserved on a procedure call.</li>
+</ul>
+<p>In the example above, we can drop <code>x5,x6</code> stores and loads.</p>
+<h3 id="5-3-nested-procedures"><a href="#5-3-nested-procedures" class="headerlink" title="5.3 nested procedures"></a>5.3 nested procedures</h3><p>Suppose that the main program calls procedure A with an argument of 3, by placing the value into register <code>x10</code>, and then using <code>jal x1, A</code>. Then suppose A calls procedure B via <code>jal x1,B</code> with an argument 7, also placed in <code>x10</code>. Since A hasn’t finished its task yet, there is a conflict over the use of <code>x10</code>. Also, there is a conflict over the return address in <code>x1</code>, since it now has the return address for <code>B</code>. This conflict will eliminate procedure A’s ability to return its caller.</p>
+<p>One solution is to push all the other registers that must be preserved on the stack.</p>
+<p>Compiling a Recursive C Procedure:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> <span class="token function">fact</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+    <span class="token keyword">return</span> n <span class="token operator">*</span> <span class="token function">fact</span><span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Assume n corresponds to <code>x10</code>.</p>
+<pre class=" language-assembly"><code class="language-assembly">fact:
+    addi sp, sp, -16
+    sd x1, 8(sp)    // save the return address
+    sd x10, 0(sp)</code></pre>
+<p>The first time <code>fact</code> is called, <code>sd</code> saves an address in the program that called <code>fact</code>. Next we test whether <code>n</code> is less than 1.</p>
+<pre class=" language-assembly"><code class="language-assembly">addi x5, x10, -1    // x5 = n - 1
+bge x5, x0, L1    // if (n - 1) >= 0, go to L1</code></pre>
+<p>If <code>n</code> is less than 1, <code>fact</code> returns 1 by putting 1 into <code>x10</code>.</p>
+<pre class=" language-assembly"><code class="language-assembly">addi x10, x0, 1    // return 1
+addi sp, sp, 16    // pop 2 items off stack
+jalr    // return to caller</code></pre>
+<p>If <code>n</code> is not less than 1, <code>n</code> is decremented and then <code>fact</code> is called again with the decremented value:</p>
+<pre class=" language-assembly"><code class="language-assembly">L1: addi x10, x10, -1    // n >= 1: argument gets(n - 1)
+    jal x1, fact    // call fact with (n - 1)</code></pre>
+<p>The next instruction is where <code>fact</code> returns; its result is in <code>x10</code>. </p>
+<pre class=" language-assembly"><code class="language-assembly">addi x6, x10, 0    // return from jal: move result of fact(n - 1) to x6
+ld x10, 0(sp)    // restore argument n
+ld x1, 8(sp)    // restore the return address
+addi sp, sp, 16</code></pre>
+<p>Next, <code>x10</code> gets the product of the old argument and the result of fact(n - 1)</p>
+<pre class=" language-assembly"><code class="language-assembly">mul x10, x10, x6    // return n * fact(n - 1)
+jalr x0, 0(x1)    // return to the caller</code></pre>
+<p>To simplify access to static data, some RISC-V compilers reserve <code>x3</code> for use as the <strong>global pointer</strong>, or <code>gp</code></p>
+<p><img src="12.jpg" alt="image"></p>
+<h3 id="5-4-Allocating-space-for-new-data-on-the-stack"><a href="#5-4-Allocating-space-for-new-data-on-the-stack" class="headerlink" title="5.4 Allocating space for new data on the stack"></a>5.4 Allocating space for new data on the stack</h3><p>Stack is also used to store variables that are local to the procedure but do not fit in registers, such as local arrays or structures.  The segment of the stack containing a procedure’s saved registers and local variables is called a <strong>procedure frame</strong> or <strong>activation record</strong>.</p>
+<p>Some RISC-V compilers use a <strong>frame pointer</strong> <code>fp</code>, or <code>x8</code> to point to the first doubleword of the frame of a procedure. A stack pointer might change during the procedure, and so references to a local variable in memory might have different offsets depending on where they are in the procedure, making the procedure harder to understand. A frame pointer offers a stable base register within a procedure for local memory-references.</p>
+<p><img src="13.jpg" alt="image"></p>
+<h2 id="5-5-Allocating-space-for-new-data-on-the-heap"><a href="#5-5-Allocating-space-for-new-data-on-the-heap" class="headerlink" title="5.5 Allocating space for new data on the heap"></a>5.5 Allocating space for new data on the heap</h2><p>In addition to automatic variables that are local to procedures, C needs space in memory for static variables and for dynamic data structures. The stack starts in the high end of the user addresses space and grows down. </p>
+<p>The first part of the low end of memory is reserved, followed by the home of the RISC-V machine code, called <strong>text segment</strong>. Above the code is the <em>static data segment</em>, which is the place for constants and other static variables. Arrays tend to be fixed length and thus belong to static data segment, while linked lists can grow and shrink, they belong to <em>heap</em>. </p>
+<p>Note that stack and heap grow toward each other.</p>
+<p><img src="14.jpg" alt="image"></p>
+<p>If there are more than 8 parameters, the RISC-V will put the extra parameters on the stack just above the frame pointer.</p>
+<p><img src="15.jpg" alt="image"></p>
+<p>Some recursive procedures can be implemented iteratively with no need to push registers into stack. </p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token keyword">int</span> acc<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token function">sum</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> acc <span class="token operator">+</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+    <span class="token keyword">return</span> acc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>This is called <em>tail recursion</em>, which can be implemented very efficiently (assume <code>x10 = n, x11 = acc</code>, and the result goes into <code>x12</code>)</p>
+<pre class=" language-assembly"><code class="language-assembly">sum:
+    ble x10, x0, sum_exit    // go to sum_exit if n <= 0
+    add x11, x11, x10    // add n to acc
+    addi x10, x10, -1
+    jal x0, sum
+sum_exit:
+    addi x12, x11, 0    // return value acc
+    jalr x0, 0(x1)    // return to caller</code></pre>
+<p><img src="16.jpg" alt="image"></p>
+<p>Compile the following C code:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> list <span class="token punctuation">{</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>car<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> list <span class="token operator">*</span>cdr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>List<span class="token punctuation">;</span>
+
+List <span class="token operator">*</span><span class="token function">map</span><span class="token punctuation">(</span>List <span class="token operator">*</span>src<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  List <span class="token operator">*</span>ret<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>src<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  ret <span class="token operator">=</span> <span class="token punctuation">(</span>List <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>List<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ret<span class="token operator">-></span>car <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>src<span class="token operator">-></span>car<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ret<span class="token operator">-></span>cdr <span class="token operator">=</span> <span class="token function">map</span><span class="token punctuation">(</span>src<span class="token operator">-></span>cdr<span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Assume <code>s0: src, s1: f, s2: ret</code></p>
+<p>Preamble:</p>
+<pre class=" language-assembly"><code class="language-assembly">map:
+    addi sp sp -16    # need to store 4 entries
+    sw ra 12(sp)
+    sw s0 8(sp)
+    sw s1 4(sp)
+    sw s2 0(sp)
+    mv s0 a0    # save src
+    mv s1 a1    # save f</code></pre>
+<p>Body:</p>
+<pre class=" language-assembly"><code class="language-assembly">bne a0 x0 map_skip_if
+mv a0 x0    # return 0
+j map_return
+map_skip_if:
+    li a0 8                    # sizeof(List)
+    jal ra malloc        # call malloc
+    mv s2 a0                # save ret
+    lw a0 0(s0)            # src->car
+    jal ra s1              # call f
+    sw a0 0(s2)            # ret->car assigned
+    lw a0 4(s0)            # src->cdr
+    mv a1 s1                # f
+    jal ra map            # recursive call
+    sw a0 4(s2)            # store to ret->cdr
+    mv a0 s2
+map_return:
+    lw ra 12(sp)
+    lw s0 8(sp)
+    lw s1 4(sp)
+    lw s2 0(sp)
+    addi sp sp 16
+    jalr x0 ra</code></pre>
+<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>Everything has a memory address:</p>
+<ul>
+<li>Since all instructions and data are stored in memory, everything has a memory address: instructions, data words…</li>
+<li>One register keeps address of instruction being executed: Program Counter(PC)<ul>
+<li>Basically a pointer to memory</li>
+<li>Intel calls it Instruction Pointer</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io" rel="external nofollow noreferrer">lovelyfrog</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://lovelyfrog.github.io/2020/04/15/cs61C-note6/">http://lovelyfrog.github.io/2020/04/15/cs61C-note6/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/cs61C/">
+                                    <span class="chip bg-color">cs61C</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/04/15/cs170-lec1-note/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="cs170 lec1-note">
+                        
+                        <span class="card-title">cs170 lec1-note</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            加法和乘法
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/cs170/">
+                        <span class="chip bg-color">cs170</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/15/cs61C-note5/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="cs61C note5">
+                        
+                        <span class="card-title">cs61C note5</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了assembly language以及register
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/computer-architecture/" class="post-category">
+                                    computer architecture
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/cs61C/">
+                        <span class="chip bg-color">cs61C</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://lovelyfrog.github.io" target="_blank">lovelyfrog</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/lovelyfrog/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="lovelyfrog@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=527257042" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 527257042" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
